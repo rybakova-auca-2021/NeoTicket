@@ -5,5 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="BottomNavStyle" parent="Widget.Design.BottomNavigationView">
+        <item name="itemIconTint">@color/color_selector</item>
+        <item name="itemTextColor">@color/color_selector</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="Theme.NeoTicket" parent="Base.Theme.NeoTicket" />
 </resources>
