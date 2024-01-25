@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.neoticket.Utils.NetworkUtils
+import com.example.neoticket.Utils.Util
+import com.example.neoticket.view.auth.RegisterFragment
 import com.example.neoticket.view.main.InternetDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -41,7 +43,12 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.btn_profile -> {
-                        navController.navigate(R.id.profileFragment)
+                        if (Util.token != null) {
+                            navController.navigate(R.id.profileFragment)
+                        } else {
+                            val bottomSheetFragment = RegisterFragment()
+                            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                        }
                         true
                     }
 
