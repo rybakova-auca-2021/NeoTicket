@@ -22,6 +22,32 @@ class MainActivity : AppCompatActivity() {
 
             bottomNavigationView = findViewById(R.id.bottomNavigationView)
             bottomNavigationView.setupWithNavController(navController)
+
+            bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.btn_main -> {
+                        navController.navigate(R.id.mainPageFragment)
+                        true
+                    }
+
+                    R.id.btn_my_tickets -> {
+                        navController.navigate(R.id.myTicketsFragment)
+                        true
+                    }
+
+                    R.id.btn_info -> {
+                        navController.navigate(R.id.infoPageFragment)
+                        true
+                    }
+
+                    R.id.btn_profile -> {
+                        navController.navigate(R.id.profileFragment)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
         } else {
             val bottomSheetFragment = InternetDialogFragment()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)

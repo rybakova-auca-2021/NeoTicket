@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/btn_main"
+        android:icon="@drawable/home_02"
+        android:title="Главная" />
+    <item
+        android:id="@+id/btn_my_tickets"
+        android:icon="@drawable/receipt_lines"
+        android:title="Мои билеты" />
+    <item
+        android:id="@+id/btn_info"
+        android:icon="@drawable/help_square_contained"
+        android:title="Инфо" />
+    <item
+        android:id="@+id/btn_profile"
+        android:icon="@drawable/user_profile_02"
+        android:title="Профиль" />
 </menu>

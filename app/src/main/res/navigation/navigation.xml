@@ -10,4 +10,19 @@
         android:name="com.example.neoticket.view.main.MainPageFragment"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.neoticket.view.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/infoPageFragment"
+        android:name="com.example.neoticket.view.info.InfoPageFragment"
+        android:label="fragment_info_page"
+        tools:layout="@layout/fragment_info_page" />
+    <fragment
+        android:id="@+id/myTicketsFragment"
+        android:name="com.example.neoticket.view.myTickets.MyTicketsFragment"
+        android:label="fragment_my_tickets"
+        tools:layout="@layout/fragment_my_tickets" />
 </navigation>
