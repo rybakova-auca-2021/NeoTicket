@@ -1,16 +1,13 @@
 package com.example.neoticket.view.profile
 
-import android.media.tv.TvContract.Channels.Logo
 import android.os.Bundle
 import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentProfileBinding
-import com.example.neoticket.view.auth.CodeVerificationFragment
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -28,6 +25,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupNavigation()
         setupData()
+        setupCard()
     }
 
     private fun setupNavigation() {
@@ -52,6 +50,23 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
+    private fun setupCard() {
+        viewModel.getCard { cardList ->
+            cardList.let {
+                if (it.isNotEmpty()) {
+                    val card = it[0]
+                    binding.textCardMoney.text = card.balance
+                    val lastFourDigits = card.account_number.takeLast(4)
+                    binding.textCardNumber.text = "Платежная карта $lastFourDigits"
+                } else {
+                    binding.card.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+
 
     private fun String?.toEditable(): Editable {
         return Editable.Factory.getInstance().newEditable(this ?: "")

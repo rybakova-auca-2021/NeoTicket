@@ -88,6 +88,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -126,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Платежная карта •6566 "
+                tools:text="Платежная карта •6566 "
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/img_card"
@@ -136,7 +137,7 @@
                 android:id="@+id/text_card_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 500 000 с"
+                tools:text="1 500 000 с"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/text_card_number"

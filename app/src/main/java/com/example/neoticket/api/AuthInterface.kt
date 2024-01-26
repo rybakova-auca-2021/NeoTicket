@@ -39,5 +39,5 @@ interface AuthInterface {
     fun myProfile(@Header("Authorization") token: String) : Call<EditProfile>
 
     @GET("authentication/bank-card/")
-    fun myCard(@Header("Authorization") token: String) : Call<BankAccount>
+    fun myCard(@Header("Authorization") token: String) : Call<List<BankAccount>>
 }
