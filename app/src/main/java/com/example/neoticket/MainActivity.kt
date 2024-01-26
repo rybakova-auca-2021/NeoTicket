@@ -33,7 +33,12 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.btn_my_tickets -> {
-                        navController.navigate(R.id.myTicketsFragment)
+                        if (Util.token != null) {
+                            navController.navigate(R.id.myTicketsFragment)
+                        } else {
+                            val bottomSheetFragment = RegisterFragment()
+                            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                        }
                         true
                     }
 
