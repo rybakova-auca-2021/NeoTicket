@@ -2,7 +2,9 @@ package com.example.neoticket.api
 
 import com.example.neoticket.model.BankAccount
 import com.example.neoticket.model.ConfirmCode
+import com.example.neoticket.model.ConfirmCodeResponse
 import com.example.neoticket.model.EditProfile
+import com.example.neoticket.model.IsUserRegistered
 import com.example.neoticket.model.RegisterUser
 import retrofit2.Call
 import retrofit2.http.Body
@@ -20,10 +22,16 @@ interface AuthInterface {
     @POST("authentication/confirm-code/")
     fun confirmCode(
         @Body request: ConfirmCode
-    ) : Call<ConfirmCode>
+    ) : Call<ConfirmCodeResponse>
+
+    @POST("authentication/check/user/")
+    fun checkUser(
+        @Body request: RegisterUser
+    ) : Call<IsUserRegistered>
 
     @PUT("authentication/profile/update/")
     fun editProfile(
+        @Header("Authorization") token: String,
         @Body request: EditProfile
     ) : Call<EditProfile>
 
