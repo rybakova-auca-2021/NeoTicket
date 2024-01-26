@@ -8,12 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.neoticket.R
+import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentRegisterBinding
+import com.example.neoticket.viewModel.CheckUserViewModel
+import com.example.neoticket.viewModel.LoginOrRegisterViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class RegisterFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentRegisterBinding
+    private val viewModel: LoginOrRegisterViewModel by viewModels()
+    private val checkUserViewModel: CheckUserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +33,7 @@ class RegisterFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupNavigation()
         setupValidation()
+        saveEmail()
     }
 
     private fun setupNavigation() {
@@ -59,6 +66,27 @@ class RegisterFragment : BottomSheetDialogFragment() {
     }
 
     private fun register() {
-        //TODO
+        val email = binding.etEmail.text.toString()
+        viewModel.register(email,
+            onSuccess = {
+                checkUser()
+                dismiss()
+                val bottomSheetFragment = CodeVerificationFragment()
+                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+            },
+            onError = {
+                //todo
+            }
+        )
+    }
+
+    private fun checkUser() {
+        val email = binding.etEmail.text.toString()
+        checkUserViewModel.checkUser(email)
+    }
+
+    private fun saveEmail() {
+        val email = binding.etEmail.text.toString()
+        Util.email = email
     }
 }

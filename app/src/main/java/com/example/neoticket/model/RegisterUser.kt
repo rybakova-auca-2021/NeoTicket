@@ -4,6 +4,10 @@ data class RegisterUser(
     val email: String
 )
 
+data class IsUserRegistered(
+    val email: Boolean
+)
+
 data class EditProfile(
     val username: String,
     val email: String,

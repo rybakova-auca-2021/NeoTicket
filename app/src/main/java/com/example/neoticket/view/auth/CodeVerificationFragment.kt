@@ -8,15 +8,18 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentCodeVerificationBinding
+import com.example.neoticket.view.profile.ProfileFragment
+import com.example.neoticket.viewModel.CheckCodeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CodeVerificationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCodeVerificationBinding
+    private val viewModel: CheckCodeViewModel by viewModels()
     private var countDownTimer: CountDownTimer? = null
     private var timeRemaining: Long = 60000
 
@@ -30,8 +33,8 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val phone = Util.phone
-        binding.codeText.text = "Код был отправлен на номер  $phone"
+        val email = Util.email
+        binding.codeText.text = "Код был отправлен на почту  $email"
         setupValidation()
         setupNavigation()
         startCountdownTimer()
@@ -44,7 +47,6 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigateToProfileFragment() {
-        findNavController().navigate(R.id.profileFragment)
         dismiss()
     }
 
@@ -64,7 +66,7 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
                 override fun afterTextChanged(s: Editable?) {
                     val pin = binding.pinview.text.toString()
                     if (pin.length == 4) {
-                        // checkCode(userId, pin)
+                         checkCode(pin)
                     }
                 }
             })
@@ -95,6 +97,24 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
         countDownTimer?.start()
     }
 
+    private fun checkCode(pin: String) {
+        viewModel.checkCode(
+            pin,
+            onSuccess = {
+                if (Util.isUserRegistered == false) {
+                    dismiss()
+                    val bottomSheetFragment = AdditionalInfoFragment()
+                    bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+                } else if (Util.isUserRegistered == true) {
+                    navigateToProfileFragment()
+                }
+            },
+            onError = {
+                binding.pinview.setTextColor(resources.getColor(R.color.main_orange))
+                binding.wrongCodeMsg.visibility = View.VISIBLE
+            }
+        )
+    }
 
     override fun onDestroyView() {
         countDownTimer?.cancel()
