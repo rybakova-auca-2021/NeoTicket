@@ -19,10 +19,35 @@
         android:id="@+id/infoPageFragment"
         android:name="com.example.neoticket.view.info.InfoPageFragment"
         android:label="fragment_info_page"
-        tools:layout="@layout/fragment_info_page" />
+        tools:layout="@layout/fragment_info_page" >
+        <action
+            android:id="@+id/action_infoPageFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment" />
+        <action
+            android:id="@+id/action_infoPageFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myTicketsFragment"
         android:name="com.example.neoticket.view.myTickets.MyTicketsFragment"
         android:label="fragment_my_tickets"
         tools:layout="@layout/fragment_my_tickets" />
+    <fragment
+        android:id="@+id/appInfoFragment"
+        android:name="com.example.neoticket.view.info.AppInfoFragment"
+        android:label="fragment_app_info"
+        tools:layout="@layout/fragment_app_info" >
+        <action
+            android:id="@+id/action_appInfoFragment_to_infoPageFragment"
+            app:destination="@id/infoPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/answerFragment"
+        android:name="com.example.neoticket.view.info.AnswerFragment"
+        android:label="fragment_answer"
+        tools:layout="@layout/fragment_answer" >
+        <action
+            android:id="@+id/action_answerFragment_to_infoPageFragment"
+            app:destination="@id/infoPageFragment" />
+    </fragment>
 </navigation>
