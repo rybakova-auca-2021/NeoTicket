@@ -33,5 +33,9 @@ class RetrofitInstance {
         val concertApi by lazy {
             retrofit.create(ConcertInterface::class.java)
         }
+
+        val movieApi by lazy {
+            retrofit.create(MovieInterface::class.java)
+        }
     }
 }
