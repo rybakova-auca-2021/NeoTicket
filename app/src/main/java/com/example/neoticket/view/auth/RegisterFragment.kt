@@ -38,6 +38,7 @@ class RegisterFragment : BottomSheetDialogFragment() {
 
     private fun setupNavigation() {
         binding.btnGetCode.setOnClickListener {
+            checkUser()
             register()
         }
     }
@@ -69,7 +70,6 @@ class RegisterFragment : BottomSheetDialogFragment() {
         val email = binding.etEmail.text.toString()
         viewModel.register(email,
             onSuccess = {
-                checkUser()
                 dismiss()
                 val bottomSheetFragment = CodeVerificationFragment()
                 bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
