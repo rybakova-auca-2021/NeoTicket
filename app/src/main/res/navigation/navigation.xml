@@ -9,7 +9,11 @@
         android:id="@+id/mainPageFragment"
         android:name="com.example.neoticket.view.main.MainPageFragment"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_cinemaFragment"
+            app:destination="@id/cinemaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.neoticket.view.profile.ProfileFragment"
@@ -49,5 +53,14 @@
         <action
             android:id="@+id/action_answerFragment_to_infoPageFragment"
             app:destination="@id/infoPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cinemaFragment"
+        android:name="com.example.neoticket.view.main.cinema.CinemaFragment"
+        android:label="fragment_cinema"
+        tools:layout="@layout/fragment_cinema" >
+        <action
+            android:id="@+id/action_cinemaFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
     </fragment>
 </navigation>

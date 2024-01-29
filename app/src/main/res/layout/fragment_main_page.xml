@@ -63,6 +63,7 @@
                     android:layout_width="242dp"
                     android:layout_height="124dp"
                     android:layout_marginTop="32dp"
+                    android:clickable="true"
                     android:src="@drawable/cinema_img"
                     app:layout_constraintStart_toStartOf="@+id/btn_search"
                     app:layout_constraintTop_toBottomOf="@+id/btn_search" />
@@ -241,10 +242,12 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:clickable="true"
                     android:src="@drawable/btn_all"
                     app:layout_constraintBottom_toBottomOf="@+id/text_cinema_events"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_cinema_events" />
+                    app:layout_constraintTop_toTopOf="@+id/text_cinema_events"
+                    android:focusable="true" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_cinema"
