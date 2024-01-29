@@ -6,4 +6,6 @@
     <string name="try_again">Попробуйте подключится через мобильный интернет</string>
     <string name="agree">Понятно</string>
     <string name="often_questions">Частые вопросы</string>
+    <string name="all_movie_details">Все детали о фильме</string>
+    <string name="full_desc">Полное описание</string>
 </resources>

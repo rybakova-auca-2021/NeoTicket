@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.main.cinema.DetailMovieFragment">
+
+    <ImageView
+        android:id="@+id/img_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/overlay_detail_movie"
+        app:layout_constraintDimensionRatio="H,16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/img_movie"
+        app:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        tools:text="Быстрый словарик любви"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/movie_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="в прокате с 8 сентября"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/movie_title"
+        app:layout_constraintStart_toStartOf="@+id/movie_title"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+
+    <TextView
+        android:id="@+id/movie_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="2022, фэнтези, боевик, приключения"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/movie_time"
+        app:layout_constraintStart_toStartOf="@+id/movie_time"
+        app:layout_constraintTop_toBottomOf="@+id/movie_time" />
+
+    <TextView
+        android:id="@+id/movie_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="США, 1 час 58 мин, 12+"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/movie_category"
+        app:layout_constraintStart_toStartOf="@+id/movie_category"
+        app:layout_constraintTop_toBottomOf="@+id/movie_category" />
+
+    <TextView
+        android:id="@+id/movie_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        tools:text="Анна — актриса с эксцентричным характером и экстравагантной внешностью. Из-за этого страдает репутация, предложений становится все меньше."
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_duration" />
+
+    <TextView
+        android:id="@+id/btn_movie_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+         android:text="@string/all_movie_details"
+        android:textColor="@color/dark_blue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/movie_description"
+        app:layout_constraintStart_toStartOf="@+id/movie_description"
+        app:layout_constraintTop_toBottomOf="@+id/movie_description" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movie_images"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_movie_details" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
