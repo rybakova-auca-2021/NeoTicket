@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/cinemaFragment"
-        android:name="com.example.neoticket.view.main.cinema.CinemaFragment"
+        android:name="com.example.neoticket.view.main.movie.CinemaFragment"
         android:label="fragment_cinema"
         tools:layout="@layout/fragment_cinema" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseTicketFragment"
-        android:name="com.example.neoticket.view.main.cinema.ChooseTicketFragment"
+        android:name="com.example.neoticket.view.main.movie.ChooseTicketFragment"
         android:label="fragment_choose_ticket"
         tools:layout="@layout/fragment_choose_ticket" />
 </navigation>

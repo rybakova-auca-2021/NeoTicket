@@ -1,4 +1,4 @@
-package com.example.neoticket.view.main.cinema
+package com.example.neoticket.view.main.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater

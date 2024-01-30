@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".view.main.cinema.SoonInCinemaFragment">
+    tools:context=".view.main.movie.SoonInCinemaFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView

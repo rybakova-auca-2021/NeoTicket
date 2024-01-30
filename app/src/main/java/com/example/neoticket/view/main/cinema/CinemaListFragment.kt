@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.neoticket.R
-import com.example.neoticket.databinding.FragmentDetailMovieBinding
+import com.example.neoticket.databinding.FragmentCinemaBinding
+import com.example.neoticket.databinding.FragmentCinemaListBinding
 
-class DetailMovieFragment : Fragment() {
-    private lateinit var binding: FragmentDetailMovieBinding
+
+class CinemaListFragment : Fragment() {
+    private lateinit var binding: FragmentCinemaListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
+        binding = FragmentCinemaListBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

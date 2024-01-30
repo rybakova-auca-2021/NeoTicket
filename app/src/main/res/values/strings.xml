@@ -8,4 +8,6 @@
     <string name="often_questions">Частые вопросы</string>
     <string name="all_movie_details">Все детали о фильме</string>
     <string name="full_desc">Полное описание</string>
+    <string name="gallery">Галерея</string>
+    <string name="schedule">Расписание сеансов</string>
 </resources>
