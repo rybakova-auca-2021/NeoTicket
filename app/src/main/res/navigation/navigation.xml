@@ -63,4 +63,9 @@
             android:id="@+id/action_cinemaFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/chooseTicketFragment"
+        android:name="com.example.neoticket.view.main.cinema.ChooseTicketFragment"
+        android:label="fragment_choose_ticket"
+        tools:layout="@layout/fragment_choose_ticket" />
 </navigation>

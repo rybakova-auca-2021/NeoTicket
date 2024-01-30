@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.btn_info -> {
-                        navController.navigate(R.id.infoPageFragment)
+                        navController.navigate(R.id.chooseTicketFragment)
                         true
                     }
 
