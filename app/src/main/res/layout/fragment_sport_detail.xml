@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.main.sport.SportDetailFragment">
+
+    <View
+        android:id="@+id/img_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:background="@drawable/img_concert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_sport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/img_concert"
+        app:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sport_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        tools:text="Wolverhampton Vs Tottenham"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_sport" />
+
+    <TextView
+        android:id="@+id/sport_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Molineux stadium"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sport_title"
+        app:layout_constraintStart_toStartOf="@+id/sport_title"
+        app:layout_constraintTop_toBottomOf="@+id/sport_title" />
+
+    <TextView
+        android:id="@+id/sport_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sport_title"
+        app:layout_constraintStart_toStartOf="@+id/sport_title"
+        app:layout_constraintTop_toBottomOf="@+id/sport_place"
+        tools:text="23 сентября" />
+
+    <TextView
+        android:id="@+id/sport_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_buy_tickets"
+        tools:text="За последние 10 встреч когда команда Вулверхэмптон Уондерерс играла дома, команда Вулверхэмптон Уондерерс выиграла 2 раз, 3 сыграла в ничью и 5 победы команды Тоттенхэм Хотспур. Разница голов 16-11 в пользу команды Тоттенхэм Хотспур." />
+
+    <TextView
+        android:id="@+id/btn_sport_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/full_desc"
+        android:textColor="@color/dark_blue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/sport_description"
+        app:layout_constraintStart_toStartOf="@+id/sport_description"
+        app:layout_constraintTop_toBottomOf="@+id/sport_description" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sport_images"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sport_details" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_buy_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_rounded_auth"
+        android:drawableLeft="@drawable/icon_schedule"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="50dp"
+        android:text="@string/buy_tickets"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/sport_title"
+        app:layout_constraintStart_toStartOf="@+id/sport_title"
+        app:layout_constraintTop_toBottomOf="@+id/sport_date" />
+
+    <TextView
+        android:id="@+id/text_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/schedule"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/rv_sport_images"
+        app:layout_constraintTop_toBottomOf="@+id/rv_sport_images" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_schedule" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
