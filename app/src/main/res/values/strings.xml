@@ -10,4 +10,15 @@
     <string name="full_desc">Полное описание</string>
     <string name="gallery">Галерея</string>
     <string name="schedule">Расписание сеансов</string>
+    <string name="all_places">Все места</string>
+    <string name="choose_place">Выберите место</string>
+    <string name="asanbay_center">Асанбай центр</string>
+    <string name="center_stadion">Центральный Стадион</string>
+    <string name="sport_palace">Дворец спорта</string>
+    <string name="night_club_nosorog">Ночной клуб Носорог</string>
+    <string name="philarmonic">Филармония</string>
+    <string name="retro_metro">Ретро метро</string>
+    <string name="apply">Применить</string>
+    <string name="clear_filter">Очистить фильтр</string>
+    <string name="date">Дата</string>
 </resources>

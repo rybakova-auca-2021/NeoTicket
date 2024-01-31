@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.main.concerts.ConcertDetailPageFragment">
+
+    <View
+        android:id="@+id/img_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:background="@drawable/img_concert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_concert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/img_concert"
+        app:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/concert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        tools:text="Димаш Кудайберген в Бишкеке"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_concert" />
+
+    <TextView
+        android:id="@+id/movie_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Центральный стадион"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/concert_title"
+        app:layout_constraintStart_toStartOf="@+id/concert_title"
+        app:layout_constraintTop_toBottomOf="@+id/concert_title" />
+
+    <TextView
+        android:id="@+id/movie_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/concert_title"
+        app:layout_constraintStart_toStartOf="@+id/concert_title"
+        app:layout_constraintTop_toBottomOf="@+id/movie_place"
+        tools:text="23 сентября" />
+
+    <TextView
+        android:id="@+id/movie_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_buy_tickets"
+        tools:text="23 сентября 2023 года Димаш Кудайберген проведет грандиозный концерт “Stranger” на одном из самых легендарных спортивных сооружений Кыргызстана - Центральном стадионе города Алматы." />
+
+    <TextView
+        android:id="@+id/btn_concert_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/full_desc"
+        android:textColor="@color/dark_blue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/movie_description"
+        app:layout_constraintStart_toStartOf="@+id/movie_description"
+        app:layout_constraintTop_toBottomOf="@+id/movie_description" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_concert_images"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_concert_details" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_buy_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_rounded_auth"
+        android:drawableLeft="@drawable/icon_schedule"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="50dp"
+        android:text="Купить билеты"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/concert_title"
+        app:layout_constraintStart_toStartOf="@+id/concert_title"
+        app:layout_constraintTop_toBottomOf="@+id/movie_date" />
+
+    <TextView
+        android:id="@+id/text_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Расписание сеансов"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/rv_concert_images"
+        app:layout_constraintTop_toBottomOf="@+id/rv_concert_images" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_schedule" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
