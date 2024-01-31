@@ -1,4 +1,4 @@
-package com.example.neoticket.view.main
+package com.example.neoticket.view.main.notifications
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

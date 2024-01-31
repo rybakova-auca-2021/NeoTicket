@@ -1,4 +1,4 @@
-package com.example.neoticket.view.main.movie
+package com.example.neoticket.view.main.payment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
