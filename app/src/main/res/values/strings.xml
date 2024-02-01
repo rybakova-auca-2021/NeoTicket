@@ -21,4 +21,20 @@
     <string name="apply">Применить</string>
     <string name="clear_filter">Очистить фильтр</string>
     <string name="date">Дата</string>
+    <string name="time_is_up">Время оплаты истекло</string>
+    <string name="return_back_to_buy_ticket">Вам придется вернуться к выбору билета</string>
+    <string name="return_back">Вернуться</string>
+    <string name="sport">Спорт</string>
+    <string name="fok_gazprom">ФОК \"Газпром\"</string>
+    <string name="spartak">Стадион Спартак имени Долона Омурзакова</string>
+    <string name="stadion_spartak">Стадион Спартак</string>
+    <string name="m_resort_spa_casino_henderson">M Resort Spa Casino, Henderson</string>
+    <string name="moody_center_austin">Moody Center, Austin</string>
+    <string name="buy_tickets">Купить билеты</string>
+    <string name="theater">Театр</string>
+    <string name="time_to_return_ticket_is_up">Время возврата билета истекло</string>
+    <string name="return_ticket_question">Вы уверены что хотите вернуть билет?</string>
+    <string name="cancel">Отмена</string>
+    <string name="continue">Продолжить</string>
+    <string name="return_home">Вернуться на главную</string>
 </resources>
