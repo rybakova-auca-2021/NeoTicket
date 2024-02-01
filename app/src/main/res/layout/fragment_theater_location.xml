@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.main.theaters.TheaterLocationFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/choose_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/choose_place"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SearchView
+                android:id="@+id/btn_search"
+                style="@style/AppTheme.SearchView"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:iconifiedByDefault="false"
+                android:queryHint="Поиск"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choose_place" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:visibility="visible"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_search">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/theater_opera"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Кыргызский театр оперы и балета"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/philarmonic"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Кыргызская Государственная Филармония"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/theater_opera" />
+
+                    <RadioButton
+                        android:id="@+id/russian_theater"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Государственный национальный русский театр драмы"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/philarmonic" />
+
+                    <RadioButton
+                        android:id="@+id/dramatic_theater"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Бишкекский городской драматический театр"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/russian_theater" />
+
+                    <RadioButton
+                        android:id="@+id/doll_theater"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Кыргызский государственный театр кукол"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/dramatic_theater" />
+
+                    <RadioButton
+                        android:id="@+id/academic_dramatic_theater"
+                        style="@style/RadioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Кыргызский Национальный академический драматический театр"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/doll_theater" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_choose"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_rounded_auth"
+                android:enabled="false"
+                android:text="@string/apply"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_clear"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_clear"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_rounded_grey"
+                android:enabled="false"
+                android:text="@string/clear_filter"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_nothing_was_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:visibility="gone"
+                android:src="@drawable/nothing_was_found"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
