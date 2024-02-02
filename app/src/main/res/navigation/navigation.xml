@@ -68,4 +68,14 @@
         android:name="com.example.neoticket.view.main.movie.ChooseTicketFragment"
         android:label="fragment_choose_ticket"
         tools:layout="@layout/fragment_choose_ticket" />
+    <fragment
+        android:id="@+id/concertChooseTicketFragment"
+        android:name="com.example.neoticket.view.main.payment.ConcertChooseTicketFragment"
+        android:label="fragment_concert_choose_ticket"
+        tools:layout="@layout/fragment_concert_choose_ticket" />
+    <fragment
+        android:id="@+id/concertChooseSectorFragment"
+        android:name="com.example.neoticket.view.main.payment.ConcertChooseSectorFragment"
+        android:label="fragment_concert_choose_sector"
+        tools:layout="@layout/fragment_concert_choose_sector" />
 </navigation>

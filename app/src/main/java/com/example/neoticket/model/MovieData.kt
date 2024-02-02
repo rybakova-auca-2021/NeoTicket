@@ -1,5 +1,7 @@
 package com.example.neoticket.model
 
+import com.google.android.datatransport.cct.StringMerger
+
 data class MovieDetail(
     val id: Int,
     val title: String,
@@ -15,7 +17,6 @@ data class MovieDetail(
     val director: String,
     val release_date: String?,
     val detail_images: List<MovieDetailImage>,
-    val cinema: Cinema
 )
 
 data class Genre(
@@ -24,10 +25,6 @@ data class Genre(
 
 data class MovieDetailImage(
     val image: String
-)
-
-data class Cinema(
-    val name: String
 )
 
 data class Movie(
@@ -49,4 +46,69 @@ data class StartTime(
     val id: Int,
     val time: String,
     val base_ticket_price: String
+)
+
+data class MovieOrderCheckout(
+    val user: Int,
+    val movie_order: Int
+)
+
+data class MovieOrderCheckoutResponse(
+    val id: Int,
+    val user: Int,
+    val movie_order: Int
+)
+
+data class MovieOrder(
+    val id: Int,
+    val user: Int,
+    val total_price: String,
+    val tickets: List<MovieTicket>
+)
+
+data class MovieTicket(
+    val id: Int,
+    val seats: List<MovieSeat>,
+    val movie_title: String,
+    val movie_cinema: String,
+    val movie_images: List<MovieDetailImage>,
+    val movie_data: String,
+    val show_time: Int,
+    val order: Int,
+    val user: Int,
+    val type: Int
+)
+
+data class MovieSeat(
+    val id: Int,
+    val row_number: Int,
+    val seat_number: Int,
+    val is_available: Boolean
+)
+
+data class MovieShowTime(
+    val start_date: String,
+    val start_times: StartTime,
+    val cinemas: List<Cinema>
+)
+
+data class StartTimeDetail(
+    val id: Int,
+    val monie_title: String,
+    val movie_cinema: String,
+    val seats: List<MovieSeat>
+)
+
+data class TicketType(
+    val id: Int,
+    val name: String,
+    val price: String
+)
+
+data class MovieTicketCreate(
+    val show_time: Int,
+    val seats: List<Int>,
+    val order: Int,
+    val user: Int,
+    val type: Int
 )
