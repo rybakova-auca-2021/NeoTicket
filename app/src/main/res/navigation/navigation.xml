@@ -13,6 +13,21 @@
         <action
             android:id="@+id/action_mainPageFragment_to_cinemaFragment"
             app:destination="@id/cinemaFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_mainConcertPageFragment"
+            app:destination="@id/mainConcertPageFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_mainSportFragment"
+            app:destination="@id/mainSportFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_mainTheaterFragment"
+            app:destination="@id/mainTheaterFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_detailNotificationFragment"
+            app:destination="@id/detailNotificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -35,7 +50,11 @@
         android:id="@+id/myTicketsFragment"
         android:name="com.example.neoticket.view.myTickets.MyTicketsFragment"
         android:label="fragment_my_tickets"
-        tools:layout="@layout/fragment_my_tickets" />
+        tools:layout="@layout/fragment_my_tickets" >
+        <action
+            android:id="@+id/action_myTicketsFragment_to_ticketDetailsFragment"
+            app:destination="@id/ticketDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
         android:name="com.example.neoticket.view.info.AppInfoFragment"
@@ -62,6 +81,15 @@
         <action
             android:id="@+id/action_cinemaFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment" />
+        <action
+            android:id="@+id/action_cinemaFragment_to_cinemaDetailFragment"
+            app:destination="@id/cinemaDetailFragment2" />
+        <action
+            android:id="@+id/action_cinemaFragment_to_detailMovieInCinemaFragment"
+            app:destination="@id/detailMovieInCinemaFragment" />
+        <action
+            android:id="@+id/action_cinemaFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseTicketFragment"
@@ -69,13 +97,233 @@
         android:label="fragment_choose_ticket"
         tools:layout="@layout/fragment_choose_ticket" />
     <fragment
+        android:id="@+id/concertChooseSectorFragment"
+        android:name="com.example.neoticket.view.main.payment.ConcertChooseSectorFragment"
+        android:label="fragment_concert_choose_sector"
+        tools:layout="@layout/fragment_concert_choose_sector" />
+    <fragment
+        android:id="@+id/detailMovieInCinemaFragment"
+        android:name="com.example.neoticket.view.main.movie.DetailMovieInCinemaFragment"
+        android:label="fragment_detail_movie_in_cinema"
+        tools:layout="@layout/fragment_detail_movie_in_cinema" >
+        <action
+            android:id="@+id/action_detailMovieInCinemaFragment_to_cinemaFragment"
+            app:destination="@id/cinemaFragment" />
+        <action
+            android:id="@+id/action_detailMovieInCinemaFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_detailMovieInCinemaFragment_to_chooseTicketFragment"
+            app:destination="@id/chooseTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="com.example.neoticket.view.main.movie.DetailMovieFragment"
+        android:label="fragment_detail_movie"
+        tools:layout="@layout/fragment_detail_movie" >
+        <action
+            android:id="@+id/action_detailMovieFragment_to_cinemaFragment"
+            app:destination="@id/cinemaFragment" />
+        <action
+            android:id="@+id/action_detailMovieFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_detailMovieFragment_to_chooseTicketFragment"
+            app:destination="@id/chooseTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.example.neoticket.view.main.movie.DescriptionFragment"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" >
+        <action
+            android:id="@+id/action_descriptionFragment_to_detailMovieInCinemaFragment"
+            app:destination="@id/detailMovieInCinemaFragment" />
+        <action
+            android:id="@+id/action_descriptionFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmPageFragment"
+        android:name="com.example.neoticket.view.main.payment.ConfirmPageFragment"
+        android:label="fragment_confirm_page"
+        tools:layout="@layout/fragment_confirm_page" >
+        <action
+            android:id="@+id/action_confirmPageFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.neoticket.view.main.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_paymentConfirmedFragment"
+            app:destination="@id/paymentConfirmedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentConfirmedFragment"
+        android:name="com.example.neoticket.view.main.payment.PaymentConfirmedFragment"
+        android:label="fragment_payment_confirmed"
+        tools:layout="@layout/fragment_payment_confirmed" />
+    <fragment
+        android:id="@+id/cinemaDetailFragment2"
+        android:name="com.example.neoticket.view.main.movie.cinema.CinemaDetailFragment"
+        android:label="fragment_cinema_detail"
+        tools:layout="@layout/fragment_cinema_detail" />
+    <fragment
+        android:id="@+id/mainConcertPageFragment"
+        android:name="com.example.neoticket.view.main.concerts.MainConcertPageFragment"
+        android:label="fragment_main_concert_page"
+        tools:layout="@layout/fragment_main_concert_page" >
+        <action
+            android:id="@+id/action_mainConcertPageFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+        <action
+            android:id="@+id/action_mainConcertPageFragment_to_concertDetailPageFragment"
+            app:destination="@id/concertDetailPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/concertDetailPageFragment"
+        android:name="com.example.neoticket.view.main.concerts.ConcertDetailPageFragment"
+        android:label="fragment_concert_detail_page"
+        tools:layout="@layout/fragment_concert_detail_page" >
+        <action
+            android:id="@+id/action_concertDetailPageFragment_to_mainConcertPageFragment"
+            app:destination="@id/mainConcertPageFragment" />
+        <action
+            android:id="@+id/action_concertDetailPageFragment_to_concertDescriptionFragment"
+            app:destination="@id/concertDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/concertDescriptionFragment"
+        android:name="com.example.neoticket.view.main.concerts.ConcertDescriptionFragment"
+        android:label="fragment_concert_description"
+        tools:layout="@layout/fragment_concert_description" >
+        <action
+            android:id="@+id/action_concertDescriptionFragment_to_concertDetailPageFragment"
+            app:destination="@id/concertDetailPageFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/concertChooseTicketFragment"
         android:name="com.example.neoticket.view.main.payment.ConcertChooseTicketFragment"
         android:label="fragment_concert_choose_ticket"
         tools:layout="@layout/fragment_concert_choose_ticket" />
     <fragment
-        android:id="@+id/concertChooseSectorFragment"
-        android:name="com.example.neoticket.view.main.payment.ConcertChooseSectorFragment"
-        android:label="fragment_concert_choose_sector"
-        tools:layout="@layout/fragment_concert_choose_sector" />
+        android:id="@+id/mainSportFragment"
+        android:name="com.example.neoticket.view.main.sport.MainSportFragment"
+        android:label="fragment_main_sport"
+        tools:layout="@layout/fragment_main_sport" >
+        <action
+            android:id="@+id/action_mainSportFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+        <action
+            android:id="@+id/action_mainSportFragment_to_sportDetailFragment"
+            app:destination="@id/sportDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sportDetailFragment"
+        android:name="com.example.neoticket.view.main.sport.SportDetailFragment"
+        android:label="fragment_sport_detail"
+        tools:layout="@layout/fragment_sport_detail" >
+        <action
+            android:id="@+id/action_sportDetailFragment_to_mainSportFragment"
+            app:destination="@id/mainSportFragment" />
+        <action
+            android:id="@+id/action_sportDetailFragment_to_sportDescriptionFragment"
+            app:destination="@id/sportDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sportDescriptionFragment"
+        android:name="com.example.neoticket.view.main.sport.SportDescriptionFragment"
+        android:label="fragment_sport_description"
+        tools:layout="@layout/fragment_sport_description" >
+        <action
+            android:id="@+id/action_sportDescriptionFragment_to_sportDetailFragment"
+            app:destination="@id/sportDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainTheaterFragment"
+        android:name="com.example.neoticket.view.main.theaters.MainTheaterFragment"
+        android:label="fragment_main_theater"
+        tools:layout="@layout/fragment_main_theater" >
+        <action
+            android:id="@+id/action_mainTheaterFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+        <action
+            android:id="@+id/action_mainTheaterFragment_to_theaterDetailFragment"
+            app:destination="@id/theaterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/theaterDetailFragment"
+        android:name="com.example.neoticket.view.main.theaters.TheaterDetailFragment"
+        android:label="fragment_theater_detail"
+        tools:layout="@layout/fragment_theater_detail" >
+        <action
+            android:id="@+id/action_theaterDetailFragment_to_mainTheaterFragment"
+            app:destination="@id/mainTheaterFragment" />
+        <action
+            android:id="@+id/action_theaterDetailFragment_to_theaterDescriptionFragment"
+            app:destination="@id/theaterDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/theaterDescriptionFragment"
+        android:name="com.example.neoticket.view.main.theaters.TheaterDescriptionFragment"
+        android:label="fragment_theater_description"
+        tools:layout="@layout/fragment_theater_description" >
+        <action
+            android:id="@+id/action_theaterDescriptionFragment_to_theaterDetailFragment"
+            app:destination="@id/theaterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketDetailsFragment"
+        android:name="com.example.neoticket.view.myTickets.TicketDetailsFragment"
+        android:label="fragment_ticket_details"
+        tools:layout="@layout/fragment_ticket_details" >
+        <action
+            android:id="@+id/action_ticketDetailsFragment_to_myTicketsFragment"
+            app:destination="@id/myTicketsFragment" />
+        <action
+            android:id="@+id/action_ticketDetailsFragment_to_returnTicketConfirmFragment"
+            app:destination="@id/returnTicketConfirmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/returnTicketConfirmFragment"
+        android:name="com.example.neoticket.view.myTickets.ReturnTicketConfirmFragment"
+        android:label="fragment_return_ticket_confirm"
+        tools:layout="@layout/fragment_return_ticket_confirm" >
+        <action
+            android:id="@+id/action_returnTicketConfirmFragment_to_ticketConfirmedFragment"
+            app:destination="@id/ticketConfirmedFragment" />
+        <action
+            android:id="@+id/action_returnTicketConfirmFragment_to_ticketDetailsFragment"
+            app:destination="@id/ticketDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketConfirmedFragment"
+        android:name="com.example.neoticket.view.myTickets.TicketConfirmedFragment"
+        android:label="fragment_ticket_confirmed"
+        tools:layout="@layout/fragment_ticket_confirmed" >
+        <action
+            android:id="@+id/action_ticketConfirmedFragment_to_returnTicketConfirmFragment"
+            app:destination="@id/returnTicketConfirmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.neoticket.view.main.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailNotificationFragment"
+        android:name="com.example.neoticket.view.main.notifications.DetailNotificationFragment"
+        android:label="fragment_detail_notification"
+        tools:layout="@layout/fragment_detail_notification" >
+        <action
+            android:id="@+id/action_detailNotificationFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
 </navigation>
