@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,8 @@ import androidx.fragment.app.viewModels
 import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentRegisterBinding
-import com.example.neoticket.viewModel.CheckUserViewModel
-import com.example.neoticket.viewModel.LoginOrRegisterViewModel
+import com.example.neoticket.viewModel.auth.CheckUserViewModel
+import com.example.neoticket.viewModel.auth.LoginOrRegisterViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class RegisterFragment : BottomSheetDialogFragment() {

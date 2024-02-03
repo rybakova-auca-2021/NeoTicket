@@ -9,12 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentCodeVerificationBinding
-import com.example.neoticket.view.profile.ProfileFragment
-import com.example.neoticket.viewModel.CheckCodeViewModel
+import com.example.neoticket.viewModel.auth.CheckCodeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CodeVerificationFragment : BottomSheetDialogFragment() {
