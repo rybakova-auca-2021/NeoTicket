@@ -35,6 +35,5 @@
     <string name="time_to_return_ticket_is_up">Время возврата билета истекло</string>
     <string name="return_ticket_question">Вы уверены что хотите вернуть билет?</string>
     <string name="cancel">Отмена</string>
-    <string name="continue">Продолжить</string>
     <string name="return_home">Вернуться на главную</string>
 </resources>

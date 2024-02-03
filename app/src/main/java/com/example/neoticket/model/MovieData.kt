@@ -31,7 +31,7 @@ data class Movie(
     val id: Int,
     val title: String,
     val age_limit: Int,
-    val rating: Int,
+    val rating: Double,
     val image: String
 )
 

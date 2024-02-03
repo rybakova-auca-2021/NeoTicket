@@ -15,7 +15,7 @@ import retrofit2.http.Path
 
 interface TheaterInterface {
     @GET("theater/list/")
-    fun getTheaters() : Call<Theater>
+    fun getTheaters() : Call<List<Theater>>
 
     @POST("theater/order/checkout/")
     fun theaterOrderCheckout(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>

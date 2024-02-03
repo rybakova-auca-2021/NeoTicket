@@ -26,16 +26,16 @@ interface MovieInterface {
     ) : Call<CinemaDetail>
 
     @GET("movie/cinema/list/")
-    fun getCinemaList() : Call<Cinema>
+    fun getCinemaList() : Call<List<Cinema>>
 
     @GET("movie/detail/{id}/")
     fun getMovieDetail(@Path("id") id: Int) : Call<MovieDetail>
 
     @GET("movie/list/at-the-box-office/")
-    fun getMoviesAtTheBox() : Call<Movie>
+    fun getMoviesAtTheBox() : Call<List<Movie>>
 
     @GET("movie/list/coming-soon-to-cinema/")
-    fun getComingSoonMovies() : Call<Movie>
+    fun getComingSoonMovies() : Call<List<Movie>>
 
     @GET("movie/show-times/")
     fun getShowTime() : Call<ShowTime>

@@ -15,7 +15,7 @@ import retrofit2.http.Path
 
 interface ConcertInterface {
     @GET("concert/list/")
-    fun getConcerts() : Call<Concert>
+    fun getConcerts() : Call<List<Concert>>
 
     @POST("concert/order/checkout/")
     fun concertOrderCheckout(@Body request: ConcertOrderCheckout) : Call<ConcertOrderCheckoutResponse>

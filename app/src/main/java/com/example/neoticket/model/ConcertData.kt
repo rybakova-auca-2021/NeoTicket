@@ -5,7 +5,7 @@ data class Concert(
     val title: String,
     val concert_date: String,
     val place: ConcertPlace,
-    val detailImages: ConcertDetailImage,
+    val detailImages: List<ConcertDetailImage>,
     val show_times: ConcertShowTime
 )
 
