@@ -17,6 +17,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieInterface {
 
@@ -26,7 +27,7 @@ interface MovieInterface {
     ) : Call<CinemaDetail>
 
     @GET("movie/cinema/list/")
-    fun getCinemaList() : Call<List<Cinema>>
+    fun getCinemaList(@Query("search") search: String? = null) : Call<List<Cinema>>
 
     @GET("movie/detail/{id}/")
     fun getMovieDetail(@Path("id") id: Int) : Call<MovieDetail>

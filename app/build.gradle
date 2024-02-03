@@ -86,4 +86,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
 
     implementation 'jp.wasabeef:blurry:4.0.1'
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
 }
