@@ -3,10 +3,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.neoticket.databinding.MovieCardBinding
-import com.example.neoticket.model.Movie
+import com.example.neoticket.databinding.CinemaCardBinding
+import com.example.neoticket.model.Cinema
 
-class CinemaAdapter(private var items: List<Movie>) :
+class CinemaAdapter(private var items: List<Cinema>) :
     RecyclerView.Adapter<CinemaAdapter.CinemaViewHolder>() {
 
     private var itemClickListener: OnItemClickListener? = null
@@ -16,12 +16,12 @@ class CinemaAdapter(private var items: List<Movie>) :
     }
 
     interface OnItemClickListener {
-        fun onCinemaItemClick(item: Movie)
+        fun onCinemaItemClick(item: Cinema)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CinemaViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = MovieCardBinding.inflate(inflater, parent, false)
+        val binding = CinemaCardBinding.inflate(inflater, parent, false)
 
         return CinemaViewHolder(binding)
     }
@@ -35,7 +35,7 @@ class CinemaAdapter(private var items: List<Movie>) :
         return items.size
     }
 
-    fun updateData(newList: List<Movie>) {
+    fun updateData(newList: List<Cinema>) {
         val diffResult = DiffUtil.calculateDiff(
             DisplayableItemDiffCallback(
                 items,
@@ -46,7 +46,7 @@ class CinemaAdapter(private var items: List<Movie>) :
         diffResult.dispatchUpdatesTo(this)
     }
 
-    inner class CinemaViewHolder(private val binding: MovieCardBinding) :
+    inner class CinemaViewHolder(private val binding: CinemaCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -59,10 +59,9 @@ class CinemaAdapter(private var items: List<Movie>) :
             }
         }
 
-        fun bind(item: Movie) {
-            binding.itemTitle.text = item.title
-            binding.itemRating.text = item.rating.toString()
-            binding.itemAge.text = "Возрастной рейтинг: ${item.age_limit}"
+        fun bind(item: Cinema) {
+            binding.itemTitle.text = item.name
+            binding.itemAddress.text = item.address
             Glide.with(binding.itemImg.context)
                 .load(item.image)
                 .into(binding.itemImg)
@@ -70,8 +69,8 @@ class CinemaAdapter(private var items: List<Movie>) :
     }
 
     class DisplayableItemDiffCallback(
-        private val oldList: List<Movie>,
-        private val newList: List<Movie>
+        private val oldList: List<Cinema>,
+        private val newList: List<Cinema>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize() = oldList.size

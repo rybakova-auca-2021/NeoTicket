@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_detailMovieInCinemaFragment_to_chooseTicketFragment"
             app:destination="@id/chooseTicketFragment" />
+        <action
+            android:id="@+id/action_detailMovieInCinemaFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -130,6 +133,9 @@
         <action
             android:id="@+id/action_detailMovieFragment_to_chooseTicketFragment"
             app:destination="@id/chooseTicketFragment" />
+        <action
+            android:id="@+id/action_detailMovieFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -325,5 +331,17 @@
         <action
             android:id="@+id/action_detailNotificationFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.neoticket.view.main.movie.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_detailMovieInCinemaFragment"
+            app:destination="@id/detailMovieInCinemaFragment" />
+        <action
+            android:id="@+id/action_scheduleFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
     </fragment>
 </navigation>

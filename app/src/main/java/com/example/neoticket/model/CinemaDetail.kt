@@ -4,21 +4,19 @@ data class CinemaDetail(
     val id: Int,
     val name: String,
     val description: String,
-    val detail_images: CinemaDetailImage,
-    val show_times: CinemaShowTime
+    val image: String,
+    val detail_images: List<MovieDetailImage>,
+    val show_times: List<CinemaShowTime>
 )
 
-data class CinemaDetailImage(
-    val image: String
-)
 
 data class CinemaShowTime(
     val movie: Int,
     val start_date: String,
-    val start_times: StartTime,
+    val start_times: List<StartTime>,
     val movie_title: String,
     val movie_age_limit: Int,
-    val movie_rating: Int
+    val movie_rating: Double
 )
 
 data class Cinema(

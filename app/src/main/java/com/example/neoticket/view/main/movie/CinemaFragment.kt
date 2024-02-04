@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.adapters.ViewPagerAdapter
 import com.example.neoticket.databinding.FragmentCinemaBinding
+import com.example.neoticket.view.main.LocationFragment
+import com.example.neoticket.view.main.movie.cinema.CinemaListFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CinemaFragment : Fragment() {
@@ -19,6 +22,7 @@ class CinemaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCinemaBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).hideBtmNav()
 
         val tabLayout = binding.tabLayout
         val viewPager2 = binding.fragmentHolder
@@ -43,6 +47,10 @@ class CinemaFragment : Fragment() {
     private fun setupNavigation() {
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_cinemaFragment_to_mainPageFragment)
+        }
+        binding.btnCinemas.setOnClickListener {
+            val bottomSheetFragment = CinemaListFragment()
+            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
     }
 }
