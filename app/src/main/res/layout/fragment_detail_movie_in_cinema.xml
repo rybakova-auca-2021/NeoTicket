@@ -161,31 +161,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/inter_medium"
-        android:text="Август"
+        android:text="Февраль"
         android:textColor="@color/dark_grey"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/text_schedule"
         app:layout_constraintTop_toBottomOf="@+id/text_schedule" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/month" />
+        <com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:baseColor="@color/white"
+            app:baseTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/month"
+            app:selectedColor="@color/dark_blue"
+            app:selectedTextColor="@color/white"
+            app:showFullDate="false"
+            app:showTitle="false" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cinemas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/rv_date"
-        app:layout_constraintStart_toStartOf="@+id/rv_date"
-        app:layout_constraintTop_toBottomOf="@+id/rv_date" />
+        app:layout_constraintEnd_toEndOf="@+id/date"
+        app:layout_constraintStart_toStartOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

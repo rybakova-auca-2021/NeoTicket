@@ -7,7 +7,7 @@ import com.example.neoticket.model.MovieDetail
 import com.example.neoticket.model.MovieOrder
 import com.example.neoticket.model.MovieOrderCheckout
 import com.example.neoticket.model.MovieOrderCheckoutResponse
-import com.example.neoticket.model.MovieShowTime
+import com.example.neoticket.model.MovieTicket
 import com.example.neoticket.model.MovieTicketCreate
 import com.example.neoticket.model.ShowTime
 import com.example.neoticket.model.StartTimeDetail
@@ -39,7 +39,10 @@ interface MovieInterface {
     fun getComingSoonMovies() : Call<List<Movie>>
 
     @GET("movie/show-times/")
-    fun getShowTime() : Call<ShowTime>
+    fun getShowTime(@Query("movie_id") movie: String? = null) : Call<List<ShowTime>>
+
+    @GET("movie/show-times/detail/{id}/")
+    fun getMovieShowTimeDetail(@Path("id") id: Int) : Call<StartTimeDetail>
 
     @POST("movie/order/checkout/")
     fun orderMovie(@Body request: MovieOrderCheckout) : Call<MovieOrderCheckoutResponse>
@@ -47,15 +50,9 @@ interface MovieInterface {
     @GET("movie/order/{id}/")
     fun getMovieOrderDetail(@Path("id") id: Int) : Call<MovieOrder>
 
-    @GET("movie/show-times/")
-    fun getMovieShowTime(): Call<MovieShowTime>
-
-    @GET("movie/show-times/detail/{id}/")
-    fun getMovieShowTimeDetail(@Path("id") id: Int) : Call<StartTimeDetail>
-
     @GET("movie/ticket-type/list/")
-    fun getTicketType() : Call<TicketType>
+    fun getTicketType() : Call<List<TicketType>>
 
     @POST("movie/ticket/create/")
-    fun createTicket(@Body request: MovieTicketCreate)
+    fun createTicket(@Body request: MovieTicketCreate) : Call<MovieTicket>
 }

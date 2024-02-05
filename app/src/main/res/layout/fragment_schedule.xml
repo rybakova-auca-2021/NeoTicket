@@ -28,11 +28,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_calendar"
+    <com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+        android:id="@+id/date"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:selectedColor="@color/dark_blue"
+        app:selectedTextColor="@color/white"
+        app:baseColor="@color/white"
+        app:baseTextColor="@color/black"
+        app:showTitle="false"
+        app:showFullDate="false"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_title" />
@@ -41,10 +47,9 @@
         android:id="@+id/rv_cinemas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_calendar" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

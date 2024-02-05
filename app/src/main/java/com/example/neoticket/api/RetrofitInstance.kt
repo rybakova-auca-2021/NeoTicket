@@ -41,5 +41,9 @@ class RetrofitInstance {
         val theaterApi by lazy {
             retrofit.create(TheaterInterface::class.java)
         }
+
+        val sportApi by lazy {
+            retrofit.create(SportInterface::class.java)
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.neoticket
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -64,5 +65,15 @@ class MainActivity : AppCompatActivity() {
             val bottomSheetFragment = InternetDialogFragment()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
+    }
+
+    fun hideBtmNav() {
+        val navBar = findViewById<View>(R.id.bottomNavigationView)
+        navBar.visibility = View.GONE
+    }
+
+    fun showBtmNav() {
+        val navBar = findViewById<View>(R.id.bottomNavigationView)
+        navBar.visibility = View.VISIBLE
     }
 }

@@ -16,14 +16,19 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentDetailMovieInCinemaBinding
 import com.example.neoticket.viewModel.cinema.MovieDetailViewModel
+import com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+import com.harrywhewell.scrolldatepicker.OnDateSelectedListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import java.util.Date
+import javax.annotation.Nullable
 
 class DetailMovieInCinemaFragment : Fragment() {
     private lateinit var binding: FragmentDetailMovieInCinemaBinding
     private val viewModel: MovieDetailViewModel by viewModels()
     private lateinit var adapter: DetailImageAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var mPicker: DayScrollDatePicker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +36,7 @@ class DetailMovieInCinemaFragment : Fragment() {
     ): View? {
         binding = FragmentDetailMovieInCinemaBinding.inflate(inflater, container, false)
         recyclerView = binding.rvMovieImages
+        mPicker = binding.date
         return binding.root
     }
 
@@ -38,6 +44,7 @@ class DetailMovieInCinemaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = arguments?.getInt("id")
         setupAdapter()
+        getValue()
         if (id != null) {
             getMovieDetail(id)
             setupNavigation(id)
@@ -56,6 +63,11 @@ class DetailMovieInCinemaFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("id", id)
             findNavController().navigate(R.id.action_detailMovieInCinemaFragment_to_descriptionFragment, bundle)
+        }
+        binding.btnSchedule.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+            findNavController().navigate(R.id.scheduleFragment, bundle)
         }
     }
 
@@ -77,5 +89,13 @@ class DetailMovieInCinemaFragment : Fragment() {
                 .into(binding.imageView4)
         })
         viewModel.getCinemaDetail(id)
+    }
+
+    private fun getValue() {
+        mPicker.getSelectedDate(object : OnDateSelectedListener {
+            override fun onDateSelected(@Nullable date: Date?) {
+                println(date)
+            }
+        })
     }
 }

@@ -36,10 +36,11 @@ data class Movie(
 )
 
 data class ShowTime(
-    val movie: Int,
-    val cinema: String,
+    val id: Int,
     val start_date: String,
-    val start_times: StartTime
+    val movie: Int,
+    val start_times: List<StartTime>,
+    val cinema: Cinema,
 )
 
 data class StartTime(
@@ -94,8 +95,8 @@ data class MovieShowTime(
 
 data class StartTimeDetail(
     val id: Int,
-    val monie_title: String,
-    val movie_cinema: String,
+    val movie_title: String,
+    val cinema_name: String,
     val seats: List<MovieSeat>
 )
 
