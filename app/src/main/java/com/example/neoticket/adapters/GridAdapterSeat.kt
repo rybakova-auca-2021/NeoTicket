@@ -15,7 +15,7 @@ class GridAdapterSeat(private val context: Context, private var seats: List<Movi
     private var seatClickListener: SeatClickListener? = null
 
     interface SeatClickListener {
-        fun onSeatClick(rowNumber: Int, seatNumber: Int)
+        fun onSeatClick(rowNumber: Int, seatNumber: Int, seatId: Int)
     }
 
     fun setSeatClickListener(listener: SeatClickListener) {
@@ -55,7 +55,7 @@ class GridAdapterSeat(private val context: Context, private var seats: List<Movi
                 textViewSeat.text = seat.seat_number.toString()
                 imageViewSeat.setImageResource(R.drawable.rounded_rectangle)
                 seatView.setOnClickListener {
-                    seatClickListener?.onSeatClick(seat.row_number, seat.seat_number)
+                    seatClickListener?.onSeatClick(seat.row_number, seat.seat_number, seat.id)
                 }
             } else {
                 textViewSeat.text = "x"

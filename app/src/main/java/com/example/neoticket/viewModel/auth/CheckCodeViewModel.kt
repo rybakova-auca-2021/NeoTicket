@@ -29,6 +29,7 @@ class CheckCodeViewModel : ViewModel() {
                     val responseBody = response.body()
                     if (responseBody != null) {
                         Util.token = responseBody.access
+                        Util.id = responseBody.user_id
                     }
                 } else {
                     onError.invoke()

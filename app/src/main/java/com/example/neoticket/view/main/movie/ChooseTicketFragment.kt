@@ -28,20 +28,22 @@ class ChooseTicketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val showTimeId = arguments?.getInt("showTimeId")
-        setupAdapter()
+        if (showTimeId != null) {
+            setupAdapter(showTimeId)
+        }
         if (showTimeId != null) {
             getShowTimeDetail(showTimeId)
         }
     }
 
-    private fun setupAdapter() {
+    private fun setupAdapter(showTimeId: Int) {
         val gridView: GridView = binding.gridView
         gridAdapterSeat = GridAdapterSeat(requireContext(), emptyList())
         gridView.adapter = gridAdapterSeat
 
         gridAdapterSeat.setSeatClickListener(object : GridAdapterSeat.SeatClickListener {
-            override fun onSeatClick(rowNumber: Int, seatNumber: Int) {
-                val bottomSheetFragment = ChooseTicketTypeFragment.newInstance(rowNumber, seatNumber)
+            override fun onSeatClick(rowNumber: Int, seatNumber: Int, seatId: Int) {
+                val bottomSheetFragment = ChooseTicketTypeFragment.newInstance(rowNumber, seatNumber, showTimeId, seatId)
                 bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
             }
         })
@@ -53,6 +55,8 @@ class ChooseTicketFragment : Fragment() {
             if (result != null) {
                 val seats = result.seats
                 gridAdapterSeat.updateData(seats)
+                binding.textCinema.text = result.cinema_name
+                binding.movieTitle.text = result.movie_title
             }
         })
         viewModel.getMoviesShowTime(showTimeId)

@@ -109,7 +109,6 @@ data class TicketType(
 data class MovieTicketCreate(
     val show_time: Int,
     val seats: List<Int>,
-    val order: Int,
     val user: Int,
     val type: Int
 )

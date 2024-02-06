@@ -69,16 +69,16 @@ class ScheduleFragment : Fragment() {
 
     fun navigateToTicketPurchasePage(startTime: StartTime, showTime: ShowTime) {
         val bundle = Bundle()
-        bundle.putString("time", startTime.time)
         bundle.putInt("movie", showTime.movie)
         bundle.putInt("showTimeId", showTime.id)
         findNavController().navigate(R.id.chooseTicketFragment, bundle)
     }
 
     private fun getValue() {
-        val currentDate = Date()
-        val startDate = SimpleDateFormat("yyyy-MM-dd").format(currentDate)
-        adapter.filterByDateTime(startDate)
+        mPicker.setStartDate(3, 2, 2024)
+//        val currentDate = Date()
+//        val startDate = SimpleDateFormat("yyyy-MM-dd").format(currentDate)
+        adapter.filterByDateTime("2024-02-03")
         adapter.notifyDataSetChanged()
 
         mPicker.getSelectedDate(object : OnDateSelectedListener {
@@ -97,8 +97,8 @@ class ScheduleFragment : Fragment() {
     private fun getShowTime(id: Int) {
         viewModel.showTimeLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
-                val currentDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
-                val filteredData = result.filter { it.start_date == currentDate }
+                val desiredDate = "2024-02-03"
+                val filteredData = result.filter { it.start_date == desiredDate }
                 adapter.updateData(filteredData)
             }
         })
