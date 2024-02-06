@@ -64,7 +64,10 @@ data class MovieOrder(
     val id: Int,
     val user: Int,
     val total_price: String,
-    val tickets: List<MovieTicket>
+    val tickets: List<MovieTicket>,
+    val movie_title: String,
+    val movie_image: String,
+    val movie_cinema: String
 )
 
 data class MovieTicket(
@@ -77,7 +80,7 @@ data class MovieTicket(
     val show_time: Int,
     val order: Int,
     val user: Int,
-    val type: Int
+    var type: TicketType
 )
 
 data class MovieSeat(

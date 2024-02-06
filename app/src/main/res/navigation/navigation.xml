@@ -166,12 +166,19 @@
         <action
             android:id="@+id/action_paymentFragment_to_paymentConfirmedFragment"
             app:destination="@id/paymentConfirmedFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_confirmPageFragment"
+            app:destination="@id/confirmPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentConfirmedFragment"
         android:name="com.example.neoticket.view.main.payment.PaymentConfirmedFragment"
         android:label="fragment_payment_confirmed"
-        tools:layout="@layout/fragment_payment_confirmed" />
+        tools:layout="@layout/fragment_payment_confirmed" >
+        <action
+            android:id="@+id/action_paymentConfirmedFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cinemaDetailFragment2"
         android:name="com.example.neoticket.view.main.movie.cinema.CinemaDetailFragment"

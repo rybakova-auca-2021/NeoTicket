@@ -13,7 +13,7 @@ class OrderMovieDetailViewModel : ViewModel() {
     private val _orderMovieLiveData = MutableLiveData<MovieOrderCheckoutResponse?>()
     val orderMovieLiveData: MutableLiveData<MovieOrderCheckoutResponse?> get() = _orderMovieLiveData
 
-    fun getMoviesShowTime(user: Int, movieOrder: Int) {
+    fun orderMovie(user: Int, movieOrder: Int) {
         val apiInterface = RetrofitInstance.movieApi
         val request = MovieOrderCheckout(user, movieOrder)
 

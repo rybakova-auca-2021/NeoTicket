@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.adapters.TicketAdapter
 import com.example.neoticket.databinding.FragmentConfirmTicketSeatsBinding
@@ -69,6 +71,13 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
     private fun createTicket(ticketDataList: List<TicketData>) {
         val showTimeId = arguments?.getInt("showTimeId", 0) ?: 0
         binding.btnNext.setOnClickListener {
+            viewModel.createTicketLiveData.observe(viewLifecycleOwner, Observer { result ->
+                if (result != null) {
+                    val bundle = Bundle()
+                    bundle.putInt("order", result.order)
+                    findNavController().navigate(R.id.confirmPageFragment, bundle)
+                }
+            })
             ticketDataList.forEach { ticketData ->
                 val seats = listOf(ticketData.seatNumber)
                 val type = ticketData.ticketType
