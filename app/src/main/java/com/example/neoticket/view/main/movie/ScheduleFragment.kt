@@ -3,10 +3,10 @@ package com.example.neoticket.view.main.movie
 import ScheduleAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,8 +19,6 @@ import com.example.neoticket.model.StartTime
 import com.example.neoticket.viewModel.cinema.GetShowTimeViewModel
 import com.harrywhewell.scrolldatepicker.DayScrollDatePicker
 import com.harrywhewell.scrolldatepicker.OnDateSelectedListener
-import jp.wasabeef.glide.transformations.BlurTransformation
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.annotation.Nullable
@@ -55,7 +53,12 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        adapter = ScheduleAdapter(emptyList(), this)
+        adapter = ScheduleAdapter(
+            emptyList(),
+            navigateToTicketPurchasePage = {
+                    startTime, item -> navigateToTicketPurchasePage(startTime, item)
+            }
+        )
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
@@ -67,7 +70,7 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    fun navigateToTicketPurchasePage(startTime: StartTime, showTime: ShowTime) {
+    private fun navigateToTicketPurchasePage(startTime: StartTime, showTime: ShowTime) {
         val bundle = Bundle()
         bundle.putInt("movie", showTime.movie)
         bundle.putInt("showTimeId", showTime.id)

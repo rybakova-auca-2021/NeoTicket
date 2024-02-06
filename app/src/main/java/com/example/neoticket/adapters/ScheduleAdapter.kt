@@ -15,8 +15,10 @@ import com.example.neoticket.model.StartTime
 import com.example.neoticket.model.Theater
 import com.example.neoticket.view.main.movie.ScheduleFragment
 
-class ScheduleAdapter(private var items: List<ShowTime>,  private val fragment: ScheduleFragment) :
-    RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
+class ScheduleAdapter(
+    private var items: List<ShowTime>,
+    private val navigateToTicketPurchasePage: (StartTime, ShowTime) -> Unit
+) : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
 
     private var itemClickListener: OnItemClickListener? = null
 
@@ -79,8 +81,11 @@ class ScheduleAdapter(private var items: List<ShowTime>,  private val fragment: 
         fun bind(item: ShowTime) {
             binding.cinemaName.text = item.cinema.name
             binding.cinemaAddress.text = item.cinema.address
+//            val showTimesAdapter = ShowTimeAdapter(item.start_times) { startTime ->
+//                fragment.navigateToTicketPurchasePage(startTime, item)
+//            }
             val showTimesAdapter = ShowTimeAdapter(item.start_times) { startTime ->
-                fragment.navigateToTicketPurchasePage(startTime, item)
+                navigateToTicketPurchasePage(startTime, item)
             }
             binding.rvShowTime.layoutManager = GridLayoutManager(binding.root.context, 4)
             binding.rvShowTime.adapter = showTimesAdapter

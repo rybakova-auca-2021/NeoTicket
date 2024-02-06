@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/overlay_detail_movie"
+        tools:src="@drawable/overlay_detail_movie"
         app:layout_constraintDimensionRatio="H,16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,7 +30,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="100dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_movie"
+        tools:src="@drawable/img_movie"
         app:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +191,16 @@
         app:layout_constraintEnd_toEndOf="@+id/date"
         app:layout_constraintStart_toStartOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/date" />
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/chevron_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

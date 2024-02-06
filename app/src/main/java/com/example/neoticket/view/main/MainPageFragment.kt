@@ -1,5 +1,6 @@
 package com.example.neoticket.view.main
 
+import CinemaAdapter
 import CinemaItem
 import ConcertItem
 import MainPageAdapter
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainPageBinding
+import com.example.neoticket.model.Cinema
+import com.example.neoticket.model.Movie
 import com.example.neoticket.viewModel.cinema.MovieAtBoxListViewModel
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
@@ -46,6 +49,7 @@ class MainPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapters()
+        setupAdapterClicks()
         setupNavigation()
         getCinemaList()
         getConcertList()
@@ -67,6 +71,25 @@ class MainPageFragment : Fragment() {
         recyclerViewTheater.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recyclerViewTheater.adapter = theaterAdapter
+    }
+
+    private fun setupAdapterClicks() {
+        cinemaAdapter.setOnItemClickListener(object : MainPageAdapter.OnItemClickListener {
+            override fun onCinemaItemClick(item: CinemaItem) {
+                val bundle = Bundle()
+                bundle.putInt("id", item.cinema.id)
+                bundle.putString("sourceFragment", "mainPageFragment")
+                findNavController().navigate(R.id.detailMovieInCinemaFragment, bundle)
+            }
+
+            override fun onConcertItemClick(item: ConcertItem) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTheaterItemClick(item: TheaterItem) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     private fun getCinemaList() {
