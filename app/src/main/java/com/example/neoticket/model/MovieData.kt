@@ -16,14 +16,14 @@ data class MovieDetail(
     val main_actors: String,
     val director: String,
     val release_date: String?,
-    val detail_images: List<MovieDetailImage>,
+    val detail_images: List<DetailImage>,
 )
 
 data class Genre(
     val name: String
 )
 
-data class MovieDetailImage(
+data class DetailImage(
     val image: String
 )
 
@@ -75,7 +75,7 @@ data class MovieTicket(
     val seats: List<MovieSeat>,
     val movie_title: String,
     val movie_cinema: String,
-    val movie_images: List<MovieDetailImage>,
+    val movie_images: List<DetailImage>,
     val movie_data: String,
     val show_time: Int,
     val order: Int,

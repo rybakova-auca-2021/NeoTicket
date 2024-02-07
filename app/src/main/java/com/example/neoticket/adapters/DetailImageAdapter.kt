@@ -3,12 +3,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.neoticket.databinding.CinemaCardBinding
 import com.example.neoticket.databinding.ImageCardBinding
-import com.example.neoticket.model.Cinema
-import com.example.neoticket.model.MovieDetailImage
+import com.example.neoticket.model.DetailImage
 
-class DetailImageAdapter(private var items: List<MovieDetailImage>) :
+class DetailImageAdapter(private var items: List<DetailImage>) :
     RecyclerView.Adapter<DetailImageAdapter.ImageViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,7 +24,7 @@ class DetailImageAdapter(private var items: List<MovieDetailImage>) :
         return items.size
     }
 
-    fun updateData(newList: List<MovieDetailImage>) {
+    fun updateData(newList: List<DetailImage>) {
         val diffResult = DiffUtil.calculateDiff(
             DisplayableItemDiffCallback(
                 items,
@@ -40,7 +38,7 @@ class DetailImageAdapter(private var items: List<MovieDetailImage>) :
     inner class ImageViewHolder(private val binding: ImageCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MovieDetailImage) {
+        fun bind(item: DetailImage) {
             Glide.with(binding.itemImg.context)
                 .load(item.image)
                 .into(binding.itemImg)
@@ -48,8 +46,8 @@ class DetailImageAdapter(private var items: List<MovieDetailImage>) :
     }
 
     class DisplayableItemDiffCallback(
-        private val oldList: List<MovieDetailImage>,
-        private val newList: List<MovieDetailImage>
+        private val oldList: List<DetailImage>,
+        private val newList: List<DetailImage>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize() = oldList.size

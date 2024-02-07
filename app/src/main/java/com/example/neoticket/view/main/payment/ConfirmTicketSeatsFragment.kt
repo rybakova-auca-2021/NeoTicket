@@ -17,6 +17,7 @@ import com.example.neoticket.databinding.FragmentConfirmTicketSeatsBinding
 import com.example.neoticket.room.MyApplication
 import com.example.neoticket.room.TicketDao
 import com.example.neoticket.room.TicketData
+import com.example.neoticket.view.auth.RegisterFragment
 import com.example.neoticket.view.main.movie.ChooseTicketTypeFragment
 import com.example.neoticket.viewModel.cinema.CreateTicketViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -71,18 +72,23 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
     private fun createTicket(ticketDataList: List<TicketData>) {
         val showTimeId = arguments?.getInt("showTimeId", 0) ?: 0
         binding.btnNext.setOnClickListener {
-            viewModel.createTicketLiveData.observe(viewLifecycleOwner, Observer { result ->
-                if (result != null) {
-                    val bundle = Bundle()
-                    bundle.putInt("order", result.order)
-                    findNavController().navigate(R.id.confirmPageFragment, bundle)
-                }
-            })
-            ticketDataList.forEach { ticketData ->
-                val seats = listOf(ticketData.seatNumber)
-                val type = ticketData.ticketType
+            if (Util.token != null) {
+                viewModel.createTicketLiveData.observe(viewLifecycleOwner, Observer { result ->
+                    if (result != null) {
+                        val bundle = Bundle()
+                        bundle.putInt("order", result.order)
+                        findNavController().navigate(R.id.confirmPageFragment, bundle)
+                    }
+                })
+                ticketDataList.forEach { ticketData ->
+                    val seats = listOf(ticketData.seatNumber)
+                    val type = ticketData.ticketType
 
-                Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type) }
+                    Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type) }
+                }
+            } else {
+                val bottomSheetFragment = RegisterFragment()
+                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
             }
         }
     }

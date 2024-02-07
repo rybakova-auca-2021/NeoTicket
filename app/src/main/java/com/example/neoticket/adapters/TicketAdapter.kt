@@ -50,7 +50,12 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
         fun bind(ticket: TicketData) {
             binding.ticketSeat.text = "${ticket.rowNumber} ряд, ${ticket.seatNumber} место"
-            binding.ticketType.text = "${ticket.ticketType},  ${ticket.price}"
+            when(ticket.ticketType) {
+                1 -> binding.ticketType.text = "Взрослый,  ${ticket.price}"
+                2 -> binding.ticketType.text = "Студенческий,  ${ticket.price}"
+                3 -> binding.ticketType.text = "Детский,  ${ticket.price}"
+            }
+
         }
     }
 }
