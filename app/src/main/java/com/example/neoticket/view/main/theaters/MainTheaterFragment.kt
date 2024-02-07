@@ -1,21 +1,78 @@
 package com.example.neoticket.view.main.theaters
 
+import TheatersAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainTheaterBinding
+import com.example.neoticket.model.Movie
+import com.example.neoticket.model.Theater
+import com.example.neoticket.view.main.movie.cinema.CinemaListFragment
+import com.example.neoticket.viewModel.theater.TheaterListViewModel
 
 class MainTheaterFragment : Fragment() {
     private lateinit var binding: FragmentMainTheaterBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: TheatersAdapter
+    private val viewModel: TheaterListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainTheaterBinding.inflate(inflater, container, false)
+        recyclerView = binding.rvTheater
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAdapters()
+        getTheaterList()
+        setupNavigation()
+    }
+
+    private fun setupAdapters() {
+        adapter = TheatersAdapter(emptyList())
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+    }
+
+    private fun setupNavigation() {
+        adapter.setOnItemClickListener(object : TheatersAdapter.OnItemClickListener {
+            override fun onCinemaItemClick(item: Theater) {
+                val bundle = Bundle()
+                bundle.putInt("id", item.id)
+                bundle.putString("sourceFragment", "mainTheaterPage")
+                findNavController().navigate(R.id.theaterDetailFragment, bundle)
+            }
+        })
+
+        binding.btnAllPlaces.setOnClickListener {
+            val bottomSheetFragment = TheaterLocationFragment()
+            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_mainTheaterFragment_to_mainPageFragment)
+        }
+    }
+
+    private fun getTheaterList() {
+        viewModel.theaterLiveData.observe(viewLifecycleOwner, Observer { theaters ->
+            if (theaters != null) {
+                adapter.updateData(theaters)
+            }
+        })
+        viewModel.getTheaters()
+    }
 }

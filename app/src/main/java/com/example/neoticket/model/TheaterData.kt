@@ -3,13 +3,32 @@ package com.example.neoticket.model
 data class Theater(
     val id: Int,
     val title: String,
+    val description: String,
     val theater_date: String?,
     val place: TheaterPlace,
-    val detail_images: List<TheaterDetailImage>,
+    val detail_images: List<DetailImage>,
     val show_times: List<TheaterShowTime>
 )
 
+data class TheaterDetail(
+    val id: Int,
+    val description: String,
+    val year_of_issue: String,
+    val country_of_origin: String,
+    val theater_date: String?,
+    val time: String,
+    val composer: String,
+    val main_actors: String,
+    val genre: TheaterGenre,
+    val duration: String,
+    val age_limit: Int
+)
+
 data class TheaterPlace(
+    val name: String
+)
+
+data class TheaterGenre(
     val name: String
 )
 
@@ -19,8 +38,6 @@ data class TheaterDetailImage(
 
 data class TheaterShowTime(
     val id: Int,
-    val title: String,
-    val readOnly: Boolean,
     val start_date: String,
     val base_ticket_price: String
 )

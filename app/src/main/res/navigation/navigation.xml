@@ -278,6 +278,9 @@
         <action
             android:id="@+id/action_theaterDetailFragment_to_theaterDescriptionFragment"
             app:destination="@id/theaterDescriptionFragment" />
+        <action
+            android:id="@+id/action_theaterDetailFragment_to_theaterChooseSectorFragment"
+            app:destination="@id/theaterChooseSectorFragment" />
     </fragment>
     <fragment
         android:id="@+id/theaterDescriptionFragment"
@@ -350,5 +353,14 @@
         <action
             android:id="@+id/action_scheduleFragment_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/theaterChooseSectorFragment"
+        android:name="com.example.neoticket.view.main.theaters.TheaterChooseSectorFragment"
+        android:label="fragment_theater_choose_sector"
+        tools:layout="@layout/fragment_theater_choose_sector" >
+        <action
+            android:id="@+id/action_theaterChooseSectorFragment_to_theaterDetailFragment"
+            app:destination="@id/theaterDetailFragment" />
     </fragment>
 </navigation>

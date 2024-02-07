@@ -27,15 +27,29 @@ data class TheaterItem(val theater: Theater) : DisplayableItem {
 class MainPageAdapter(private var items: List<DisplayableItem>) :
     RecyclerView.Adapter<MainPageAdapter.MainPageViewHolder>() {
 
-    private var itemClickListener: OnItemClickListener? = null
+    private var cinemaClickListener: OnCinemaClickListener? = null
+    private var concertClickListener: OnConcertClickListener? = null
+    private var theaterClickListener: OnTheaterClickListener? = null
 
-    fun setOnItemClickListener(listener: MainPageAdapter.OnItemClickListener) {
-        itemClickListener = listener
+    fun setOnCinemaClickListener(listener: MainPageAdapter.OnCinemaClickListener) {
+        cinemaClickListener = listener
+    }
+    fun setOnConcertClickListener(listener: MainPageAdapter.OnConcertClickListener) {
+        concertClickListener = listener
+    }
+    fun setOnTheaterClickListener(listener: MainPageAdapter.OnTheaterClickListener) {
+        theaterClickListener = listener
     }
 
-    interface OnItemClickListener {
+    interface OnCinemaClickListener {
         fun onCinemaItemClick(item: CinemaItem)
+    }
+
+    interface OnConcertClickListener {
         fun onConcertItemClick(item: ConcertItem)
+    }
+
+    interface OnTheaterClickListener {
         fun onTheaterItemClick(item: TheaterItem)
     }
 
@@ -74,9 +88,9 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     when (val clickedItem = items[position]) {
-                        is CinemaItem -> itemClickListener?.onCinemaItemClick(clickedItem)
-                        is ConcertItem -> itemClickListener?.onConcertItemClick(clickedItem)
-                        is TheaterItem -> itemClickListener?.onTheaterItemClick(clickedItem)
+                        is CinemaItem -> cinemaClickListener?.onCinemaItemClick(clickedItem)
+                        is ConcertItem -> concertClickListener?.onConcertItemClick(clickedItem)
+                        is TheaterItem -> theaterClickListener?.onTheaterItemClick(clickedItem)
                     }
                 }
             }
@@ -96,19 +110,19 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                 is ConcertItem -> {
                     val concert = item.concert
                     binding.itemTitle.text = concert.title
-                    binding.itemPlace.text = concert.place.toString()
+                    binding.itemPlace.text = concert.place.name
                     binding.itemPrice.text = "От 450с"
-                    Glide.with(binding.itemImg.context)
-                        .load(concert.detailImages[1])
-                        .into(binding.itemImg)
+//                    Glide.with(binding.itemImg.context)
+//                        .load(concert.detailImages[0].image)
+//                        .into(binding.itemImg)
                 }
                 is TheaterItem -> {
                     val theater = item.theater
                     binding.itemTitle.text = theater.title
-                    binding.itemPlace.text = theater.place.toString()
+                    binding.itemPlace.text = theater.place.name
                     binding.itemPrice.text = "От 800с"
                     Glide.with(binding.itemImg.context)
-                        .load(theater.detail_images[1])
+                        .load(theater.detail_images[0].image)
                         .into(binding.itemImg)
                 }
             }

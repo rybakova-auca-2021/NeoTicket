@@ -1,6 +1,5 @@
 package com.example.neoticket.view.main
 
-import CinemaAdapter
 import CinemaItem
 import ConcertItem
 import MainPageAdapter
@@ -15,10 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainPageBinding
-import com.example.neoticket.model.Cinema
-import com.example.neoticket.model.Movie
 import com.example.neoticket.viewModel.cinema.MovieAtBoxListViewModel
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
@@ -40,6 +38,7 @@ class MainPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainPageBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).showBtmNav()
         recyclerViewCinema = binding.rvCinema
         recyclerViewConcert = binding.rvConcerts
         recyclerViewTheater = binding.rvTheater
@@ -74,21 +73,30 @@ class MainPageFragment : Fragment() {
     }
 
     private fun setupAdapterClicks() {
-        cinemaAdapter.setOnItemClickListener(object : MainPageAdapter.OnItemClickListener {
+        cinemaAdapter.setOnCinemaClickListener(object : MainPageAdapter.OnCinemaClickListener {
             override fun onCinemaItemClick(item: CinemaItem) {
                 val bundle = Bundle()
                 bundle.putInt("id", item.cinema.id)
                 bundle.putString("sourceFragment", "mainPageFragment")
                 findNavController().navigate(R.id.detailMovieInCinemaFragment, bundle)
             }
-
+        })
+        concertAdapter.setOnConcertClickListener(object : MainPageAdapter.OnConcertClickListener {
             override fun onConcertItemClick(item: ConcertItem) {
-                TODO("Not yet implemented")
+                val bundle = Bundle()
+                bundle.putInt("id", item.concert.id)
+                bundle.putString("sourceFragment", "mainPageFragment")
+                findNavController().navigate(R.id.concertDetailPageFragment, bundle)
+            }
+        })
+        theaterAdapter.setOnTheaterClickListener(object : MainPageAdapter.OnTheaterClickListener {
+            override fun onTheaterItemClick(item: TheaterItem) {
+                val bundle = Bundle()
+                bundle.putInt("id", item.theater.id)
+                bundle.putString("sourceFragment", "mainPageFragment")
+                findNavController().navigate(R.id.theaterDetailFragment, bundle)
             }
 
-            override fun onTheaterItemClick(item: TheaterItem) {
-                TODO("Not yet implemented")
-            }
         })
     }
 

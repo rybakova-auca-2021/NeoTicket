@@ -1,6 +1,7 @@
 package com.example.neoticket.api
 
 import com.example.neoticket.model.Theater
+import com.example.neoticket.model.TheaterDetail
 import com.example.neoticket.model.TheaterOrder
 import com.example.neoticket.model.TheaterOrderCheckout
 import com.example.neoticket.model.TheaterOrderCheckoutResponse
@@ -16,6 +17,9 @@ import retrofit2.http.Path
 interface TheaterInterface {
     @GET("theater/list/")
     fun getTheaters() : Call<List<Theater>>
+
+    @GET("theater/detail/{id}/")
+    fun getTheaterDetail(@Path("id") id: Int) : Call<TheaterDetail>
 
     @POST("theater/order/checkout/")
     fun theaterOrderCheckout(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>
