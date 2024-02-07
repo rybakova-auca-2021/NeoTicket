@@ -2,14 +2,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.neoticket.databinding.CardScheduleTheaterBinding
-import com.example.neoticket.model.TheaterConcertShowTime
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.example.neoticket.databinding.TheaterCardBinding
+import com.example.neoticket.model.Concert
+import com.example.neoticket.model.Theater
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
-class TheaterScheduleAdapter(
-    private var items: List<TheaterConcertShowTime>
-) : RecyclerView.Adapter<TheaterScheduleAdapter.ScheduleViewHolder>() {
+class ConcertAdapter(private var items: List<Concert>) :
+    RecyclerView.Adapter<ConcertAdapter.TheaterViewHolder>() {
 
     private var itemClickListener: OnItemClickListener? = null
 
@@ -18,17 +21,17 @@ class TheaterScheduleAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(item: TheaterConcertShowTime)
+        fun onItemClick(item: Concert)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TheaterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = CardScheduleTheaterBinding.inflate(inflater, parent, false)
+        val binding = TheaterCardBinding.inflate(inflater, parent, false)
 
-        return ScheduleViewHolder(binding)
+        return TheaterViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TheaterViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
     }
@@ -37,7 +40,7 @@ class TheaterScheduleAdapter(
         return items.size
     }
 
-    fun updateData(newList: List<TheaterConcertShowTime>) {
+    fun updateData(newList: List<Concert>) {
         val diffResult = DiffUtil.calculateDiff(
             DisplayableItemDiffCallback(
                 items,
@@ -48,15 +51,7 @@ class TheaterScheduleAdapter(
         diffResult.dispatchUpdatesTo(this)
     }
 
-    fun filterByDateTime(startDate: String) {
-        val filteredList = items.filter { showTime ->
-            showTime.start_date == startDate
-        }
-
-        updateData(filteredList)
-    }
-
-    inner class ScheduleViewHolder(private val binding: CardScheduleTheaterBinding) :
+    inner class TheaterViewHolder(private val binding: TheaterCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -69,22 +64,20 @@ class TheaterScheduleAdapter(
             }
         }
 
-        fun bind(item: TheaterConcertShowTime) {
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
-            val dayOfWeekFormat = SimpleDateFormat("EEEE", Locale.getDefault())
-            val startDate = inputFormat.parse(item.start_date)
-            val formattedDate = outputFormat.format(startDate)
-            val dayOfWeek = dayOfWeekFormat.format(startDate)
-
-            binding.textDate.text = formattedDate
-            binding.textDay.text = dayOfWeek
+        fun bind(item: Concert) {
+            binding.itemTitle.text = item.title
+            binding.itemPlace.text = item.place.name
+            binding.itemDate.text = item.concert_date
+            Glide.with(binding.itemImg.context)
+                .load(item.detail_images[0].image)
+                .transform(CenterCrop(), RoundedCorners(20))
+                .into(binding.itemImg)
         }
     }
 
     class DisplayableItemDiffCallback(
-        private val oldList: List<TheaterConcertShowTime>,
-        private val newList: List<TheaterConcertShowTime>
+        private val oldList: List<Concert>,
+        private val newList: List<Concert>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize() = oldList.size

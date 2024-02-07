@@ -86,10 +86,8 @@
         android:id="@+id/concert_place"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/place_text"
         app:layout_constraintEnd_toEndOf="@+id/concert_description"
-        app:layout_constraintStart_toEndOf="@+id/place_text"
         app:layout_constraintTop_toTopOf="@+id/place_text"
         tools:text="Центральный стадион г. Бишкек" />
 
@@ -171,7 +169,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/guest_text"
         app:layout_constraintEnd_toEndOf="@+id/concert_artist"
         app:layout_constraintTop_toTopOf="@+id/guest_text"
-        tools:text="20:00" />
+        android:text="20:00" />
 
     <TextView
         android:id="@+id/age_limit_text"
@@ -181,7 +179,7 @@
         android:textColor="@color/dark_grey"
         app:layout_constraintStart_toStartOf="@+id/artists_text"
         app:layout_constraintTop_toBottomOf="@+id/view4"
-        tools:text="Возрастное ограничение" />
+        android:text="Возрастное ограничение" />
 
     <TextView
         android:id="@+id/guest_text"
@@ -191,5 +189,5 @@
         android:textColor="@color/dark_grey"
         app:layout_constraintStart_toStartOf="@+id/age_limit_text"
         app:layout_constraintTop_toBottomOf="@+id/view4"
-        tools:text="Сбор гостей" />
+        android:text="Сбор гостей" />
 </androidx.constraintlayout.widget.ConstraintLayout>

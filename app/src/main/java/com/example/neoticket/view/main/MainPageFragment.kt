@@ -140,6 +140,7 @@ class MainPageFragment : Fragment() {
         val cinemaAction = R.id.action_mainPageFragment_to_cinemaFragment
         val theaterAction = R.id.action_mainPageFragment_to_mainTheaterFragment
         val sportAction = R.id.action_mainPageFragment_to_mainSportFragment
+        val concertAction = R.id.action_mainPageFragment_to_mainConcertPageFragment
 
         binding.btnAllCinema.setOnClickListener {
             findNavController().navigate(cinemaAction)
@@ -157,6 +158,13 @@ class MainPageFragment : Fragment() {
 
         binding.btnSport.setOnClickListener {
             findNavController().navigate(sportAction)
+        }
+
+        binding.btnConcert.setOnClickListener {
+            findNavController().navigate(concertAction)
+        }
+        binding.btnAllConcert.setOnClickListener {
+            findNavController().navigate(concertAction)
         }
     }
 }
