@@ -3,10 +3,21 @@ package com.example.neoticket.model
 data class SportData(
     val id: Int,
     val title: String,
+    val description: String,
     val sport_date: String,
     val place: SportPlace,
-    val detail_images: List<SportDetailImage>,
-    val show_times: List<SportShowTime>
+    val detail_images: List<DetailImage>,
+    val show_times: List<CombinedShowTime>
+)
+
+data class SportDetail(
+    val id: Int,
+    val title: String,
+    val description: String,
+    val sport_date: String,
+    val time: String,
+    val place: SportPlace,
+    val age_limit: Int
 )
 
 data class SportPlace(

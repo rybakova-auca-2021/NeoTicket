@@ -1,6 +1,7 @@
 package com.example.neoticket.api
 
 import com.example.neoticket.model.SportData
+import com.example.neoticket.model.SportDetail
 import com.example.neoticket.model.SportOrder
 import com.example.neoticket.model.SportOrderCheckout
 import com.example.neoticket.model.SportOrderCheckoutResponse
@@ -22,7 +23,10 @@ import retrofit2.http.Path
 
 interface SportInterface {
     @GET("sport/list/")
-    fun getSportList() : Call<SportData>
+    fun getSportList() : Call<List<SportData>>
+
+    @GET("sport/detail/{id}/")
+    fun getSportDetail(@Path("id") id: Int) : Call<SportDetail>
 
     @POST("sport/order/checkout/")
     fun sportOrderCheckout(@Body request: SportOrderCheckout) : Call<SportOrderCheckoutResponse>
