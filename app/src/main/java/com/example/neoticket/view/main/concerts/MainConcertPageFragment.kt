@@ -63,7 +63,7 @@ class MainConcertPageFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_mainTheaterFragment_to_mainPageFragment)
+            findNavController().navigate(R.id.action_mainConcertPageFragment_to_mainPageFragment)
         }
     }
 

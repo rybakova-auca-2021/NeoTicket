@@ -3,10 +3,11 @@ package com.example.neoticket.model
 data class Concert(
     val id: Int,
     val title: String,
+    val description: String,
     val concert_date: String,
     val place: ConcertPlace,
-    val detailImages: List<ConcertDetailImage>,
-    val show_times: ConcertShowTime
+    val detail_images: List<DetailImage>,
+    val show_times: List<CombinedShowTime>
 )
 
 data class ConcertPlace(
@@ -15,12 +16,6 @@ data class ConcertPlace(
 
 data class ConcertDetailImage(
     val image: String
-)
-
-data class ConcertShowTime(
-    val id: Int,
-    val start_date: String,
-    val base_ticket_price: String
 )
 
 data class ConcertOrderCheckout(
@@ -39,6 +34,17 @@ data class ConcertOrder(
     val user: Int,
     val total_price: String,
     val tickets: List<ConcertTicket>
+)
+
+data class ConcertDetail(
+    val id: Int,
+    val title: String,
+    val description: String,
+    val concert_date: String?,
+    val time: String,
+    val place: ConcertPlace,
+    val artist: String,
+    val age_limit: Int
 )
 
 data class ConcertTicket(

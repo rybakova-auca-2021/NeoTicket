@@ -4,7 +4,6 @@ import DetailImageAdapter
 import TheaterScheduleAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -19,10 +18,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentConcertDetailPageBinding
-import com.example.neoticket.model.TheaterConcertShowTime
+import com.example.neoticket.model.CombinedShowTime
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class ConcertDetailPageFragment : Fragment() {
     private lateinit var binding: FragmentConcertDetailPageBinding
@@ -65,7 +63,7 @@ class ConcertDetailPageFragment : Fragment() {
 
     private fun setupNavigation(id: Int) {
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
-            override fun onItemClick(item: TheaterConcertShowTime) {
+            override fun onItemClick(item: CombinedShowTime) {
                 findNavController().navigate(R.id.concertChooseSectorFragment)
             }
         })

@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/btn_back" />
 
     <TextView
-        android:id="@+id/concert_place"
+        android:id="@+id/place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -42,16 +42,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/concert_artist"
+        android:id="@+id/artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Димаш Кудайберген"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/concert_place"
-        app:layout_constraintStart_toStartOf="@+id/concert_place"
-        app:layout_constraintTop_toBottomOf="@+id/concert_place" />
+        app:layout_constraintEnd_toEndOf="@+id/place"
+        app:layout_constraintStart_toStartOf="@+id/place"
+        app:layout_constraintTop_toBottomOf="@+id/place" />
 
     <TextView
         android:id="@+id/text_room_number"
@@ -60,9 +60,9 @@
         android:layout_marginTop="8dp"
         android:text="Сектор А3"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@+id/concert_artist"
-        app:layout_constraintStart_toStartOf="@+id/concert_artist"
-        app:layout_constraintTop_toBottomOf="@+id/concert_artist" />
+        app:layout_constraintEnd_toEndOf="@+id/artist"
+        app:layout_constraintStart_toStartOf="@+id/artist"
+        app:layout_constraintTop_toBottomOf="@+id/artist" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"

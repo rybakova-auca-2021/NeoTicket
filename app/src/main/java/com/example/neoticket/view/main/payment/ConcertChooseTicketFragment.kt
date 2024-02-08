@@ -18,9 +18,9 @@ class ConcertChooseTicketFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentConcertChooseTicketBinding.inflate(inflater, container, false)
-        val gridView: GridView = binding.gridView
-        val gridAdapterSeat = GridAdapterSeat(requireContext())
-        gridView.adapter = gridAdapterSeat
+//        val gridView: GridView = binding.gridView
+//        val gridAdapterSeat = GridAdapterSeat(requireContext())
+//        gridView.adapter = gridAdapterSeat
         return binding.root
     }
 }
