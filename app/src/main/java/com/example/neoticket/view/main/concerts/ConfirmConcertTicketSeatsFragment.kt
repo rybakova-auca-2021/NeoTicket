@@ -1,4 +1,4 @@
-package com.example.neoticket.view.main.payment
+package com.example.neoticket.view.main.concerts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,33 +12,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
-import com.example.neoticket.adapters.TicketAdapter
+import com.example.neoticket.adapters.ConcertTicketAdapter
 import com.example.neoticket.databinding.FragmentConfirmTicketSeatsBinding
+import com.example.neoticket.room.ConcertTicketData
 import com.example.neoticket.room.MyApplication
 import com.example.neoticket.room.TicketDao
-import com.example.neoticket.room.TicketData
 import com.example.neoticket.view.auth.RegisterFragment
-import com.example.neoticket.view.main.movie.ChooseTicketTypeFragment
-import com.example.neoticket.viewModel.cinema.CreateTicketViewModel
+import com.example.neoticket.viewModel.concerts.CreateConcertTicketViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.installations.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
+class ConfirmConcertTicketSeatsFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentConfirmTicketSeatsBinding
-    private val viewModel: CreateTicketViewModel by viewModels()
+    private val viewModel: CreateConcertTicketViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: TicketAdapter
+    private lateinit var adapter: ConcertTicketAdapter
     private val ticketDao: TicketDao by lazy {
         (requireActivity().application as MyApplication).database.ticketDao()
     }
 
     companion object {
-        fun newInstance(showTime: Int): ConfirmTicketSeatsFragment {
-            val fragment = ConfirmTicketSeatsFragment()
+        fun newInstance(showTime: Int): ConfirmConcertTicketSeatsFragment {
+            val fragment = ConfirmConcertTicketSeatsFragment()
             val args = Bundle()
             args.putInt("showTimeId", showTime)
             fragment.arguments = args
@@ -63,13 +61,13 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = TicketAdapter()
+        adapter = ConcertTicketAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
 
-    private fun createTicket(ticketDataList: List<TicketData>) {
+    private fun createTicket(ticketDataList: List<ConcertTicketData>) {
         val showTimeId = arguments?.getInt("showTimeId", 0) ?: 0
         binding.btnNext.setOnClickListener {
             if (Util.token != null) {
@@ -77,15 +75,14 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
                     if (result != null) {
                         val bundle = Bundle()
                         bundle.putInt("order", result.order)
-                        bundle.putString("source", "movieTicket")
+                        bundle.putString("source", "concertTicket")
                         findNavController().navigate(R.id.confirmPageFragment, bundle)
                     }
                 })
                 ticketDataList.forEach { ticketData ->
                     val seats = listOf(ticketData.seatNumber)
-                    val type = ticketData.ticketType
 
-                    Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type) }
+                    Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1) }
                 }
             } else {
                 val bottomSheetFragment = RegisterFragment()
@@ -97,7 +94,7 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
 
     private fun getTickets() {
         CoroutineScope(Dispatchers.IO).launch {
-            val tickets = ticketDao.getAllTickets()
+            val tickets = ticketDao.getAllConcertTickets()
             withContext(Dispatchers.Main) {
                 if (tickets.isNotEmpty()) {
                     binding.numOfTickets.text = "${tickets.size} билет"
@@ -109,12 +106,12 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
     }
 
     private fun deleteTicket() {
-        adapter.setOnItemClickListener(object : TicketAdapter.OnItemClickListener {
-            override fun onItemClick(item: TicketData) {
+        adapter.setOnItemClickListener(object : ConcertTicketAdapter.OnItemClickListener {
+            override fun onItemClick(item: ConcertTicketData) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    ticketDao.deleteTicket(item.rowNumber, item.seatNumber, item.ticketType)
+                    ticketDao.deleteConcertTicket(item.rowNumber, item.seatNumber)
                     println("Item was deleted")
-                    val updatedTickets = ticketDao.getAllTickets()
+                    val updatedTickets = ticketDao.getAllConcertTickets()
                     withContext(Dispatchers.Main) {
                         if (updatedTickets.isNotEmpty()) {
                             binding.numOfTickets.text = "${updatedTickets.size} билет"

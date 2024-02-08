@@ -98,7 +98,7 @@
         tools:layout="@layout/fragment_choose_ticket" />
     <fragment
         android:id="@+id/concertChooseSectorFragment"
-        android:name="com.example.neoticket.view.main.payment.ConcertChooseSectorFragment"
+        android:name="com.example.neoticket.view.main.concerts.ConcertChooseSectorFragment"
         android:label="fragment_concert_choose_sector"
         tools:layout="@layout/fragment_concert_choose_sector" />
     <fragment
@@ -219,7 +219,7 @@
     </fragment>
     <fragment
         android:id="@+id/concertChooseTicketFragment"
-        android:name="com.example.neoticket.view.main.payment.ConcertChooseTicketFragment"
+        android:name="com.example.neoticket.view.main.concerts.ConcertChooseTicketFragment"
         android:label="fragment_concert_choose_ticket"
         tools:layout="@layout/fragment_concert_choose_ticket" />
     <fragment

@@ -13,11 +13,13 @@ import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentPaymentBinding
 import com.example.neoticket.view.profile.ProfileDataViewModel
 import com.example.neoticket.viewModel.cinema.OrderMovieDetailViewModel
+import com.example.neoticket.viewModel.concerts.CheckoutConcertOrderViewModel
 
 class PaymentFragment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
     private val viewModel: ProfileDataViewModel by viewModels()
     private val checkOutViewModel: OrderMovieDetailViewModel by viewModels()
+    private val checkOutConcertViewModel: CheckoutConcertOrderViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -32,35 +34,52 @@ class PaymentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val ticketType = arguments?.getString("ticket_type")
         val totalPrice = arguments?.getString("total_price")
-        val order = arguments?.getInt("movie_order")
+        val order = arguments?.getInt("order")
         binding.ticketCategory.text = ticketType
         binding.payment.text = totalPrice
         setupCard()
-        if (order != null && totalPrice != null) {
-            setupNavigation(order, totalPrice)
+        if (order != null && totalPrice != null && ticketType != null) {
+            setupNavigation(order, totalPrice, ticketType)
         }
     }
 
-    private fun setupNavigation(order: Int, total_price: String) {
+    private fun setupNavigation(order: Int, total_price: String, ticketType: String) {
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_paymentFragment_to_confirmPageFragment)
         }
         binding.btnPay.setOnClickListener {
-            checkoutOrder(order, total_price)
+            when(ticketType) {
+                "Кинотеатры" -> checkoutMovieOrder(order, total_price)
+                "Концерты" -> checkoutConcertOrder(order, total_price)
+            }
+            checkoutMovieOrder(order, total_price)
         }
     }
 
-    private fun checkoutOrder(order: Int, total_price: String) {
+    private fun checkoutMovieOrder(order: Int, total_price: String) {
         checkOutViewModel.orderMovieLiveData.observe(viewLifecycleOwner, Observer {
             result ->
             if (result != null) {
                 val bundle = Bundle()
                 bundle.putString("ticket_type", "Кинотеатры")
                 bundle.putString("total_price", total_price)
-                findNavController().navigate(R.id.action_paymentFragment_to_paymentConfirmedFragment, bundle)
+                findNavController().navigate(R.id.paymentConfirmedFragment, bundle)
             }
         })
         Util.id?.let { checkOutViewModel.orderMovie(it, order) }
+    }
+
+    private fun checkoutConcertOrder(order: Int, total_price: String) {
+        checkOutConcertViewModel.orderConcertLiveData.observe(viewLifecycleOwner, Observer {
+                result ->
+            if (result != null) {
+                val bundle = Bundle()
+                bundle.putString("ticket_type", "Концерты")
+                bundle.putString("total_price", total_price)
+                findNavController().navigate(R.id.paymentConfirmedFragment, bundle)
+            }
+        })
+        Util.id?.let { checkOutConcertViewModel.orderConcert(it, order) }
     }
 
     private fun setupCard() {

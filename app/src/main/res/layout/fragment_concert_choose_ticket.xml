@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.main.payment.ConcertChooseTicketFragment">
+    tools:context=".view.main.concerts.ConcertChooseTicketFragment">
 
 
     <ImageView
@@ -81,15 +81,15 @@
 
             <GridView
                 android:id="@+id/gridView"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginEnd="16dp"
-                android:columnWidth="5dp"
+                android:columnWidth="2dp"
                 android:gravity="center"
                 android:horizontalSpacing="1dp"
-                android:numColumns="12"
+                android:numColumns="6"
                 android:verticalSpacing="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

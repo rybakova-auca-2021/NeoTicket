@@ -32,7 +32,10 @@ interface ConcertInterface {
     ) : Call<ConcertOrder>
 
     @GET("concert/section/list/")
-    fun getSection() : Call<Section>
+    fun getSection() : Call<List<Section>>
+
+    @GET("concert/section/detail/{id}/")
+    fun getSectionDetail(@Path("id") id: Int) : Call<Section>
 
     @POST("concert/ticket/create/")
     fun createTicket(
