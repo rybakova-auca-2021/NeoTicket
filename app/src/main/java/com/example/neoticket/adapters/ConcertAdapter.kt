@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.TheaterCardBinding
 import com.example.neoticket.model.Concert
 import com.example.neoticket.model.Theater
@@ -67,7 +68,8 @@ class ConcertAdapter(private var items: List<Concert>) :
         fun bind(item: Concert) {
             binding.itemTitle.text = item.title
             binding.itemPlace.text = item.place.name
-            binding.itemDate.text = item.concert_date
+            val formattedDate = DateUtils.formatRussianDate(item.concert_date, "yyyy-MM-dd")
+            binding.itemDate.text = formattedDate
             Glide.with(binding.itemImg.context)
                 .load(item.detail_images[0].image)
                 .transform(CenterCrop(), RoundedCorners(20))

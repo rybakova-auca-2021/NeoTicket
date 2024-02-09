@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentConcertDescriptionBinding
 import com.example.neoticket.viewModel.concerts.ConcertDetailViewModel
 
@@ -47,7 +48,8 @@ class ConcertDescriptionFragment : Fragment() {
         viewModel.concertDetailLiveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 binding.concertDescription.text = result.description
-                binding.concertDate.text = result.concert_date
+                val formattedDate = DateUtils.formatRussianShortDate(result.concert_date, "yyyy-MM-dd")
+                binding.concertDate.text = formattedDate
                 binding.concertPlace.text = result.place.name
                 binding.concertArtist.text = result.artist
                 binding.ageLimit.text = "${result.age_limit}+"

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentDescriptionBinding
 import com.example.neoticket.viewModel.cinema.MovieDetailViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -51,7 +52,8 @@ class DescriptionFragment : Fragment() {
     private fun getMovieDetail(id: Int) {
         viewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer { result ->
             binding.movieDescription.text = result?.description
-            binding.yearOfPublication.text = result?.release_date
+            val formattedDate = DateUtils.getYearFromDate(result?.release_date, "yyyy")
+            binding.yearOfPublication.text = formattedDate
             binding.country.text = result?.country_of_origin
             binding.producer.text = result?.director
             binding.mainActors.text = result?.main_actors

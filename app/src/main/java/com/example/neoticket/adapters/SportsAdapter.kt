@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.TheaterCardBinding
 import com.example.neoticket.model.SportData
 import com.example.neoticket.model.Theater
@@ -65,7 +66,8 @@ class SportsAdapter(private var items: List<SportData>) :
         fun bind(item: SportData) {
             binding.itemTitle.text = item.title
             binding.itemPlace.text = item.place.name
-            binding.itemDate.text = item.sport_date
+            val formattedDate = DateUtils.formatRussianDate(item.sport_date, "yyyy-MM-dd")
+            binding.itemDate.text = formattedDate
             Glide.with(binding.itemImg.context)
                 .load(item.detail_images[0].image)
                 .transform(CenterCrop(), RoundedCorners(20))

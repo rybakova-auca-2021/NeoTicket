@@ -18,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentSportDetailBinding
 import com.example.neoticket.model.CombinedShowTime
 import com.example.neoticket.viewModel.sport.SportListViewModel
@@ -78,7 +79,7 @@ class SportDetailFragment : Fragment() {
             when (arguments?.getString("sourceFragment")) {
                 "mainPageFragment" -> findNavController().navigate(R.id.mainPageFragment)
                 "mainSportPage" -> findNavController().navigate(R.id.mainSportFragment)
-                else -> findNavController().navigateUp()
+                else -> findNavController().navigate(R.id.mainSportFragment)
             }
 
         }
@@ -90,7 +91,8 @@ class SportDetailFragment : Fragment() {
             val sport = sports?.find { it.id == sportId }
             binding.sportTitle.text = sport?.title
             binding.sportPlace.text = sport?.place?.name
-            binding.sportDate.text = sport?.sport_date
+            val formattedDate = DateUtils.formatRussianDate(sport?.sport_date, "yyyy-MM-dd")
+            binding.sportDate.text = formattedDate
             binding.sportDescription.text = sport?.description
             sport?.detail_images?.let { adapter.updateData(it) }
             Glide.with(binding.imgOverlay.context)

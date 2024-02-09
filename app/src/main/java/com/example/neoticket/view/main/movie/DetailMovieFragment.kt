@@ -2,6 +2,8 @@ package com.example.neoticket.view.main.movie
 
 import DetailImageAdapter
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentDetailMovieBinding
 import com.example.neoticket.viewModel.cinema.MovieDetailViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -58,7 +61,10 @@ class DetailMovieFragment : Fragment() {
         binding.btnMovieDetails.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", id)
-            findNavController().navigate(R.id.action_detailMovieInCinemaFragment_to_descriptionFragment, bundle)
+            findNavController().navigate(R.id.action_detailMovieFragment_to_descriptionFragment, bundle)
+        }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.cinemaFragment)
         }
     }
 
@@ -66,7 +72,8 @@ class DetailMovieFragment : Fragment() {
     private fun getMovieDetail(id: Int) {
         viewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer { result ->
             binding.movieTitle.text = result?.title
-            binding.movieTime.text = result?.release_date
+            val formattedDate = DateUtils.formatRussianDate(result?.release_date, "yyyy-MM-dd")
+            binding.movieTime.text = "В прокате с $formattedDate"
             binding.movieDescription.text = result?.description
             val genresNames = result?.genres?.joinToString(", ") { it.name }
             binding.movieCategory.text = genresNames
@@ -86,6 +93,13 @@ class DetailMovieFragment : Fragment() {
                     ))
                 .load(result?.image)
                 .into(binding.imageView4)
+
+            result?.link_to_video?.let { videoLink ->
+                binding.imageView4.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoLink))
+                    startActivity(intent)
+                }
+            }
         })
         viewModel.getCinemaDetail(id)
     }

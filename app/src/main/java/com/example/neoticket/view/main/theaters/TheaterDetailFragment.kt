@@ -18,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentTheaterDetailBinding
 import com.example.neoticket.model.CombinedShowTime
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
@@ -88,7 +89,8 @@ class TheaterDetailFragment : Fragment() {
             val theater = theaters?.find { it.id == theaterId }
             binding.theaterTitle.text = theater?.title
             binding.theaterPlace.text = theater?.place?.name
-            binding.theaterDate.text = theater?.theater_date
+            val formattedDate = DateUtils.formatRussianDate(theater?.theater_date, "yyyy-MM-dd")
+            binding.theaterDate.text = formattedDate
             binding.theaterDescription.text = theater?.description
             theater?.detail_images?.let { adapter.updateData(it) }
             Glide.with(binding.imgOverlay.context)

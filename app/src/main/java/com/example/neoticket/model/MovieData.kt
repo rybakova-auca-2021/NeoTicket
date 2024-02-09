@@ -124,7 +124,7 @@ data class Popular(
     val cinema_count: Int?,
     val place: Place?,
     val base_price: Int,
-    val release_date: String
+    val release_date: String?
 )
 
 data class Place(

@@ -50,17 +50,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-    <TextView
-        android:id="@+id/movie_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="в прокате с 8 сентября"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/movie_title"
-        app:layout_constraintStart_toStartOf="@+id/movie_title"
-        app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+        <TextView
+            android:id="@+id/movie_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            tools:text="2022, фэнтези, боевик, приключения"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="@+id/movie_title"
+            app:layout_constraintStart_toStartOf="@+id/movie_title"
+            app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+
+        <TextView
+            android:id="@+id/movie_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="США, 1 час 58 мин, 12+"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="@+id/movie_category"
+            app:layout_constraintStart_toStartOf="@+id/movie_category"
+            app:layout_constraintTop_toBottomOf="@+id/movie_category" />
 
     <TextView
         android:id="@+id/movie_description"
@@ -114,9 +124,9 @@
         android:text="Расписание и билеты"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/movie_title"
-        app:layout_constraintStart_toStartOf="@+id/movie_title"
-        app:layout_constraintTop_toBottomOf="@+id/movie_time" />
+        app:layout_constraintEnd_toEndOf="@+id/movie_duration"
+        app:layout_constraintStart_toStartOf="@+id/movie_duration"
+        app:layout_constraintTop_toBottomOf="@+id/movie_duration" />
 
     <TextView
         android:id="@+id/movie_rate"

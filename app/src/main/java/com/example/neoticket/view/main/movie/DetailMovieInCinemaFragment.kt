@@ -110,7 +110,11 @@ class DetailMovieInCinemaFragment : Fragment() {
     private fun getMovieDetail(id: Int) {
         viewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer { result ->
             binding.movieTitle.text = result?.title
-            binding.movieTime.text = result?.release_date
+            val genresNames = result?.genres?.joinToString(", ") { it.name }
+            binding.movieCategory.text = genresNames
+            if (result != null) {
+                binding.movieDuration.text = "${result.country_of_origin}, ${result.film_duration}, ${result.age_limit}+"
+            }
             binding.movieRate.text = result?.rating.toString()
             binding.movieDescription.text = result?.description
             result?.detail_images?.let { adapter.updateData(it) }

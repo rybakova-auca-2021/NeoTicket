@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.TheaterCardBinding
 import com.example.neoticket.model.Popular
 import com.example.neoticket.viewModel.cinema.CinemaDetailViewModel
@@ -71,7 +72,10 @@ class PopularAdapter(private var items: List<Popular>) :
             } else {
                 binding.itemPlace.text = "В ${item.cinema_count} кинотеатрах"
             }
-            binding.itemDate.text = item.release_date
+            if (item.release_date != null) {
+                val formattedDate = DateUtils.formatRussianDate(item.release_date, "yyyy-MM-dd")
+                binding.itemDate.text = formattedDate
+            }
             Glide.with(binding.itemImg.context)
                 .load(item.image)
                 .transform(CenterCrop(), RoundedCorners(20))

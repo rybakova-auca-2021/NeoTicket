@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
+import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentSportDescriptionBinding
 import com.example.neoticket.viewModel.sport.SportDetailViewModel
 
@@ -46,7 +47,8 @@ class SportDescriptionFragment : Fragment() {
         viewModel.sportDetailLiveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 binding.sportDescription.text = result.description
-                binding.sportDate.text = result.sport_date
+                val formattedDate = DateUtils.formatRussianShortDate(result.sport_date, "yyyy-MM-dd")
+                binding.sportDate.text = formattedDate
                 binding.sportPlace.text = result.place.name
                 binding.sportTime.text = result.time
                 binding.ageLimit.text = "${result.age_limit}+"
