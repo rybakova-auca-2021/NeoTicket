@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMyTicketsBinding
 
@@ -18,6 +19,7 @@ class MyTicketsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMyTicketsBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).showBtmNav()
         return binding.root
     }
 }

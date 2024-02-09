@@ -30,7 +30,10 @@ interface TheaterInterface {
     ) : Call<TheaterOrder>
 
     @GET("theater/section/list/")
-    fun getSection() : Call<TheaterSection>
+    fun getSection() : Call<List<TheaterSection>>
+
+    @GET("theater/section/detail/{id}/")
+    fun getSectionDetail(@Path("id") id: Int) : Call<TheaterSection>
 
     @POST("theater/ticket/create/")
     fun createTicket(

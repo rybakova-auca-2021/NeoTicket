@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.neoticket.adapters.GridAdapterSeat
+import com.example.neoticket.adapters.MovieSeatItem
+import com.example.neoticket.adapters.SeatItem
 import com.example.neoticket.databinding.FragmentChooseTicketBinding
 import com.example.neoticket.viewModel.cinema.GetShowTimeDetailViewModel
 
@@ -53,8 +55,10 @@ class ChooseTicketFragment : Fragment() {
     private fun getShowTimeDetail(showTimeId: Int) {
         viewModel.showTimeDetailLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
-                val seats = result.seats
-                gridAdapterSeat.updateData(seats)
+                val items = result.seats?.map { MovieSeatItem(it) }
+                if (items != null) {
+                    gridAdapterSeat.updateData(items)
+                }
                 binding.textCinema.text = result.cinema_name
                 binding.movieTitle.text = result.movie_title
             }

@@ -8,6 +8,8 @@ import com.example.neoticket.databinding.CardTicketBinding
 import com.example.neoticket.databinding.CardTicketConfirmBinding
 import com.example.neoticket.model.ConcertTicket
 import com.example.neoticket.model.MovieTicket
+import com.example.neoticket.model.SportTicket
+import com.example.neoticket.model.TheaterTicket
 
 interface DisplayableItem {
     val viewType: Int
@@ -21,6 +23,14 @@ data class MovieTicketItem(val movie: MovieTicket) : DisplayableItem {
     override val viewType: Int = 2
 }
 
+
+data class SportTicketItem(val sport: SportTicket) : DisplayableItem {
+    override val viewType: Int = 3
+}
+
+data class TheaterTicketItem(val theater: TheaterTicket) : DisplayableItem {
+    override val viewType: Int = 3
+}
 
 class TicketConfirmAdapter(private var tickets: List<DisplayableItem>) : RecyclerView.Adapter<TicketConfirmAdapter.TicketViewHolder>() {
 
@@ -59,6 +69,22 @@ class TicketConfirmAdapter(private var tickets: List<DisplayableItem>) : Recycle
                     for (seat in ticket.seats) {
                         binding.ticketSeat.text =
                             "${seat.row_number} ряд, ${seat.seat_number} место"
+                    }
+                }
+                is SportTicketItem -> {
+                    val ticket = item.sport
+                    for (seat in ticket.seats) {
+                        binding.ticketSeat.text =
+                            "${seat.row_number} ряд, ${seat.seat_number} место"
+                        binding.ticketPrice.text = seat.price
+                    }
+                }
+                is TheaterTicketItem -> {
+                    val ticket = item.theater
+                    for (seat in ticket.seats) {
+                        binding.ticketSeat.text =
+                            "${seat.row_number} ряд, ${seat.seat_number} место"
+                        binding.ticketPrice.text = seat.price
                     }
                 }
             }

@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentTheaterDetailBinding
-import com.example.neoticket.model.TheaterConcertShowTime
+import com.example.neoticket.model.CombinedShowTime
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -65,7 +65,7 @@ class TheaterDetailFragment : Fragment() {
 
     private fun setupNavigation(id: Int) {
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
-            override fun onItemClick(item: TheaterConcertShowTime) {
+            override fun onItemClick(item: CombinedShowTime) {
                 findNavController().navigate(R.id.action_theaterDetailFragment_to_theaterChooseSectorFragment)
             }
         })

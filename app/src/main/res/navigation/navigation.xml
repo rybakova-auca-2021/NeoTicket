@@ -363,4 +363,23 @@
             android:id="@+id/action_theaterChooseSectorFragment_to_theaterDetailFragment"
             app:destination="@id/theaterDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/sportChooseTicketFragment"
+        android:name="com.example.neoticket.view.main.sport.SportChooseTicketFragment"
+        android:label="SportChooseTicketFragment"
+        tools:layout="@layout/fragment_sport_choose_ticket"/>
+    <fragment
+        android:id="@+id/sportChooseSectorFragment"
+        android:name="com.example.neoticket.view.main.sport.SportChooseSectorFragment"
+        android:label="fragment_sport_choose_sector"
+        tools:layout="@layout/fragment_sport_choose_sector" />
+    <dialog
+        android:id="@+id/confirmTheaterTicketSeatsFragment"
+        android:name="com.example.neoticket.view.main.theaters.ConfirmTheaterTicketSeatsFragment"
+        android:label="ConfirmTheaterTicketSeatsFragment" />
+    <fragment
+        android:id="@+id/theaterChooseTicketsFragment"
+        android:name="com.example.neoticket.view.main.theaters.TheaterChooseTicketsFragment"
+        android:label="fragment_theater_choose_tickets"
+        tools:layout="@layout/fragment_theater_choose_tickets" />
 </navigation>

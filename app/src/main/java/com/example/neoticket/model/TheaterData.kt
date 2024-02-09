@@ -7,7 +7,7 @@ data class Theater(
     val theater_date: String?,
     val place: TheaterPlace,
     val detail_images: List<DetailImage>,
-    val show_times: List<TheaterConcertShowTime>
+    val show_times: List<CombinedShowTime>
 )
 
 data class TheaterDetail(
@@ -36,7 +36,7 @@ data class TheaterDetailImage(
     val image: String
 )
 
-data class TheaterConcertShowTime(
+data class CombinedShowTime(
     val id: Int,
     val start_date: String,
     val base_ticket_price: String
@@ -68,7 +68,7 @@ data class TheaterTicket(
     val theater_images: List<TheaterDetailImage>,
     val theater_date: String?,
     val show_time: Int,
-    val order: Int?,
+    val order: Int,
     val user: Int
 )
 
@@ -86,12 +86,11 @@ data class TheaterSection(
     val name: String,
     val theater_name: String,
     val place: String,
-    val seats: List<TheaterSeat>
+    val theater_seats: List<Seat>
 )
 
 data class TheaterTicketCreate(
     val show_time: Int,
-    val seats: List<Seat>,
-    val order: Int,
+    val seats: List<Int>,
     val user: Int
 )

@@ -3,12 +3,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.databinding.CardScheduleTheaterBinding
-import com.example.neoticket.model.TheaterConcertShowTime
+import com.example.neoticket.model.CombinedShowTime
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class TheaterScheduleAdapter(
-    private var items: List<TheaterConcertShowTime>
+    private var items: List<CombinedShowTime>
 ) : RecyclerView.Adapter<TheaterScheduleAdapter.ScheduleViewHolder>() {
 
     private var itemClickListener: OnItemClickListener? = null
@@ -18,7 +18,7 @@ class TheaterScheduleAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(item: TheaterConcertShowTime)
+        fun onItemClick(item: CombinedShowTime)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
@@ -37,7 +37,7 @@ class TheaterScheduleAdapter(
         return items.size
     }
 
-    fun updateData(newList: List<TheaterConcertShowTime>) {
+    fun updateData(newList: List<CombinedShowTime>) {
         val diffResult = DiffUtil.calculateDiff(
             DisplayableItemDiffCallback(
                 items,
@@ -69,7 +69,7 @@ class TheaterScheduleAdapter(
             }
         }
 
-        fun bind(item: TheaterConcertShowTime) {
+        fun bind(item: CombinedShowTime) {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val outputFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
             val dayOfWeekFormat = SimpleDateFormat("EEEE", Locale.getDefault())
@@ -83,8 +83,8 @@ class TheaterScheduleAdapter(
     }
 
     class DisplayableItemDiffCallback(
-        private val oldList: List<TheaterConcertShowTime>,
-        private val newList: List<TheaterConcertShowTime>
+        private val oldList: List<CombinedShowTime>,
+        private val newList: List<CombinedShowTime>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize() = oldList.size
