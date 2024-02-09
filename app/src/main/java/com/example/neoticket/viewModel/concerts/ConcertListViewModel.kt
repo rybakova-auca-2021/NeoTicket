@@ -1,6 +1,5 @@
 package com.example.neoticket.viewModel.concerts
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.neoticket.api.RetrofitInstance
@@ -18,6 +17,28 @@ class ConcertListViewModel : ViewModel() {
         val apiInterface = RetrofitInstance.concertApi
 
         val call = apiInterface.getConcerts()
+        call.enqueue(object : Callback<List<Concert>> {
+            override fun onResponse(call: Call<List<Concert>>, response: Response<List<Concert>>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        _concertsLiveData.value = body
+                    }
+                } else {
+                    println("Request failed with status code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Concert>>, t: Throwable) {
+                println("Request failed: ${t.message}")
+            }
+        })
+    }
+
+    fun getConcertsBySearch(search: String? = null, param: (List<Concert>) -> Unit) {
+        val apiInterface = RetrofitInstance.concertApi
+
+        val call = apiInterface.getConcerts(search)
         call.enqueue(object : Callback<List<Concert>> {
             override fun onResponse(call: Call<List<Concert>>, response: Response<List<Concert>>) {
                 if (response.isSuccessful) {

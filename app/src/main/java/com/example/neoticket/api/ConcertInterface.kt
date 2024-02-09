@@ -13,10 +13,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ConcertInterface {
     @GET("concert/list/")
-    fun getConcerts() : Call<List<Concert>>
+    fun getConcerts(@Query("search") search: String? = null) : Call<List<Concert>>
 
     @GET("concert/detail/{id}/")
     fun getConcertDetail(

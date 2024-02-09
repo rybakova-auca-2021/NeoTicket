@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -40,6 +41,7 @@ class MainTheaterFragment : Fragment() {
         setupAdapters()
         getTheaterList()
         setupNavigation()
+        search()
     }
 
     private fun setupAdapters() {
@@ -76,5 +78,24 @@ class MainTheaterFragment : Fragment() {
             }
         })
         viewModel.getTheaters()
+    }
+
+    private fun search() {
+        binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isNotEmpty()) {
+                        viewModel.getTheatersBySearch(it) { result ->
+                            adapter.updateData(result)
+                        }
+                    }
+                }
+                return true
+            }
+        })
     }
 }

@@ -20,10 +20,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SportInterface {
     @GET("sport/list/")
-    fun getSportList() : Call<List<SportData>>
+    fun getSportList(@Query("search") search: String? = null) : Call<List<SportData>>
 
     @GET("sport/detail/{id}/")
     fun getSportDetail(@Path("id") id: Int) : Call<SportDetail>
