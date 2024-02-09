@@ -3,6 +3,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.neoticket.databinding.MainCardBinding
 import com.example.neoticket.model.Concert
 import com.example.neoticket.model.Movie
@@ -110,6 +112,7 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                     binding.itemPrice.text = "От 450с"
                     Glide.with(binding.itemImg.context)
                         .load(cinema.image)
+                        .transform(CenterCrop(), RoundedCorners(20))
                         .into(binding.itemImg)
                 }
                 is ConcertItem -> {
@@ -117,9 +120,10 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                     binding.itemTitle.text = concert.title
                     binding.itemPlace.text = concert.place.name
                     binding.itemPrice.text = "От 450с"
-//                    Glide.with(binding.itemImg.context)
-//                        .load(concert.detailImages[0].image)
-//                        .into(binding.itemImg)
+                    Glide.with(binding.itemImg.context)
+                        .load(concert.detail_images[0].image)
+                        .transform(CenterCrop(), RoundedCorners(20))
+                        .into(binding.itemImg)
                 }
                 is TheaterItem -> {
                     val theater = item.theater
@@ -128,6 +132,7 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                     binding.itemPrice.text = "От 800с"
                     Glide.with(binding.itemImg.context)
                         .load(theater.detail_images[0].image)
+                        .transform(CenterCrop(), RoundedCorners(20))
                         .into(binding.itemImg)
                 }
 
@@ -142,6 +147,7 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                     binding.itemPrice.text = "От ${popular.base_price}с"
                     Glide.with(binding.itemImg.context)
                         .load(popular.image)
+                        .transform(CenterCrop(), RoundedCorners(20))
                         .into(binding.itemImg)
                 }
             }

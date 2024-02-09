@@ -3,6 +3,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.neoticket.databinding.TheaterCardBinding
 import com.example.neoticket.model.Theater
 
@@ -65,6 +67,7 @@ class TheatersAdapter(private var items: List<Theater>) :
             binding.itemDate.text = item.theater_date
             Glide.with(binding.itemImg.context)
                 .load(item.detail_images[0].image)
+                .transform(CenterCrop(), RoundedCorners(20))
                 .into(binding.itemImg)
         }
     }

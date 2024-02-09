@@ -3,6 +3,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.neoticket.databinding.CinemaCardBinding
 import com.example.neoticket.model.Cinema
 
@@ -64,6 +66,7 @@ class CinemaAdapter(private var items: List<Cinema>) :
             binding.itemAddress.text = item.address
             Glide.with(binding.itemImg.context)
                 .load(item.image)
+                .transform(CenterCrop(), RoundedCorners(20))
                 .into(binding.itemImg)
         }
     }

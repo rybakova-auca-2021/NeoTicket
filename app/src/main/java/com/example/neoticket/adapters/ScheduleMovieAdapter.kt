@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.neoticket.R
 import com.example.neoticket.adapters.ShowTimeAdapter
 import com.example.neoticket.databinding.CardCinemaScheduleBinding
@@ -88,7 +90,7 @@ class ScheduleMovieAdapter(
             binding.movieTitle.text = item.movie_title
             binding.movieAgeLimit.text = item.movie_age_limit.toString()
             binding.movieRatimg.text = item.movie_rating.toString()
-            Glide.with(binding.movieImg.context).load(item.movie_image).into(binding.movieImg)
+            Glide.with(binding.movieImg.context).load(item.movie_image).transform(CenterCrop(), RoundedCorners(20)).into(binding.movieImg)
 
             val showTimesAdapter = ShowTimeAdapter(item.start_times) { startTime ->
                 navigateToTicketPurchasePage(startTime, item)
