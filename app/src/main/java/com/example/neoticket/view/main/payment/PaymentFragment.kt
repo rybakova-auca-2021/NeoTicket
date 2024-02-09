@@ -14,12 +14,14 @@ import com.example.neoticket.databinding.FragmentPaymentBinding
 import com.example.neoticket.view.profile.ProfileDataViewModel
 import com.example.neoticket.viewModel.cinema.OrderMovieDetailViewModel
 import com.example.neoticket.viewModel.concerts.CheckoutConcertOrderViewModel
+import com.example.neoticket.viewModel.sport.CheckoutSportOrderViewModel
 
 class PaymentFragment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
     private val viewModel: ProfileDataViewModel by viewModels()
     private val checkOutViewModel: OrderMovieDetailViewModel by viewModels()
     private val checkOutConcertViewModel: CheckoutConcertOrderViewModel by viewModels()
+    private val checkOutSportViewModel: CheckoutSportOrderViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -51,6 +53,7 @@ class PaymentFragment : Fragment() {
             when(ticketType) {
                 "Кинотеатры" -> checkoutMovieOrder(order, total_price)
                 "Концерты" -> checkoutConcertOrder(order, total_price)
+                "Спорт" -> checkoutSportOrder(order, total_price)
             }
             checkoutMovieOrder(order, total_price)
         }
@@ -80,6 +83,18 @@ class PaymentFragment : Fragment() {
             }
         })
         Util.id?.let { checkOutConcertViewModel.orderConcert(it, order) }
+    }
+    private fun checkoutSportOrder(order: Int, total_price: String) {
+        checkOutSportViewModel.orderSportLiveData.observe(viewLifecycleOwner, Observer {
+                result ->
+            if (result != null) {
+                val bundle = Bundle()
+                bundle.putString("ticket_type", "Спорт")
+                bundle.putString("total_price", total_price)
+                findNavController().navigate(R.id.paymentConfirmedFragment, bundle)
+            }
+        })
+        Util.id?.let { checkOutSportViewModel.orderSport(it, order) }
     }
 
     private fun setupCard() {

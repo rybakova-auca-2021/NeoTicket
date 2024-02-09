@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.main.sport.SportChooseSectorFragment">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Выбор билета"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Центральный стадион"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Димаш Кудайберген"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/place"
+        app:layout_constraintStart_toStartOf="@+id/place"
+        app:layout_constraintTop_toBottomOf="@+id/place" />
+
+    <com.example.neoticket.Utils.ZoomLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_sector">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_sector"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/sector_c13"
+                    android:layout_width="96dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="100dp"
+                    android:src="@drawable/_c13"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/sector_c12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="-14dp"
+                    android:src="@drawable/_c12"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_c13"
+                    app:layout_constraintTop_toTopOf="@+id/sector_c13" />
+
+                <ImageView
+                    android:id="@+id/sector_c11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-13dp"
+                    android:layout_marginTop="-15dp"
+                    android:src="@drawable/_c11"
+                    app:layout_constraintStart_toStartOf="@+id/sector_c12"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_c12" />
+
+                <ImageView
+                    android:id="@+id/sector_c10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_c10"
+                    app:layout_constraintStart_toStartOf="@+id/sector_c11"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_c11" />
+
+                <ImageView
+                    android:id="@+id/sector_c9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-15dp"
+                    android:src="@drawable/_c9"
+                    app:layout_constraintStart_toStartOf="@+id/sector_c10"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_c10" />
+
+                <ImageView
+                    android:id="@+id/sector_c8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-13dp"
+                    android:layout_marginBottom="-13dp"
+                    android:src="@drawable/_c8"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c9"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c9" />
+
+                <ImageView
+                    android:id="@+id/sector_c7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_c7"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c8"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c8" />
+
+                <ImageView
+                    android:id="@+id/sector_c6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_c6"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c7"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c7" />
+
+                <ImageView
+                    android:id="@+id/sector_c4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-15dp"
+                    android:src="@drawable/_c4"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c10"
+                    app:layout_constraintEnd_toEndOf="@+id/sector_c5"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_c11" />
+
+                <ImageView
+                    android:id="@+id/sector_c5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-14dp"
+                    android:src="@drawable/_c5"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c9"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c6"
+                    app:layout_constraintTop_toTopOf="@+id/sector_c9" />
+
+                <ImageView
+                    android:id="@+id/sector_c3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-13dp"
+                    android:src="@drawable/_c3"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c11"
+                    app:layout_constraintEnd_toEndOf="@+id/sector_c2"
+                    app:layout_constraintTop_toTopOf="@+id/sector_c11" />
+
+                <ImageView
+                    android:id="@+id/sector_c2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-12dp"
+                    android:src="@drawable/_c2"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c12"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c1"
+                    app:layout_constraintTop_toTopOf="@+id/sector_c12" />
+
+                <ImageView
+                    android:id="@+id/sector_c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="110dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/_c1"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_c13"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/sector_c13" />
+
+                <ImageView
+                    android:id="@+id/sector_a1"
+                    android:layout_width="53dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="-4dp"
+                    android:src="@drawable/_a1"
+                    app:layout_constraintEnd_toEndOf="@+id/sector_c1"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_c1" />
+
+                <ImageView
+                    android:id="@+id/sector_a2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/_a2"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_a1"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_a1"
+                    app:layout_constraintTop_toTopOf="@+id/sector_a1" />
+
+                <ImageView
+                    android:id="@+id/sector_a3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_a3"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_a2"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_a2"
+                    app:layout_constraintTop_toTopOf="@+id/sector_a2" />
+
+                <ImageView
+                    android:id="@+id/sector_a4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/_a4"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_a3"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_a3"
+                    app:layout_constraintTop_toTopOf="@+id/sector_a3" />
+
+                <ImageView
+                    android:id="@+id/sector_b1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="-3dp"
+                    android:src="@drawable/_b1"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_c3"
+                    app:layout_constraintTop_toTopOf="@+id/sector_a1" />
+
+                <ImageView
+                    android:id="@+id/sector_b2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="-2dp"
+                    android:src="@drawable/_b2"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_c3"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_b1" />
+
+                <ImageView
+                    android:id="@+id/sector_b3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_b3"
+                    app:layout_constraintEnd_toEndOf="@+id/sector_b2"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_b2" />
+
+                <ImageView
+                    android:id="@+id/sector_b4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/_b4"
+                    app:layout_constraintBottom_toTopOf="@+id/sector_c6"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_b3" />
+
+                <ImageView
+                    android:id="@+id/sector_b5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:src="@drawable/_b5"
+                    app:layout_constraintBottom_toTopOf="@+id/sector_c6"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_b4"
+                    app:layout_constraintTop_toTopOf="@+id/sector_b4" />
+
+                <ImageView
+                    android:id="@+id/sector_b6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_b6"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_b5"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_b5" />
+
+                <ImageView
+                    android:id="@+id/sector_b7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/_b7"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_b6"
+                    app:layout_constraintEnd_toStartOf="@+id/sector_b6" />
+
+                <ImageView
+                    android:id="@+id/sector_b8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-8dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/_b8"
+                    app:layout_constraintBottom_toBottomOf="@+id/sector_b3"
+                    app:layout_constraintStart_toEndOf="@+id/sector_c10"
+                    app:layout_constraintTop_toTopOf="@+id/sector_b3" />
+
+                <ImageView
+                    android:id="@+id/sector_b9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginBottom="3dp"
+                    android:src="@drawable/_b9"
+                    app:layout_constraintBottom_toTopOf="@+id/sector_b8"
+                    app:layout_constraintStart_toStartOf="@+id/sector_b8" />
+
+                <ImageView
+                    android:id="@+id/sector_b10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="11dp"
+                    android:src="@drawable/_b10"
+                    app:layout_constraintStart_toStartOf="@+id/sector_b9"
+                    app:layout_constraintTop_toTopOf="@+id/sector_a4" />
+
+                <ImageView
+                    android:id="@+id/dance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/dance"
+                    app:layout_constraintBottom_toTopOf="@+id/sector_b7"
+                    app:layout_constraintStart_toEndOf="@+id/sector_b9"
+                    app:layout_constraintTop_toBottomOf="@+id/sector_a4" />
+
+                <ImageView
+                    android:id="@+id/parter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/_parter1"
+                    app:layout_constraintBottom_toBottomOf="@+id/dance"
+                    app:layout_constraintStart_toEndOf="@+id/dance"
+                    app:layout_constraintTop_toTopOf="@+id/dance" />
+
+                <ImageView
+                    android:id="@+id/vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/vip"
+                    app:layout_constraintBottom_toBottomOf="@+id/parter"
+                    app:layout_constraintStart_toEndOf="@+id/parter"
+                    app:layout_constraintTop_toTopOf="@+id/parter" />
+
+                <ImageView
+                    android:id="@+id/parter2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/_parter1"
+                    app:layout_constraintBottom_toBottomOf="@+id/vip"
+                    app:layout_constraintStart_toEndOf="@+id/vip"
+                    app:layout_constraintTop_toTopOf="@+id/vip" />
+
+                <ImageView
+                    android:id="@+id/szene"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/szene"
+                    app:layout_constraintBottom_toBottomOf="@+id/parter2"
+                    app:layout_constraintStart_toEndOf="@+id/parter2"
+                    app:layout_constraintTop_toTopOf="@+id/parter2" />
+
+                <ImageView
+                    android:id="@+id/btn_zoom_in"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="150dp"
+                    android:src="@drawable/btn_zoom_in"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_zoom_out"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/btn_zoom_out"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_zoom_in" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </com.example.neoticket.Utils.ZoomLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/choose_sector"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background_green"
+        android:fontFamily="@font/inter_bold"
+        android:text="Выберите сектор"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artist" />
+</androidx.constraintlayout.widget.ConstraintLayout>

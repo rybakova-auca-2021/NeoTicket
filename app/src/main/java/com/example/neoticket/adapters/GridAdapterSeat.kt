@@ -11,7 +11,16 @@ import com.example.neoticket.R
 import com.example.neoticket.model.MovieSeat
 import com.example.neoticket.model.Seat
 
-class GridAdapterSeat(private val context: Context, private var seats: List<Any>) : BaseAdapter() {
+data class MovieSeatItem(val movieSeat: MovieSeat) : DisplayableItem {
+    override val viewType: Int = 1
+}
+
+data class SeatItem(val seat: Seat) : DisplayableItem {
+    override val viewType: Int = 2
+}
+
+
+class GridAdapterSeat(private val context: Context, private var seats: List<DisplayableItem>) : BaseAdapter() {
 
     private var seatClickListener: SeatClickListener? = null
 
@@ -35,7 +44,7 @@ class GridAdapterSeat(private val context: Context, private var seats: List<Any>
         return position.toLong()
     }
 
-    fun updateData(newSeats: List<Any>) {
+    fun updateData(newSeats: List<DisplayableItem>) {
         seats = newSeats
         notifyDataSetChanged()
     }
@@ -43,52 +52,43 @@ class GridAdapterSeat(private val context: Context, private var seats: List<Any>
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val seatView: View
-
         val item = getItem(position)
 
         if (convertView == null) {
             seatView = inflater.inflate(R.layout.grid_item, null)
-            val imageViewSeat = seatView.findViewById<ImageView>(R.id.img_seat)
-            val textViewSeat = seatView.findViewById<TextView>(R.id.seat_number)
-
-            val seat: Any
-            val isAvailable: Boolean
-            val seatNumber: Int
-            val rowNumber: Int
-            val seatId: Int
-            var price: String? = null
-
-            if (item is MovieSeat) {
-                isAvailable = item.is_available
-                seatNumber = item.seat_number
-                rowNumber = item.row_number
-                seatId = item.id
-            } else if (item is Seat) {
-                isAvailable = item.is_available
-                seatNumber = item.seat_number
-                rowNumber = item.row_number
-                price = item.price
-                seatId = item.id
-            } else {
-                throw IllegalArgumentException("Unsupported item type")
-            }
-
-
-            if (isAvailable) {
-                textViewSeat.text = seatNumber.toString()
-                imageViewSeat.setImageResource(R.drawable.rounded_rectangle)
-                seatView.setOnClickListener {
-                    seatClickListener?.onSeatClick(rowNumber, seatNumber, seatId)
-                }
-            } else {
-                textViewSeat.text = "x"
-                imageViewSeat.setImageResource(R.drawable.rounded_drawable_seat_grey)
-            }
         } else {
             seatView = convertView
         }
 
+        val imageViewSeat = seatView.findViewById<ImageView>(R.id.img_seat)
+        val textViewSeat = seatView.findViewById<TextView>(R.id.seat_number)
+
+        when (item) {
+            is MovieSeatItem -> {
+                val movieSeat = item.movieSeat
+                setupSeatView(seatView, movieSeat.is_available, movieSeat.seat_number, movieSeat.row_number, null, movieSeat.id, imageViewSeat, textViewSeat)
+            }
+            is SeatItem -> {
+                val seat = item.seat
+                setupSeatView(seatView, seat.is_available, seat.seat_number, seat.row_number, seat.price, seat.id, imageViewSeat, textViewSeat)
+            }
+            else -> throw IllegalArgumentException("Unsupported item type")
+        }
+
         return seatView
+    }
+
+    private fun setupSeatView(seatView: View, isAvailable: Boolean, seatNumber: Int, rowNumber: Int, price: String?, seatId: Int, imageViewSeat: ImageView, textViewSeat: TextView) {
+        if (isAvailable) {
+            textViewSeat.text = seatNumber.toString()
+            imageViewSeat.setImageResource(R.drawable.rounded_rectangle)
+            seatView.setOnClickListener {
+                seatClickListener?.onSeatClick(rowNumber, seatNumber, seatId)
+            }
+        } else {
+            textViewSeat.text = "x"
+            imageViewSeat.setImageResource(R.drawable.rounded_drawable_seat_grey)
+        }
     }
 
 }

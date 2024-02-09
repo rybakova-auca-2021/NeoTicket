@@ -36,8 +36,11 @@ interface SportInterface {
         @Path("id") id: Int
     ) : Call<SportOrder>
 
+    @GET("sport/section/detail/{id}/")
+    fun getSportSectionDetail(@Path("id") id: Int) : Call<SportSection>
+
     @GET("sport/section/list/")
-    fun getSportSection() : Call<SportSection>
+    fun getSportSection() : Call<List<SportSection>>
 
     @POST("sport/ticket/create/")
     fun createSportTicket(

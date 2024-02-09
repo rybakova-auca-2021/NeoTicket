@@ -12,11 +12,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentSectorDetailBinding
 import com.example.neoticket.viewModel.concerts.GetSectionDetailViewModel
+import com.example.neoticket.viewModel.sport.GetSportSectionDetailViewModel
+import com.example.neoticket.viewModel.theater.TheaterSectionDetailViewModel
 
 
 class SectorDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentSectorDetailBinding
     private val viewModel: GetSectionDetailViewModel by viewModels()
+    private val sportViewModel: GetSportSectionDetailViewModel by viewModels()
+    private val theaterViewModel: TheaterSectionDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +34,18 @@ class SectorDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = arguments?.getString("title")
+        val source = arguments?.getString("source")
         val id = arguments?.getInt("id")
-        if (id != null) {
-            setData(id)
+        if (id != null && source != null) {
+            when(source) {
+                "SportSector" -> setSportData(id)
+                "ConcertSector" -> setConcertData(id)
+                "TheaterSector" -> setTheaterData(id)
+            }
         }
     }
 
-    private fun setData(id: Int) {
+    private fun setConcertData(id: Int) {
         viewModel.getSectionDetail(id)
         viewModel.sectionLiveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
@@ -47,6 +56,39 @@ class SectorDialogFragment : DialogFragment() {
                     bundle.putInt("id", result.id)
                     bundle.putInt("showTimeId", result.show_times)
                     findNavController().navigate(R.id.concertChooseTicketFragment, bundle)
+                    dismiss()
+                }
+            }
+        }
+    }
+
+    private fun setSportData(id: Int) {
+        sportViewModel.getSectionDetail(id)
+        sportViewModel.sectionLiveData.observe(viewLifecycleOwner) { result ->
+            if (result != null) {
+                binding.sectorTitle.text = result.name
+                binding.ticketPrice.text = result.sport_seats[0].price
+                binding.btnChooseTickets.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putInt("id", result.id)
+                    bundle.putInt("showTimeId", result.show_time)
+                    findNavController().navigate(R.id.sportChooseTicketFragment, bundle)
+                    dismiss()
+                }
+            }
+        }
+    }
+    private fun setTheaterData(id: Int) {
+        theaterViewModel.getSectionDetail(id)
+        theaterViewModel.sectionLiveData.observe(viewLifecycleOwner) { result ->
+            if (result != null) {
+                binding.sectorTitle.text = result.name
+//                binding.ticketPrice.text = result.seats[0].price
+                binding.btnChooseTickets.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putInt("id", result.id)
+                    bundle.putInt("showTimeId", result.show_time)
+                    findNavController().navigate(R.id.theaterChooseTicketsFragment, bundle)
                     dismiss()
                 }
             }

@@ -61,14 +61,14 @@ data class SportTicket(
     val sport_images: List<SportDetailImage>,
     val sport_date: String,
     val show_time: Int,
-    val order: Int?,
+    val order: Int,
     val user: Int
 )
 
 data class SportOrder(
     val id: Int,
     val user: Int,
-    val totalPrice: String,
+    val total_price: String,
     val tickets: List<SportTicket>
 )
 
@@ -78,12 +78,11 @@ data class SportSection(
     val name: String,
     val sport_name: String,
     val place: String,
-    val seats: List<SportSeat>
+    val sport_seats: List<Seat>
 )
 
 data class SportTicketCreate(
     val show_time: Int,
     val seats: List<Int>,
-    val order: Int,
     val user: Int
 )

@@ -66,7 +66,7 @@ class SportDetailFragment : Fragment() {
     private fun setupNavigation(id: Int) {
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
             override fun onItemClick(item: CombinedShowTime) {
-                findNavController().navigate(R.id.concertChooseSectorFragment)
+                findNavController().navigate(R.id.sportChooseSectorFragment)
             }
         })
         binding.btnSportDetails.setOnClickListener {
