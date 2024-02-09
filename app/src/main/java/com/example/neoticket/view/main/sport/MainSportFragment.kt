@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainSportBinding
 import com.example.neoticket.model.SportData
@@ -31,6 +32,7 @@ class MainSportFragment : Fragment() {
     ): View? {
         binding = FragmentMainSportBinding.inflate(inflater, container, false)
         recyclerView = binding.rvSports
+        (requireActivity() as MainActivity).hideBtmNav()
         return binding.root
     }
 

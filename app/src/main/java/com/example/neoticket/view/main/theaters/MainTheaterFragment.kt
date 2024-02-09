@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainTheaterBinding
 import com.example.neoticket.model.Movie
@@ -30,6 +31,7 @@ class MainTheaterFragment : Fragment() {
     ): View {
         binding = FragmentMainTheaterBinding.inflate(inflater, container, false)
         recyclerView = binding.rvTheater
+        (requireActivity() as MainActivity).hideBtmNav()
         return binding.root
     }
 

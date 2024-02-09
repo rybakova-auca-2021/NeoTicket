@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.neoticket.MainActivity
 import com.example.neoticket.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -18,6 +19,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).showBtmNav()
         return binding.root
     }
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentDetailMovieBinding
 import com.example.neoticket.viewModel.cinema.MovieDetailViewModel
@@ -32,6 +33,7 @@ class DetailMovieFragment : Fragment() {
     ): View {
         binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
         recyclerView = binding.rvMovieImages
+        (requireActivity() as MainActivity).hideBtmNav()
         return binding.root
     }
 
