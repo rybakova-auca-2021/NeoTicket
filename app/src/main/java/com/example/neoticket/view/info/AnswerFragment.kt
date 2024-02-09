@@ -6,19 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentAnswerBinding
+import com.example.neoticket.viewModel.info.GetQuestionAnswerViewModel
 
 class AnswerFragment : Fragment() {
     private lateinit var binding: FragmentAnswerBinding
-    // private val viewModel: GetQuestionAnswerViewModel by viewModels()
+    private val viewModel: GetQuestionAnswerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAnswerBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).hideBtmNav()
         return binding.root
     }
 
@@ -26,7 +30,7 @@ class AnswerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = arguments?.getInt("id")
         if (id != null) {
-            // getQuestionAnswer(id)
+             getQuestionAnswer(id)
         }
         setupNavigation()
     }
@@ -37,13 +41,11 @@ class AnswerFragment : Fragment() {
         }
     }
 
-//    private fun getQuestionAnswer(id: Int) {
-//        viewModel.getQuestionAnswer(id,
-//            onSuccess = {
-//                    questionDetail ->
-//                binding.infoQuestion.text = questionDetail.question
-//                binding.infoAnswer.text = questionDetail.answer
-//            }
-//        )
-//    }
+    private fun getQuestionAnswer(id: Int) {
+        viewModel.questionsLiveData.observe(viewLifecycleOwner, Observer {
+            result -> binding.infoQuestion.text = result?.question
+            binding.infoAnswer.text = result?.answer
+        })
+        viewModel.getQuestionAnswer(id)
+    }
 }

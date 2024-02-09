@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.btn_info -> {
-                        navController.navigate(R.id.concertChooseSectorFragment)
+                        navController.navigate(R.id.infoPageFragment)
                         true
                     }
 
