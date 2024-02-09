@@ -3,6 +3,7 @@ package com.example.neoticket.view.main
 import CinemaItem
 import ConcertItem
 import MainPageAdapter
+import PopularItem
 import TheaterItem
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainPageBinding
+import com.example.neoticket.viewModel.cinema.GetPopularListViewModel
 import com.example.neoticket.viewModel.cinema.MovieAtBoxListViewModel
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
@@ -26,12 +28,15 @@ class MainPageFragment : Fragment() {
     private lateinit var cinemaAdapter: MainPageAdapter
     private lateinit var concertAdapter: MainPageAdapter
     private lateinit var theaterAdapter: MainPageAdapter
+    private lateinit var popularAdapter: MainPageAdapter
     private lateinit var recyclerViewCinema: RecyclerView
     private lateinit var recyclerViewTheater: RecyclerView
     private lateinit var recyclerViewConcert: RecyclerView
+    private lateinit var recyclerViewPopular: RecyclerView
     private val movieViewModel: MovieAtBoxListViewModel by viewModels()
     private val concertViewModel: ConcertListViewModel by viewModels()
     private val theaterViewModel: TheaterListViewModel by viewModels()
+    private val popularViewModel: GetPopularListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +47,7 @@ class MainPageFragment : Fragment() {
         recyclerViewCinema = binding.rvCinema
         recyclerViewConcert = binding.rvConcerts
         recyclerViewTheater = binding.rvTheater
+        recyclerViewPopular = binding.rvPopular
         return binding.root
     }
 
@@ -50,6 +56,7 @@ class MainPageFragment : Fragment() {
         setupAdapters()
         setupAdapterClicks()
         setupNavigation()
+        getPopularList()
         getCinemaList()
         getConcertList()
         getTheaterList()
@@ -70,6 +77,11 @@ class MainPageFragment : Fragment() {
         recyclerViewTheater.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recyclerViewTheater.adapter = theaterAdapter
+
+        popularAdapter = MainPageAdapter(emptyList())
+        recyclerViewPopular.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewPopular.adapter = popularAdapter
     }
 
     private fun setupAdapterClicks() {
@@ -131,6 +143,16 @@ class MainPageFragment : Fragment() {
         concertViewModel.getConcerts()
     }
 
+    private fun getPopularList() {
+        popularViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { popular ->
+            val items = popular?.map { PopularItem(it) }
+            if (items != null) {
+                popularAdapter.updateData(items)
+            }
+        })
+        popularViewModel.getPopularList()
+    }
+
     private fun setupNavigation() {
         binding.btnLocation.setOnClickListener {
             val bottomSheetFragment = LocationFragment()
@@ -165,6 +187,9 @@ class MainPageFragment : Fragment() {
         }
         binding.btnAllConcert.setOnClickListener {
             findNavController().navigate(concertAction)
+        }
+        binding.btnAllPopular.setOnClickListener {
+            findNavController().navigate(R.id.popularPageFragment)
         }
     }
 }

@@ -115,3 +115,18 @@ data class MovieTicketCreate(
     val user: Int,
     val type: Int
 )
+
+data class Popular(
+    val id: Int,
+    val title: String,
+    val image: String,
+    val popularity: Int,
+    val cinema_count: Int?,
+    val place: Place?,
+    val base_price: Int,
+    val release_date: String
+)
+
+data class Place(
+    val name: String
+)

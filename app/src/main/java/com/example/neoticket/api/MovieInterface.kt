@@ -9,6 +9,7 @@ import com.example.neoticket.model.MovieOrderCheckout
 import com.example.neoticket.model.MovieOrderCheckoutResponse
 import com.example.neoticket.model.MovieTicket
 import com.example.neoticket.model.MovieTicketCreate
+import com.example.neoticket.model.Popular
 import com.example.neoticket.model.ShowTime
 import com.example.neoticket.model.StartTimeDetail
 import com.example.neoticket.model.TicketType
@@ -55,4 +56,7 @@ interface MovieInterface {
 
     @POST("movie/ticket/create/")
     fun createTicket(@Body request: MovieTicketCreate) : Call<MovieTicket>
+
+    @GET("movie/popular-events/")
+    fun getPopularList() : Call<List<Popular>>
 }

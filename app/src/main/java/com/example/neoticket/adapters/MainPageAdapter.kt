@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.neoticket.databinding.MainCardBinding
 import com.example.neoticket.model.Concert
 import com.example.neoticket.model.Movie
+import com.example.neoticket.model.Popular
 import com.example.neoticket.model.Theater
 
 interface DisplayableItem {
@@ -22,6 +23,10 @@ data class ConcertItem(val concert: Concert) : DisplayableItem {
 
 data class TheaterItem(val theater: Theater) : DisplayableItem {
     override val viewType: Int = 3
+}
+
+data class PopularItem(val popular: Popular) : DisplayableItem {
+    override val viewType: Int = 4
 }
 
 class MainPageAdapter(private var items: List<DisplayableItem>) :
@@ -123,6 +128,20 @@ class MainPageAdapter(private var items: List<DisplayableItem>) :
                     binding.itemPrice.text = "От 800с"
                     Glide.with(binding.itemImg.context)
                         .load(theater.detail_images[0].image)
+                        .into(binding.itemImg)
+                }
+
+                is PopularItem -> {
+                    val popular = item.popular
+                    binding.itemTitle.text = popular.title
+                    if (popular.place != null) {
+                        binding.itemPlace.text = popular.place.name
+                    } else {
+                        binding.itemPlace.text = "В ${popular.cinema_count} кинотеатрах"
+                    }
+                    binding.itemPrice.text = "От ${popular.base_price}с"
+                    Glide.with(binding.itemImg.context)
+                        .load(popular.image)
                         .into(binding.itemImg)
                 }
             }

@@ -382,4 +382,9 @@
         android:name="com.example.neoticket.view.main.theaters.TheaterChooseTicketsFragment"
         android:label="fragment_theater_choose_tickets"
         tools:layout="@layout/fragment_theater_choose_tickets" />
+    <fragment
+        android:id="@+id/popularPageFragment"
+        android:name="com.example.neoticket.view.main.PopularPageFragment"
+        android:label="fragment_popular_page"
+        tools:layout="@layout/fragment_popular_page" />
 </navigation>
