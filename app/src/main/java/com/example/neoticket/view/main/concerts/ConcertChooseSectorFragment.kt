@@ -80,6 +80,7 @@ class ConcertChooseSectorFragment : Fragment() {
     private fun sectorDetailDialog(title: String, id: Int) {
         val dialog = SectorDialogFragment()
         val bundle = Bundle().apply {
+            putString("source", "ConcertSector")
             putString("title", title)
             putInt("id", id)
         }

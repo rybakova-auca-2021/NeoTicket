@@ -8,6 +8,9 @@ import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.neoticket.adapters.GridAdapterSeat
+import com.example.neoticket.adapters.MovieSeatItem
+import com.example.neoticket.adapters.MovieTicketItem
+import com.example.neoticket.adapters.SeatItem
 import com.example.neoticket.databinding.FragmentConcertChooseTicketBinding
 import com.example.neoticket.room.ConcertTicketData
 import com.example.neoticket.room.MyApplication
@@ -67,8 +70,10 @@ class ConcertChooseTicketFragment : Fragment() {
         viewModel.getSectionDetail(id)
         viewModel.sectionLiveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
-                val seats = result.seats
-                gridAdapterSeat.updateData(seats)
+                val items = result.seats?.map { SeatItem(it) }
+                if (items != null) {
+                    gridAdapterSeat.updateData(items)
+                }
                 binding.artist.text = result.concert_name
                 binding.place.text = result.place
                 binding.textRoomNumber.text = result.name
