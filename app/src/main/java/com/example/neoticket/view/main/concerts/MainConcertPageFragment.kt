@@ -18,7 +18,7 @@ import com.example.neoticket.databinding.FragmentMainConcertPageBinding
 import com.example.neoticket.model.Concert
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 
-class MainConcertPageFragment : Fragment() {
+class MainConcertPageFragment : Fragment(), OnConcertLocationSelectedListener {
     private lateinit var binding: FragmentMainConcertPageBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ConcertAdapter
@@ -61,6 +61,7 @@ class MainConcertPageFragment : Fragment() {
 
         binding.btnAllPlaces.setOnClickListener {
             val bottomSheetFragment = ConcertLocationFragment()
+            bottomSheetFragment.setOnLocationSelectedListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
 
@@ -93,6 +94,16 @@ class MainConcertPageFragment : Fragment() {
                     }
                 }
                 return true
+            }
+        })
+    }
+
+    override fun onLocationSelected(location: String) {
+        println("onLocationSelected $location")
+        viewModel.getConcertsByPlace(location)
+        viewModel.concertsLiveData.observe(viewLifecycleOwner, Observer { concerts ->
+            if (concerts != null) {
+                adapter.updateData(concerts)
             }
         })
     }

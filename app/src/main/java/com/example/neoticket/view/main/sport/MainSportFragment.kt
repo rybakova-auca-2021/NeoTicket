@@ -2,11 +2,11 @@ package com.example.neoticket.view.main.sport
 
 import SportsAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,12 +16,9 @@ import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainSportBinding
 import com.example.neoticket.model.SportData
-import com.example.neoticket.model.Theater
-import com.example.neoticket.view.main.theaters.TheaterLocationFragment
 import com.example.neoticket.viewModel.sport.SportListViewModel
-import com.example.neoticket.viewModel.theater.TheaterListViewModel
 
-class MainSportFragment : Fragment() {
+class MainSportFragment : Fragment(),  OnLocationSelectedListener {
     private lateinit var binding: FragmentMainSportBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SportsAdapter
@@ -64,6 +61,7 @@ class MainSportFragment : Fragment() {
 
         binding.btnAllPlaces.setOnClickListener {
             val bottomSheetFragment = SportLocationsFragment()
+            bottomSheetFragment.setOnLocationSelectedListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
 
@@ -100,5 +98,13 @@ class MainSportFragment : Fragment() {
         })
     }
 
-
+    override fun onLocationSelected(location: String) {
+        println("onLocationSelected $location")
+        viewModel.getSportListByPlace(location)
+        viewModel.sportLiveData.observe(viewLifecycleOwner, Observer { sports ->
+            if (sports != null) {
+                adapter.updateData(sports)
+            }
+        })
+    }
 }

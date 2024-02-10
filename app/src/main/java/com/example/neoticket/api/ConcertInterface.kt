@@ -17,7 +17,7 @@ import retrofit2.http.Query
 
 interface ConcertInterface {
     @GET("concert/list/")
-    fun getConcerts(@Query("search") search: String? = null) : Call<List<Concert>>
+    fun getConcerts(@Query("search") search: String? = null, @Query("place_name") place_name: String? = null) : Call<List<Concert>>
 
     @GET("concert/detail/{id}/")
     fun getConcertDetail(

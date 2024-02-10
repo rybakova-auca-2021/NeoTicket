@@ -1,21 +1,24 @@
 package com.example.neoticket.view.main.theaters
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.SearchView
-import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentTheaterLocationBinding
+import com.example.neoticket.view.main.sport.OnLocationSelectedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
+interface OnTheaterLocationSelectedListener {
+    fun onLocationSelected(location: String)
+}
 
 class TheaterLocationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentTheaterLocationBinding
     private var searchText: String = ""
+    private var locationSelectedListener: OnTheaterLocationSelectedListener? = null
+
     private val radioButtons: List<CompoundButton> by lazy {
         listOf(
             binding.theaterOpera,
@@ -40,10 +43,17 @@ class TheaterLocationFragment : BottomSheetDialogFragment() {
         }
         search()
         binding.btnChoose.setOnClickListener {
-            // Handle button click logic here
+            val selectedLocation = radioButtons.find { it.isChecked }?.text.toString()
+            println(selectedLocation)
+            locationSelectedListener?.onLocationSelected(selectedLocation)
+            dismiss()
         }
 
         return binding.root
+    }
+
+    fun setOnLocationSelectedListener(listener: OnTheaterLocationSelectedListener) {
+        locationSelectedListener = listener
     }
 
     private fun updateChooseButtonState(isAnyRadioButtonChecked: Boolean) {

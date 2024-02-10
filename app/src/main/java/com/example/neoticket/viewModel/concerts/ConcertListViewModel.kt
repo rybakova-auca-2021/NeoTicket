@@ -56,4 +56,26 @@ class ConcertListViewModel : ViewModel() {
             }
         })
     }
+
+    fun getConcertsByPlace(place: String? = null) {
+        val apiInterface = RetrofitInstance.concertApi
+
+        val call = apiInterface.getConcerts(null, place)
+        call.enqueue(object : Callback<List<Concert>> {
+            override fun onResponse(call: Call<List<Concert>>, response: Response<List<Concert>>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        _concertsLiveData.value = body
+                    }
+                } else {
+                    println("Request failed with status code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Concert>>, t: Throwable) {
+                println("Request failed: ${t.message}")
+            }
+        })
+    }
 }

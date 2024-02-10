@@ -7,11 +7,18 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.SearchView
 import com.example.neoticket.databinding.FragmentConcertLocationBinding
+import com.example.neoticket.view.main.sport.OnLocationSelectedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
+interface OnConcertLocationSelectedListener {
+    fun onLocationSelected(location: String)
+}
 
 class ConcertLocationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentConcertLocationBinding
     private var searchText: String = ""
+    private var locationSelectedListener: OnConcertLocationSelectedListener? = null
+
     private val radioButtons: List<CompoundButton> by lazy {
         listOf(
             binding.rbAsanbay,
@@ -35,9 +42,18 @@ class ConcertLocationFragment : BottomSheetDialogFragment() {
         }
         search()
         binding.btnChoose.setOnClickListener {
+            val selectedLocation = radioButtons.find { it.isChecked }?.text.toString()
+            println(selectedLocation)
+            locationSelectedListener?.onLocationSelected(selectedLocation)
+            dismiss()
         }
         return binding.root
     }
+
+    fun setOnLocationSelectedListener(listener: OnConcertLocationSelectedListener) {
+        locationSelectedListener = listener
+    }
+
 
     private fun updateChooseButtonState(isAnyRadioButtonChecked: Boolean) {
         binding.btnChoose.isEnabled = isAnyRadioButtonChecked

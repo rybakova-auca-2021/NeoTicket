@@ -57,4 +57,26 @@ class TheaterListViewModel : ViewModel() {
             }
         })
     }
+
+    fun getTheatersByPlace(place: String? = null) {
+        val apiInterface = RetrofitInstance.theaterApi
+
+        val call = apiInterface.getTheaters(null, place)
+        call.enqueue(object : Callback<List<Theater>> {
+            override fun onResponse(call: Call<List<Theater>>, response: Response<List<Theater>>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        _theaterLiveData.value = body
+                    }
+                } else {
+                    println("Request failed with status code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Theater>>, t: Throwable) {
+                println("Request failed: ${t.message}")
+            }
+        })
+    }
 }

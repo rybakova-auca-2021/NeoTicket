@@ -24,7 +24,7 @@ import retrofit2.http.Query
 
 interface SportInterface {
     @GET("sport/list/")
-    fun getSportList(@Query("search") search: String? = null) : Call<List<SportData>>
+    fun getSportList(@Query("search") search: String? = null, @Query("place_name") place_name: String? = null) : Call<List<SportData>>
 
     @GET("sport/detail/{id}/")
     fun getSportDetail(@Path("id") id: Int) : Call<SportDetail>

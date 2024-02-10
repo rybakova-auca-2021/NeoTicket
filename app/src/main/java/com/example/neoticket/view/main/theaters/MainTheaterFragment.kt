@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentMainTheaterBinding
-import com.example.neoticket.model.Movie
 import com.example.neoticket.model.Theater
-import com.example.neoticket.view.main.movie.cinema.CinemaListFragment
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
 
-class MainTheaterFragment : Fragment() {
+class MainTheaterFragment : Fragment(), OnTheaterLocationSelectedListener {
     private lateinit var binding: FragmentMainTheaterBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TheatersAdapter
@@ -63,6 +61,7 @@ class MainTheaterFragment : Fragment() {
 
         binding.btnAllPlaces.setOnClickListener {
             val bottomSheetFragment = TheaterLocationFragment()
+            bottomSheetFragment.setOnLocationSelectedListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
 
@@ -95,6 +94,16 @@ class MainTheaterFragment : Fragment() {
                     }
                 }
                 return true
+            }
+        })
+    }
+
+    override fun onLocationSelected(location: String) {
+        println("onLocationSelected $location")
+        viewModel.getTheatersByPlace(location)
+        viewModel.theaterLiveData.observe(viewLifecycleOwner, Observer { theaters ->
+            if (theaters != null) {
+                adapter.updateData(theaters)
             }
         })
     }
