@@ -7,13 +7,38 @@
     android:padding="16dp"
     tools:context=".view.main.movie.NowInCinemaFragment">
 
+    <SearchView
+        android:id="@+id/btn_search"
+        style="@style/AppTheme.SearchView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Поиск фильмов"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cinemas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/et_rounded"
+        android:drawableLeft="@drawable/list"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="20dp"
+        android:text="Кинотеатры"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_now_in_cinema"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cinemas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

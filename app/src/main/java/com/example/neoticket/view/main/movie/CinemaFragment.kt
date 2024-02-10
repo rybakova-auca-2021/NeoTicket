@@ -48,9 +48,5 @@ class CinemaFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_cinemaFragment_to_mainPageFragment)
         }
-        binding.btnCinemas.setOnClickListener {
-            val bottomSheetFragment = CinemaListFragment()
-            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-        }
     }
 }

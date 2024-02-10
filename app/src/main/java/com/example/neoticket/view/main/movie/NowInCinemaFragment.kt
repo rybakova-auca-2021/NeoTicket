@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentNowInCinemaBinding
 import com.example.neoticket.model.Movie
+import com.example.neoticket.view.main.movie.cinema.CinemaListFragment
 import com.example.neoticket.viewModel.cinema.MovieAtBoxListViewModel
 
 class NowInCinemaFragment : Fragment() {
@@ -36,6 +38,7 @@ class NowInCinemaFragment : Fragment() {
         setupAdapters()
         getCinemaList()
         setupNavigation()
+        search()
     }
 
     private fun setupAdapters() {
@@ -61,6 +64,32 @@ class NowInCinemaFragment : Fragment() {
                 bundle.putInt("id", item.id)
                 bundle.putString("sourceFragment", "nowInCinema")
                 findNavController().navigate(R.id.detailMovieInCinemaFragment, bundle)
+            }
+        })
+
+        binding.btnCinemas.setOnClickListener {
+            val bottomSheetFragment = CinemaListFragment()
+            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+        }
+    }
+
+    private fun search() {
+        binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isNotEmpty()) {
+                        movieViewModel.getMoviesBySearch(it) { result ->
+                            moviesAdapter.updateData(result)
+                        }
+                    } else {
+                        getCinemaList()
+                    }
+                }
+                return true
             }
         })
     }

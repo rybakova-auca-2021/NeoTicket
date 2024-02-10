@@ -37,7 +37,7 @@ interface MovieInterface {
     fun getMoviesAtTheBox(@Query("search") search: String? = null) : Call<List<Movie>>
 
     @GET("movie/list/coming-soon-to-cinema/")
-    fun getComingSoonMovies() : Call<List<Movie>>
+    fun getComingSoonMovies(@Query("search") search: String? = null) : Call<List<Movie>>
 
     @GET("movie/show-times/")
     fun getShowTime(@Query("movie_id") movie: String? = null) : Call<List<ShowTime>>

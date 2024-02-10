@@ -30,19 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
-        android:id="@+id/btn_search"
-        style="@style/AppTheme.SearchView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:iconifiedByDefault="false"
-        android:queryHint="Поиск фильмов"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cinema_text" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -56,12 +43,12 @@
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@+id/cinema_text"
         app:tabGravity="fill"
-        app:tabIndicatorFullWidth="true"
         app:tabIndicator="@drawable/tab_indicator"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/dark_blue"
+        app:tabIndicatorFullWidth="true"
         app:tabIndicatorGravity="stretch"
         app:tabSelectedTextColor="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -71,27 +58,12 @@
         android:id="@+id/fragment_holder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:paddingTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cinemas" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_cinemas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Кинотеатры"
-        android:textAllCaps="false"
-        android:paddingHorizontal="20dp"
-        android:drawableLeft="@drawable/list"
-        android:background="@drawable/et_rounded"
-        android:drawablePadding="8dp"
-        app:layout_constraintStart_toStartOf="@+id/tab_layout"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 
