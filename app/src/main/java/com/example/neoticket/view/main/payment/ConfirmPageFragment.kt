@@ -1,9 +1,12 @@
 package com.example.neoticket.view.main.payment
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -32,17 +35,23 @@ class ConfirmPageFragment : Fragment() {
     private val sportViewModel: GetSportOrderDetailViewModel by viewModels()
     private val theaterViewModel: GetTheaterOrderViewModel by viewModels()
 
+    private lateinit var countDownTimer: CountDownTimer
+    private lateinit var countdownTextView: TextView
+    private var timeRemainingMillis: Long = 1199000
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentConfirmPageBinding.inflate(inflater, container, false)
         recyclerView = binding.rvTickets
+        countdownTextView = binding.timeLeft
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startCountdown()
         val order = arguments?.getInt("order", 0) ?: 0
         val source = arguments?.getString("source")
         setupRecyclerView()
@@ -163,4 +172,23 @@ class ConfirmPageFragment : Fragment() {
         theaterViewModel.getTheaterOrderDetail(id)
     }
 
+    private fun startCountdown() {
+        countDownTimer = object : CountDownTimer(timeRemainingMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeRemainingMillis = millisUntilFinished
+                updateCountdownText()
+            }
+
+            override fun onFinish() {
+                countdownTextView.text = "00:00"
+                Toast.makeText(requireContext(), "Оплата больше недействительна", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
+    }
+
+    private fun updateCountdownText() {
+        val minutes = (timeRemainingMillis / 1000) / 60
+        val seconds = (timeRemainingMillis / 1000) % 60
+        countdownTextView.text = String.format("%02d:%02d", minutes, seconds)
+    }
 }
