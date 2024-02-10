@@ -34,7 +34,7 @@ interface MovieInterface {
     fun getMovieDetail(@Path("id") id: Int) : Call<MovieDetail>
 
     @GET("movie/list/at-the-box-office/")
-    fun getMoviesAtTheBox() : Call<List<Movie>>
+    fun getMoviesAtTheBox(@Query("search") search: String? = null) : Call<List<Movie>>
 
     @GET("movie/list/coming-soon-to-cinema/")
     fun getComingSoonMovies() : Call<List<Movie>>

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -60,6 +61,7 @@ class MainPageFragment : Fragment() {
         getCinemaList()
         getConcertList()
         getTheaterList()
+        search()
     }
 
     private fun setupAdapters() {
@@ -151,6 +153,36 @@ class MainPageFragment : Fragment() {
             }
         })
         popularViewModel.getPopularList()
+    }
+
+    private fun search() {
+        binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { it ->
+                    if (it.isNotEmpty()) {
+                        binding.cardPopular.visibility = View.GONE
+                        binding.cardView3.visibility = View.GONE
+                        movieViewModel.getMoviesBySearch(it) { result ->
+                            val items = result.map { CinemaItem(it) }
+                            cinemaAdapter.updateData(items)
+                        }
+                        theaterViewModel.getTheatersBySearch(it) { result ->
+                            val items = result.map { TheaterItem(it) }
+                            theaterAdapter.updateData(items)
+                        }
+                        concertViewModel.getConcertsBySearch(it) { result ->
+                            val items = result.map { ConcertItem(it) }
+                            concertAdapter.updateData(items)
+                        }
+                    }
+                }
+                return true
+            }
+        })
     }
 
     private fun setupNavigation() {
