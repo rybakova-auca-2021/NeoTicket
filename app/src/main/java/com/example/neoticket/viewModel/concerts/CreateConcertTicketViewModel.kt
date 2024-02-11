@@ -13,7 +13,7 @@ class CreateConcertTicketViewModel : ViewModel() {
     private val _createTicketLiveData = MutableLiveData<ConcertTicket?>()
     val createTicketLiveData: MutableLiveData<ConcertTicket?> get() = _createTicketLiveData
 
-    fun createTicket(showTime: Int, seats: List<Int>, user: Int) {
+    fun createTicket(showTime: Int, seats: List<Int?>, user: Int) {
         val apiInterface = RetrofitInstance.concertApi
         val request = ConcertTicketCreate(showTime, seats, user)
 

@@ -1,7 +1,5 @@
 package com.example.neoticket.model
 
-import com.google.android.datatransport.cct.StringMerger
-
 data class MovieDetail(
     val id: Int,
     val title: String,
@@ -111,7 +109,7 @@ data class TicketType(
 
 data class MovieTicketCreate(
     val show_time: Int,
-    val seats: List<Int>,
+    val seats: List<Int?>,
     val user: Int,
     val type: Int
 )

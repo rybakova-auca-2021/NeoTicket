@@ -60,6 +60,6 @@ interface MovieInterface {
     @POST("movie/ticket/create/")
     fun createTicket(@Body request: MovieTicketCreate) : Call<MovieTicket>
 
-    @GET("movie/popular-events/")
+    @GET("popular-events/")
     fun getPopularList(@Query("location_name") location: String? = null) : Call<List<Popular>>
 }

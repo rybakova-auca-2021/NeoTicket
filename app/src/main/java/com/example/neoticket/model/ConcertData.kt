@@ -78,7 +78,7 @@ data class Section(
 
 data class ConcertTicketCreate(
     val show_time: Int,
-    val seats: List<Int>,
+    val seats: List<Int?>,
     val user: Int
 )
 

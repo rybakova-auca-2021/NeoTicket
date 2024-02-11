@@ -80,7 +80,7 @@ class ConfirmConcertTicketSeatsFragment : BottomSheetDialogFragment() {
                     }
                 })
                 ticketDataList.forEach { ticketData ->
-                    val seats = listOf(ticketData.seatNumber)
+                    val seats = listOf(ticketData.id)
 
                     Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1) }
                 }

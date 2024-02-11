@@ -18,10 +18,8 @@ import com.example.neoticket.room.MyApplication
 import com.example.neoticket.room.TicketDao
 import com.example.neoticket.room.TicketData
 import com.example.neoticket.view.auth.RegisterFragment
-import com.example.neoticket.view.main.movie.ChooseTicketTypeFragment
 import com.example.neoticket.viewModel.cinema.CreateTicketViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.installations.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -82,7 +80,7 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
                     }
                 })
                 ticketDataList.forEach { ticketData ->
-                    val seats = listOf(ticketData.seatNumber)
+                    val seats = listOf(ticketData.id)
                     val type = ticketData.ticketType
 
                     Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type) }
