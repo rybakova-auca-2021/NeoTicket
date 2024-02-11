@@ -34,7 +34,10 @@ interface MovieInterface {
     fun getMovieDetail(@Path("id") id: Int) : Call<MovieDetail>
 
     @GET("movie/list/at-the-box-office/")
-    fun getMoviesAtTheBox(@Query("search") search: String? = null) : Call<List<Movie>>
+    fun getMoviesAtTheBox(
+        @Query("search") search: String? = null,
+        @Query("location_name") location: String? = null
+    ) : Call<List<Movie>>
 
     @GET("movie/list/coming-soon-to-cinema/")
     fun getComingSoonMovies(@Query("search") search: String? = null) : Call<List<Movie>>
@@ -58,5 +61,5 @@ interface MovieInterface {
     fun createTicket(@Body request: MovieTicketCreate) : Call<MovieTicket>
 
     @GET("movie/popular-events/")
-    fun getPopularList() : Call<List<Popular>>
+    fun getPopularList(@Query("location_name") location: String? = null) : Call<List<Popular>>
 }

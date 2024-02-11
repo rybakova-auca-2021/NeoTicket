@@ -17,7 +17,11 @@ import retrofit2.http.Query
 
 interface TheaterInterface {
     @GET("theater/list/")
-    fun getTheaters(@Query("search") search: String? = null, @Query("place_name") place_name: String? = null) : Call<List<Theater>>
+    fun getTheaters(
+        @Query("search") search: String? = null,
+        @Query("place_name") place_name: String? = null,
+        @Query("location_name") location: String? = null
+    ) : Call<List<Theater>>
 
     @GET("theater/detail/{id}/")
     fun getTheaterDetail(@Path("id") id: Int) : Call<TheaterDetail>

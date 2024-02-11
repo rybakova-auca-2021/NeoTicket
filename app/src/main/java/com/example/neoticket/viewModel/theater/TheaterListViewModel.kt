@@ -1,6 +1,5 @@
 package com.example.neoticket.viewModel.theater
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.neoticket.api.RetrofitInstance
@@ -62,6 +61,28 @@ class TheaterListViewModel : ViewModel() {
         val apiInterface = RetrofitInstance.theaterApi
 
         val call = apiInterface.getTheaters(null, place)
+        call.enqueue(object : Callback<List<Theater>> {
+            override fun onResponse(call: Call<List<Theater>>, response: Response<List<Theater>>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        _theaterLiveData.value = body
+                    }
+                } else {
+                    println("Request failed with status code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Theater>>, t: Throwable) {
+                println("Request failed: ${t.message}")
+            }
+        })
+    }
+
+    fun getTheatersByLocation(location: String? = null, param: (List<Theater>) -> Unit) {
+        val apiInterface = RetrofitInstance.theaterApi
+
+        val call = apiInterface.getTheaters(null, null, location)
         call.enqueue(object : Callback<List<Theater>> {
             override fun onResponse(call: Call<List<Theater>>, response: Response<List<Theater>>) {
                 if (response.isSuccessful) {

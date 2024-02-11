@@ -56,4 +56,25 @@ class MovieAtBoxListViewModel : ViewModel() {
             }
         })
     }
+
+    fun getMoviesByLocation(location: String? = null, param: (List<Movie>) -> Unit) {
+        val apiInterface = RetrofitInstance.movieApi
+
+        val call = apiInterface.getMoviesAtTheBox(null, location)
+        call.enqueue(object : Callback<List<Movie>> {
+            override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    _moviesLiveData.value = body
+
+                } else {
+                    println("Request failed with status code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
+                println("Request failed: ${t.message}")
+            }
+        })
+    }
 }

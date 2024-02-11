@@ -9,10 +9,17 @@ import android.widget.CompoundButton
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.neoticket.databinding.FragmentLocationBinding
+import com.example.neoticket.view.main.concerts.OnConcertLocationSelectedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
+interface OnCitySelectedListener {
+    fun onCitySelected(location: String)
+}
 
 class LocationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentLocationBinding
+    private var citySelectedListener: OnCitySelectedListener? = null
+
     private val radioButtons: List<CompoundButton> by lazy {
         listOf(
             binding.rbBishkek,
@@ -33,22 +40,26 @@ class LocationFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentLocationBinding.inflate(inflater, container, false)
 
-        // Add listeners for radio buttons
         radioButtons.forEach { radioButton ->
             radioButton.setOnCheckedChangeListener { _, isChecked ->
                 updateChooseButtonState(isChecked)
             }
         }
-
-        // Add search functionality
         search()
 
-        // Add button click listener
         binding.btnChoose.setOnClickListener {
-            // Handle button click logic here
+            val selectedLocation = radioButtons.find { it.isChecked }?.text.toString()
+            println(selectedLocation)
+            citySelectedListener?.onCitySelected(selectedLocation)
+            dismiss()
         }
 
         return binding.root
+    }
+
+
+    fun setOnLocationSelectedListener(listener: OnCitySelectedListener) {
+        citySelectedListener = listener
     }
 
     private fun updateChooseButtonState(isAnyRadioButtonChecked: Boolean) {

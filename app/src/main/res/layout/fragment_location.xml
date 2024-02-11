@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".view.main.LocationFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_height="650dp"
         app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="visible"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_search">
@@ -147,14 +149,13 @@
                 android:id="@+id/btn_choose"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/btn_rounded_auth"
                 android:enabled="false"
                 android:text="Выбрать"
                 android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_buttons" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/img_nothing_was_found"

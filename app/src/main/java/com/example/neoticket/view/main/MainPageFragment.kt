@@ -24,7 +24,7 @@ import com.example.neoticket.viewModel.cinema.MovieAtBoxListViewModel
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
 
-class MainPageFragment : Fragment() {
+class MainPageFragment : Fragment(), OnCitySelectedListener {
     private lateinit var binding: FragmentMainPageBinding
     private lateinit var cinemaAdapter: MainPageAdapter
     private lateinit var concertAdapter: MainPageAdapter
@@ -188,6 +188,7 @@ class MainPageFragment : Fragment() {
     private fun setupNavigation() {
         binding.btnLocation.setOnClickListener {
             val bottomSheetFragment = LocationFragment()
+            bottomSheetFragment.setOnLocationSelectedListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
 
@@ -222,6 +223,25 @@ class MainPageFragment : Fragment() {
         }
         binding.btnAllPopular.setOnClickListener {
             findNavController().navigate(R.id.popularPageFragment)
+        }
+    }
+
+    override fun onCitySelected(location: String) {
+        movieViewModel.getMoviesByLocation(location) { result ->
+            val items = result.map { CinemaItem(it) }
+            cinemaAdapter.updateData(items)
+        }
+        theaterViewModel.getTheatersByLocation(location) { result ->
+            val items = result.map { TheaterItem(it) }
+            theaterAdapter.updateData(items)
+        }
+        concertViewModel.getConcertsByLocation(location) { result ->
+            val items = result.map { ConcertItem(it) }
+            concertAdapter.updateData(items)
+        }
+        popularViewModel.getPopularListByLocation(location) { result ->
+            val items = result.map { PopularItem(it) }
+            popularAdapter.updateData(items)
         }
     }
 }
