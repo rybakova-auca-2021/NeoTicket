@@ -62,7 +62,7 @@ data class MovieOrder(
     val id: Int,
     val user: Int,
     val total_price: String,
-    val tickets: List<MovieTicket>,
+    val tickets_movie: List<MovieTicket>,
     val movie_title: String,
     val movie_image: String,
     val movie_cinema: String
@@ -70,12 +70,14 @@ data class MovieOrder(
 
 data class MovieTicket(
     val id: Int,
-    val seats: List<MovieSeat>,
+    val seats_id: List<MovieSeat>,
     val movie_title: String,
     val movie_cinema: String,
     val movie_images: List<DetailImage>,
     val movie_data: String,
     val show_time: Int,
+    val qr_code: String,
+    val bar_code: String,
     val order: Int,
     val user: Int,
     var type: TicketType
@@ -109,7 +111,9 @@ data class TicketType(
 
 data class MovieTicketCreate(
     val show_time: Int,
-    val seats: List<Int?>,
+    val seats_id: List<Int?>,
+    val qr_code: String?,
+    val bar_code: String?,
     val user: Int,
     val type: Int
 )
@@ -128,3 +132,88 @@ data class Popular(
 data class Place(
     val name: String
 )
+
+data class TheaterImage(
+    val image: String
+)
+
+data class Ticket(
+    val id: Int,
+    val user: Int,
+    val theater_title: String?,
+    val theater_image: String?,
+    val theater_place: String?,
+    val theater_date: String?,
+    val sport_title: String?,
+    val sport_image: String?,
+    val sport_place: String?,
+    val sport_date: String?,
+    val movie_title: String?,
+    val movie_image: String?,
+    val movie_date: String?,
+    val cinema: String?,
+    val concert_title: String?,
+    val concert_image: String?,
+    val concert_place: String?,
+    val concert_date: String?,
+    val total_price: String,
+    val total_tickets: Int,
+    val tickets_theater: List<TheaterTicketDetail>?,
+    val tickets_sport: List<SportTicketDetail>?,
+    val tickets_movie: List<MovieTicketDetail>?,
+    val tickets_concert: List<ConcertTicketDetail>?,
+    val type: String?,
+    val order_number: String
+)
+
+data class TheaterTicketDetail(
+    val id: Int,
+    val seats_id: List<Seat>,
+    val theater_title: String,
+    val theater_place: String,
+    val theater_images: List<TheaterImage>,
+    val qr_code: String,
+    val bar_code: String,
+    val show_time: Int,
+    val order: Int,
+    val user: Int
+)
+
+data class SportTicketDetail(
+    val id: Int,
+    val seats_id: List<Seat>,
+    val sport_title: String,
+    val sport_place: String,
+    val sport_images: List<DetailImage>,
+    val qr_code: String,
+    val bar_code: String,
+    val show_time: Int,
+    val order: Int,
+    val user: Int
+)
+
+data class ConcertTicketDetail(
+    val id: Int,
+    val seats_id: List<Seat>,
+    val concert_title: String,
+    val concert_place: String,
+    val concert_images: List<DetailImage>,
+    val qr_code: String,
+    val bar_code: String,
+    val show_time: Int,
+    val order: Int,
+    val user: Int,
+    val concert_date: String
+)
+
+data class MovieTicketDetail(
+    val id: Int,
+    val seats_id: List<Seat>,
+    val type: TicketType?,
+    val qr_code: String,
+    val bar_code: String,
+    val show_time: Int,
+    val order: Int,
+    val user: Int
+)
+

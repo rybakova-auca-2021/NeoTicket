@@ -12,10 +12,12 @@ import com.example.neoticket.model.MovieTicketCreate
 import com.example.neoticket.model.Popular
 import com.example.neoticket.model.ShowTime
 import com.example.neoticket.model.StartTimeDetail
+import com.example.neoticket.model.Ticket
 import com.example.neoticket.model.TicketType
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -62,4 +64,7 @@ interface MovieInterface {
 
     @GET("popular-events/")
     fun getPopularList(@Query("location_name") location: String? = null) : Call<List<Popular>>
+
+    @GET("my-order/")
+    fun getMyTickets(@Header("Authorization") token: String) : Call<List<Ticket>>
 }
