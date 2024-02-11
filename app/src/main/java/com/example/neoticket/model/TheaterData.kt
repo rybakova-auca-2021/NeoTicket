@@ -57,16 +57,18 @@ data class TheaterOrder(
     val id: Int,
     val user: Int,
     val total_price: String,
-    val tickets: List<TheaterTicket>
+    val tickets_theater: List<TheaterTicket>
 )
 
 data class TheaterTicket(
     val id: Int,
-    val seats: List<TheaterSeat>,
+    val seats_id: List<TheaterSeat>,
     val theater_title: String,
     val theater_place: String,
     val theater_images: List<TheaterDetailImage>,
     val theater_date: String?,
+    val qr_code: String,
+    val bar_code: String,
     val show_time: Int,
     val order: Int,
     val user: Int
@@ -91,6 +93,8 @@ data class TheaterSection(
 
 data class TheaterTicketCreate(
     val show_time: Int,
-    val seats: List<Int>,
+    val seats_id: List<Int?>,
+    val qr_code: String,
+    val bar_code: String,
     val user: Int
 )

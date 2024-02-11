@@ -1,10 +1,10 @@
 package com.example.neoticket.view.main.payment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,6 +15,7 @@ import com.example.neoticket.view.profile.ProfileDataViewModel
 import com.example.neoticket.viewModel.cinema.OrderMovieDetailViewModel
 import com.example.neoticket.viewModel.concerts.CheckoutConcertOrderViewModel
 import com.example.neoticket.viewModel.sport.CheckoutSportOrderViewModel
+import com.example.neoticket.viewModel.theater.CheckoutTheaterOrderViewModel
 
 class PaymentFragment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
@@ -22,6 +23,7 @@ class PaymentFragment : Fragment() {
     private val checkOutViewModel: OrderMovieDetailViewModel by viewModels()
     private val checkOutConcertViewModel: CheckoutConcertOrderViewModel by viewModels()
     private val checkOutSportViewModel: CheckoutSportOrderViewModel by viewModels()
+    private val checkOutTheaterViewModel: CheckoutTheaterOrderViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -54,6 +56,7 @@ class PaymentFragment : Fragment() {
                 "Кинотеатры" -> checkoutMovieOrder(order, total_price)
                 "Концерты" -> checkoutConcertOrder(order, total_price)
                 "Спорт" -> checkoutSportOrder(order, total_price)
+                "Театры" -> checkoutTheaterOrder(order, total_price)
             }
             checkoutMovieOrder(order, total_price)
         }
@@ -96,6 +99,20 @@ class PaymentFragment : Fragment() {
         })
         Util.id?.let { checkOutSportViewModel.orderSport(it, order) }
     }
+
+    private fun checkoutTheaterOrder(order: Int, total_price: String) {
+        checkOutTheaterViewModel.orderTheaterLiveData.observe(viewLifecycleOwner, Observer {
+                result ->
+            if (result != null) {
+                val bundle = Bundle()
+                bundle.putString("ticket_type", "Театр")
+                bundle.putString("total_price", total_price)
+                findNavController().navigate(R.id.paymentConfirmedFragment, bundle)
+            }
+        })
+        Util.id?.let { checkOutTheaterViewModel.orderTheater(it, order) }
+    }
+
 
     private fun setupCard() {
         viewModel.getCard { cardList ->

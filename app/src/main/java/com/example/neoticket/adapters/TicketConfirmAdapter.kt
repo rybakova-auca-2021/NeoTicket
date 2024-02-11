@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.neoticket.databinding.CardTicketBinding
 import com.example.neoticket.databinding.CardTicketConfirmBinding
 import com.example.neoticket.model.ConcertTicket
 import com.example.neoticket.model.MovieTicket
@@ -59,21 +58,21 @@ class TicketConfirmAdapter(private var tickets: List<DisplayableItem>) : Recycle
                     val ticket = item.movie
                     binding.ticketType.text = ticket.type.name
                     binding.ticketPrice.text = ticket.type.price
-                    for (seat in ticket.seats) {
+                    for (seat in ticket.seats_id) {
                         binding.ticketSeat.text =
                             "${seat.row_number} ряд, ${seat.seat_number} место"
                     }
                 }
                 is ConcertTicketItem -> {
                     val ticket = item.concert
-                    for (seat in ticket.seats) {
+                    for (seat in ticket.seats_id) {
                         binding.ticketSeat.text =
                             "${seat.row_number} ряд, ${seat.seat_number} место"
                     }
                 }
                 is SportTicketItem -> {
                     val ticket = item.sport
-                    for (seat in ticket.seats) {
+                    for (seat in ticket.seats_id) {
                         binding.ticketSeat.text =
                             "${seat.row_number} ряд, ${seat.seat_number} место"
                         binding.ticketPrice.text = seat.price
@@ -81,7 +80,7 @@ class TicketConfirmAdapter(private var tickets: List<DisplayableItem>) : Recycle
                 }
                 is TheaterTicketItem -> {
                     val ticket = item.theater
-                    for (seat in ticket.seats) {
+                    for (seat in ticket.seats_id) {
                         binding.ticketSeat.text =
                             "${seat.row_number} ряд, ${seat.seat_number} место"
                         binding.ticketPrice.text = seat.price

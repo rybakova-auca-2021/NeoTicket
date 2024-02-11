@@ -13,9 +13,9 @@ class CreateConcertTicketViewModel : ViewModel() {
     private val _createTicketLiveData = MutableLiveData<ConcertTicket?>()
     val createTicketLiveData: MutableLiveData<ConcertTicket?> get() = _createTicketLiveData
 
-    fun createTicket(showTime: Int, seats: List<Int?>, user: Int) {
+    fun createTicket(showTime: Int, seats: List<Int?>, user: Int, qr: String, bar: String) {
         val apiInterface = RetrofitInstance.concertApi
-        val request = ConcertTicketCreate(showTime, seats, user)
+        val request = ConcertTicketCreate(showTime, seats, qr, bar, user)
 
         val call = apiInterface.createTicket(request)
         call.enqueue(object : Callback<ConcertTicket> {

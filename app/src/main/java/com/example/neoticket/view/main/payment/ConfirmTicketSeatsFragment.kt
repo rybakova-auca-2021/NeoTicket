@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoticket.R
+import com.example.neoticket.Utils.QRCodeUtils
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.adapters.TicketAdapter
 import com.example.neoticket.databinding.FragmentConfirmTicketSeatsBinding
@@ -83,7 +84,17 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
                     val seats = listOf(ticketData.id)
                     val type = ticketData.ticketType
 
-                    Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type) }
+                    val qrCodeData = "QR Code for registration"
+                    val barCodeData = "Bar Code for registration"
+                    val qrCodeBitmap = QRCodeUtils.textToImageEncode(qrCodeData, 200)
+                    val barCodeBitmap = QRCodeUtils.BarcodeUtils.generateBarcode(barCodeData, 200, 100)
+                    if (qrCodeBitmap != null && barCodeBitmap != null) {
+                        val qrCodeImagePath = QRCodeUtils.saveImage(requireContext(), qrCodeBitmap)
+                        val barCodeImagePath = QRCodeUtils.saveImage(requireContext(), barCodeBitmap)
+                        if (qrCodeImagePath.isNotEmpty()) {
+                            Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type, qrCodeImagePath, barCodeImagePath) }
+                        }
+                    }
                 }
             } else {
                 val bottomSheetFragment = RegisterFragment()

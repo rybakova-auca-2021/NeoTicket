@@ -74,11 +74,11 @@ class ConfirmPageFragment : Fragment() {
             if (result != null) {
                 binding.textCinema.text = result.movie_cinema
                 binding.movieTitle.text = result.movie_title
-                binding.textMovieDate.text = result.tickets[0].movie_data
+                binding.textMovieDate.text = result.tickets_movie[0].movie_data
                 binding.sumPayment.text = result.total_price
                 binding.btnPay.text = "Оплатить ${result.total_price} c"
                 Glide.with(binding.imageView8).load(result.movie_image).into(binding.imageView8)
-                val items = result.tickets?.map { MovieTicketItem(it) }
+                val items = result.tickets_movie?.map { MovieTicketItem(it) }
                 if (items != null) {
                     adapter.updateData(items)
                 }
@@ -98,13 +98,13 @@ class ConfirmPageFragment : Fragment() {
     private fun getConcertOrderData(id: Int) {
         concertViewModel.orderConcertLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
-                binding.textCinema.text = result.tickets[0].concert_place
-                binding.movieTitle.text = result.tickets[0].concert_title
-                binding.textMovieDate.text = result.tickets[0].concert_date
+                binding.textCinema.text = result.tickets_concert[0].concert_place
+                binding.movieTitle.text = result.tickets_concert[0].concert_title
+                binding.textMovieDate.text = result.tickets_concert[0].concert_date
                 binding.sumPayment.text = result.total_price
                 binding.btnPay.text = "Оплатить ${result.total_price} c"
-                Glide.with(binding.imageView8).load(result.tickets[0].concert_images[0].image).into(binding.imageView8)
-                val items = result.tickets?.map { ConcertTicketItem(it) }
+                Glide.with(binding.imageView8).load(result.tickets_concert[0].concert_images[0].image).into(binding.imageView8)
+                val items = result.tickets_concert?.map { ConcertTicketItem(it) }
                 if (items != null) {
                     adapter.updateData(items)
                 }
@@ -124,13 +124,13 @@ class ConfirmPageFragment : Fragment() {
     private fun getSportOrderData(id: Int) {
         sportViewModel.orderSportLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
-                binding.textCinema.text = result.tickets[0].sport_place
-                binding.movieTitle.text = result.tickets[0].sport_title
-                binding.textMovieDate.text = result.tickets[0].sport_date
+                binding.textCinema.text = result.tickets_sport[0].sport_place
+                binding.movieTitle.text = result.tickets_sport[0].sport_title
+                binding.textMovieDate.text = result.tickets_sport[0].sport_date
                 binding.sumPayment.text = result.total_price
                 binding.btnPay.text = "Оплатить ${result.total_price} c"
-                Glide.with(binding.imageView8).load(result.tickets[0].sport_images[0].image).into(binding.imageView8)
-                val items = result.tickets?.map { SportTicketItem(it) }
+                Glide.with(binding.imageView8).load(result.tickets_sport[0].sport_images[0].image).into(binding.imageView8)
+                val items = result.tickets_sport?.map { SportTicketItem(it) }
                 if (items != null) {
                     adapter.updateData(items)
                 }
@@ -149,13 +149,13 @@ class ConfirmPageFragment : Fragment() {
     private fun getTheaterOrderData(id: Int) {
         theaterViewModel.orderTheaterLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
-                binding.textCinema.text = result.tickets[0].theater_place
-                binding.movieTitle.text = result.tickets[0].theater_title
-                binding.textMovieDate.text = result.tickets[0].theater_date
+                binding.textCinema.text = result.tickets_theater[0].theater_place
+                binding.movieTitle.text = result.tickets_theater[0].theater_title
+                binding.textMovieDate.text = result.tickets_theater[0].theater_date
                 binding.sumPayment.text = result.total_price
                 binding.btnPay.text = "Оплатить ${result.total_price} c"
-                Glide.with(binding.imageView8).load(result.tickets[0].theater_images[0].image).into(binding.imageView8)
-                val items = result.tickets?.map { TheaterTicketItem(it) }
+                Glide.with(binding.imageView8).load(result.tickets_theater[0].theater_images[0].image).into(binding.imageView8)
+                val items = result.tickets_theater?.map { TheaterTicketItem(it) }
                 if (items != null) {
                     adapter.updateData(items)
                 }

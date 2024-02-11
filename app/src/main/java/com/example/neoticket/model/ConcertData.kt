@@ -33,7 +33,7 @@ data class ConcertOrder(
     val id: Int,
     val user: Int,
     val total_price: String,
-    val tickets: List<ConcertTicket>
+    val tickets_concert: List<ConcertTicket>
 )
 
 data class ConcertDetail(
@@ -49,11 +49,13 @@ data class ConcertDetail(
 
 data class ConcertTicket(
     val id: String,
-    val seats: List<Seat>,
+    val seats_id: List<Seat>,
     val concert_title: String,
     val concert_place: String,
     val concert_images: List<ConcertDetailImage>,
     val concert_date: String,
+    val qr_code: String,
+    val bar_code: String,
     val show_time: Int,
     val order: Int,
     val user: Int
@@ -78,7 +80,9 @@ data class Section(
 
 data class ConcertTicketCreate(
     val show_time: Int,
-    val seats: List<Int?>,
+    val seats_id: List<Int?>,
+    val qr_code: String,
+    val bar_code: String,
     val user: Int
 )
 
