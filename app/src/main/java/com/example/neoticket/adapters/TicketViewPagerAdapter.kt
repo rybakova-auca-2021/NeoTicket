@@ -7,14 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.neoticket.view.myTickets.TicketCodeFragment
 import com.example.neoticket.view.myTickets.TicketQrFragment
 
-class TicketViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+class TicketViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, private val id: Int) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> TicketQrFragment()
-            1 -> TicketCodeFragment()
+            0 -> TicketQrFragment.newInstance(id)
+            1 -> TicketCodeFragment.newInstance(id)
             else -> Fragment()
         }
     }

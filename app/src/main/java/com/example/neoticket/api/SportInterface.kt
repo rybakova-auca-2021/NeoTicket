@@ -32,6 +32,9 @@ interface SportInterface {
     @POST("sport/order/checkout/")
     fun sportOrderCheckout(@Body request: SportOrderCheckout) : Call<SportOrderCheckoutResponse>
 
+    @POST("sport/order/refund/")
+    fun sportOrderRefund(@Body request: SportOrderCheckout) : Call<SportOrderCheckoutResponse>
+
     @GET("sport/order/{id}/")
     fun getSportOrderData(
         @Path("id") id: Int

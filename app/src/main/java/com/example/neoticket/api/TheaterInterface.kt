@@ -29,6 +29,10 @@ interface TheaterInterface {
     @POST("theater/order/checkout/")
     fun theaterOrderCheckout(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>
 
+    @POST("theater/order/refund/")
+    fun theaterOrderRefund(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>
+
+
     @GET("theater/order/{id}/")
     fun getTheaterData(
         @Path("id") id: Int

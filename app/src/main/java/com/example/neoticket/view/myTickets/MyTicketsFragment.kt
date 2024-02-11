@@ -55,6 +55,7 @@ class MyTicketsFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putInt("id", item.id)
                 bundle.putString("type", item.type)
+                bundle.putString("totalPrice", item.total_price)
                 if (orderId != null) {
                     bundle.putInt("orderId", orderId)
                 }

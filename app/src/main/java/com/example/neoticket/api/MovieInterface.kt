@@ -53,6 +53,9 @@ interface MovieInterface {
     @POST("movie/order/checkout/")
     fun orderMovie(@Body request: MovieOrderCheckout) : Call<MovieOrderCheckoutResponse>
 
+    @POST("movie/order/refund/")
+    fun refundMovie(@Body request: MovieOrderCheckout) : Call<MovieOrderCheckoutResponse>
+
     @GET("movie/order/{id}/")
     fun getMovieOrderDetail(@Path("id") id: Int) : Call<MovieOrder>
 

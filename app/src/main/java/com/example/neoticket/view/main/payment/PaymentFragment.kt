@@ -58,7 +58,6 @@ class PaymentFragment : Fragment() {
                 "Спорт" -> checkoutSportOrder(order, total_price)
                 "Театры" -> checkoutTheaterOrder(order, total_price)
             }
-            checkoutMovieOrder(order, total_price)
         }
     }
 

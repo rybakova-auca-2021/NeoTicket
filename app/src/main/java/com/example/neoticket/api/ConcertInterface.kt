@@ -31,6 +31,9 @@ interface ConcertInterface {
     @POST("concert/order/checkout/")
     fun concertOrderCheckout(@Body request: ConcertOrderCheckout) : Call<ConcertOrderCheckoutResponse>
 
+    @POST("concert/order/refund/")
+    fun concertOrderRefund(@Body request: ConcertOrderCheckout) : Call<ConcertOrderCheckoutResponse>
+
     @GET("concert/order/{id}/")
     fun getConcertData(
         @Path("id") id: Int

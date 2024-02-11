@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.neoticket.R
-import com.example.neoticket.adapters.ViewPagerAdapter
+import com.example.neoticket.adapters.TicketViewPagerAdapter
 import com.example.neoticket.databinding.FragmentMyTicketBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,11 +17,16 @@ class MyTicketFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMyTicketBinding.inflate(inflater, container, false)
+        val id = arguments?.getInt("id")
 
         val tabLayout = binding.tabLayout
         val viewPager2 = binding.fragmentHolder
 
-        viewPager2.adapter = ViewPagerAdapter(parentFragmentManager, lifecycle)
+        viewPager2.adapter = id?.let {
+            TicketViewPagerAdapter(parentFragmentManager, lifecycle,
+                it
+            )
+        }
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {

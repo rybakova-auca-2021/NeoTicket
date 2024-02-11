@@ -18,6 +18,7 @@ import com.example.neoticket.adapters.MySportTicketItem
 import com.example.neoticket.adapters.MyTheaterTicketItem
 import com.example.neoticket.adapters.MyTicketsConfirmAdapter
 import com.example.neoticket.databinding.FragmentTicketDetailsBinding
+import com.example.neoticket.view.main.LocationFragment
 import com.example.neoticket.viewModel.MyTicketsViewModel
 
 class TicketDetailsFragment : Fragment() {
@@ -40,9 +41,10 @@ class TicketDetailsFragment : Fragment() {
         val id = arguments?.getInt("id")
         val orderId = arguments?.getInt("orderId")
         val type = arguments?.getString("type")
+        val price = arguments?.getString("totalPrice")
         setupRecyclerView()
-        if (orderId != null && type != null) {
-            setupNavigation(orderId, type)
+        if (id != null && orderId != null && type != null && price != null) {
+            setupNavigation(id, orderId, type, price)
         }
         if (id != null) {
             setupTicketData(id)
@@ -113,12 +115,22 @@ class TicketDetailsFragment : Fragment() {
     }
 
 
-    private fun setupNavigation(id: Int, type: String) {
+    private fun setupNavigation(id: Int, orderId: Int, type: String, price: String) {
         binding.btnReturnTicket.setOnClickListener {
             val bottomSheetFragment = ReturnTicketConfirmDialogFragment()
             val bundle = Bundle().apply {
-                putInt("order_id", id)
+                putInt("orderId", orderId)
+                putInt("id", id)
                 putString("type", type)
+                putString("totalPrice", price)
+            }
+            bottomSheetFragment.arguments = bundle
+            bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+        }
+        binding.btnShowTicket.setOnClickListener {
+            val bottomSheetFragment = MyTicketFragment()
+            val bundle = Bundle().apply {
+                putInt("id", id)
             }
             bottomSheetFragment.arguments = bundle
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
