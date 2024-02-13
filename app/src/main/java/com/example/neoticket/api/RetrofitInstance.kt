@@ -48,5 +48,8 @@ class RetrofitInstance {
         val questionApi by lazy {
             retrofit.create(QuestionsInterface::class.java)
         }
+        val notificationApi by lazy {
+            retrofit.create(NotificationInterface::class.java)
+        }
     }
 }

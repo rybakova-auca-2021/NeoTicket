@@ -387,4 +387,8 @@
         android:name="com.example.neoticket.view.main.PopularPageFragment"
         android:label="fragment_popular_page"
         tools:layout="@layout/fragment_popular_page" />
+    <dialog
+        android:id="@+id/imageDialogFragment"
+        android:name="com.example.neoticket.view.ImageDialogFragment"
+        android:label="ImageDialogFragment" />
 </navigation>
