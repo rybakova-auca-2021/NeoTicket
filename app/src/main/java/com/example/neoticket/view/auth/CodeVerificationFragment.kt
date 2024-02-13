@@ -9,16 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.neoticket.R
 import com.example.neoticket.Utils.Util
 import com.example.neoticket.databinding.FragmentCodeVerificationBinding
 import com.example.neoticket.viewModel.auth.CheckCodeViewModel
+import com.example.neoticket.viewModel.auth.LoginOrRegisterViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlin.math.log
 
 class CodeVerificationFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCodeVerificationBinding
     private val viewModel: CheckCodeViewModel by viewModels()
     private var countDownTimer: CountDownTimer? = null
+    private val loginViewModel: LoginOrRegisterViewModel by viewModels()
     private var timeRemaining: Long = 60000
 
     override fun onCreateView(
@@ -31,11 +35,14 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val email = Util.email
+        val email = arguments?.getString("email")
         binding.codeText.text = "Код был отправлен на почту  $email"
-        setupValidation()
+        if (email != null) {
+            setupValidation(email)
+            startCountdownTimer(email)
+        }
         setupNavigation()
-        startCountdownTimer()
+
     }
 
     private fun setupNavigation() {
@@ -48,7 +55,7 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
         dismiss()
     }
 
-    private fun setupValidation() {
+    private fun setupValidation(email: String) {
         val textWatchers = arrayOf(
             binding.pinview
         )
@@ -64,14 +71,25 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
                 override fun afterTextChanged(s: Editable?) {
                     val pin = binding.pinview.text.toString()
                     if (pin.length == 4) {
-                         checkCode(pin)
+                         checkCode(pin, email)
                     }
                 }
             })
         }
     }
 
-    private fun startCountdownTimer() {
+    private fun register(email: String) {
+        loginViewModel.register(email,
+            onSuccess = {
+                        println("code was sent")
+            },
+            onError = {
+                // Handle error
+            }
+        )
+    }
+
+    private fun startCountdownTimer(email: String) {
         countDownTimer = object : CountDownTimer(timeRemaining, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
@@ -88,6 +106,9 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
                     binding.btnSendCode.isEnabled = true
                     val whiteColor = resources.getColor(R.color.white)
                     binding.btnSendCode.setTextColor(whiteColor)
+                    binding.btnSendCode.setOnClickListener {
+                        register(email)
+                    }
                 }
             }
         }
@@ -95,13 +116,18 @@ class CodeVerificationFragment : BottomSheetDialogFragment() {
         countDownTimer?.start()
     }
 
-    private fun checkCode(pin: String) {
+    private fun checkCode(pin: String, email: String) {
         viewModel.checkCode(
             pin,
             onSuccess = {
                 if (Util.isUserRegistered == false) {
                     dismiss()
-                    val bottomSheetFragment = AdditionalInfoFragment()
+                    val bottomSheetFragment = AdditionalInfoFragment().apply {
+                        val args = Bundle().apply {
+                            putString("email", email)
+                        }
+                        arguments = args
+                    }
                     bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
                 } else if (Util.isUserRegistered == true) {
                     navigateToProfileFragment()

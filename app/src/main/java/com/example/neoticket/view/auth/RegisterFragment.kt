@@ -70,14 +70,20 @@ class RegisterFragment : BottomSheetDialogFragment() {
         viewModel.register(email,
             onSuccess = {
                 dismiss()
-                val bottomSheetFragment = CodeVerificationFragment()
+                val bottomSheetFragment = CodeVerificationFragment().apply {
+                    val args = Bundle().apply {
+                        putString("email", email)
+                    }
+                    arguments = args
+                }
                 bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
             },
             onError = {
-                //todo
+                // Handle error
             }
         )
     }
+
 
     private fun checkUser() {
         val email = binding.etEmail.text.toString()

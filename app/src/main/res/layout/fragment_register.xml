@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Войти или зарегестрироваться"
+                android:text="Войти или зарегистрироваться"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
