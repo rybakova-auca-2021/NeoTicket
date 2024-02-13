@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.neoticket.R
 import com.example.neoticket.adapters.GridAdapterSeat
 import com.example.neoticket.adapters.SeatItem
 import com.example.neoticket.databinding.FragmentTheaterChooseTicketsBinding
@@ -37,11 +39,23 @@ class TheaterChooseTicketsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = arguments?.getInt("id")
+        val theaterId = arguments?.getInt("theaterId")
         println("id $id")
+        if (theaterId != null) {
+            setupNavigation(theaterId)
+        }
         val showTimeId = arguments?.getInt("showTimeId")
         if (id != null && showTimeId != null) {
             setupAdapter(showTimeId)
             setData(id)
+        }
+    }
+
+    private fun setupNavigation(theaterId: Int) {
+        binding.btnBack.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", theaterId)
+            findNavController().navigate(R.id.theaterChooseSectorFragment, bundle)
         }
     }
 

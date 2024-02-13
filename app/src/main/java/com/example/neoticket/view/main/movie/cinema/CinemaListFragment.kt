@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -32,6 +33,7 @@ class CinemaListFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentCinemaListBinding.inflate(inflater, container, false)
         recyclerView = binding.rvCinemas
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
         return binding.root
     }
 
@@ -64,13 +66,36 @@ class CinemaListFragment : BottomSheetDialogFragment() {
                 val bundle = Bundle()
                 bundle.putInt("id", item.id)
                 findNavController().navigate(R.id.cinemaDetailFragment2, bundle)
+                dismiss()
             }
         })
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.cinemaFragment)
+            dismiss()
+        }
     }
 
     private fun search() {
         binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (it.isNotEmpty()) {
+                        binding.rvCinemas.visibility = View.VISIBLE
+                        binding.imgError.visibility = View.GONE
+                        viewModel.getCinemasBySearch(it) { result ->
+                            if (result.isEmpty()) {
+                                binding.imgError.visibility = View.VISIBLE
+                                binding.rvCinemas.visibility = View.GONE
+                            } else {
+                                binding.imgError.visibility = View.GONE
+                                binding.rvCinemas.visibility = View.VISIBLE
+                                adapter.updateData(result)
+                            }
+                        }
+                    } else {
+                        binding.imgError.visibility = View.VISIBLE
+                    }
+                }
                 return true
             }
 

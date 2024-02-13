@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.neoticket.R
 import com.example.neoticket.Utils.SwipeTouchListener
 import com.example.neoticket.databinding.FragmentConcertChooseSectorBinding
 import com.example.neoticket.viewModel.concerts.GetSectionListViewModel
@@ -26,9 +28,21 @@ class ConcertChooseSectorFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val id = arguments?.getInt("id")
+        if (id != null) {
+            setupNavigation(id)
+        }
         setData()
         setupZoomListeners()
         setupSectorClickListeners()
+    }
+
+    private fun setupNavigation(id: Int) {
+        binding.btnBack.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+            findNavController().navigate(R.id.concertDetailPageFragment, bundle)
+        }
     }
 
     private fun setupZoomListeners() {
@@ -68,6 +82,10 @@ class ConcertChooseSectorFragment : Fragment() {
             sectorView.setOnClickListener {
                 sectorDetailDialog("Сектор ${getSectorName(index)}", sectorIds[index])
             }
+        }
+        binding.dance.setOnClickListener {
+            val dialog = ChooseDanceTicketsFragment()
+            dialog.show(parentFragmentManager, dialog.tag)
         }
     }
 

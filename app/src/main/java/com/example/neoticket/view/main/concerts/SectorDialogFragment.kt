@@ -3,6 +3,7 @@ package com.example.neoticket.view.main.concerts
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Identity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,13 +35,14 @@ class SectorDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = arguments?.getString("title")
+        val theaterId = arguments?.getInt("theaterId")
         val source = arguments?.getString("source")
         val id = arguments?.getInt("id")
         if (id != null && source != null) {
             when(source) {
                 "SportSector" -> setSportData(id)
                 "ConcertSector" -> setConcertData(id)
-                "TheaterSector" -> setTheaterData(id)
+                "TheaterSector" -> theaterId?.let { setTheaterData(id, it) }
             }
         }
     }
@@ -78,7 +80,7 @@ class SectorDialogFragment : DialogFragment() {
             }
         }
     }
-    private fun setTheaterData(id: Int) {
+    private fun setTheaterData(id: Int, theaterId: Int) {
         theaterViewModel.getSectionDetail(id)
         theaterViewModel.sectionLiveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
@@ -87,6 +89,7 @@ class SectorDialogFragment : DialogFragment() {
                 binding.btnChooseTickets.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putInt("id", result.id)
+                    bundle.putInt("theaterId", theaterId)
                     bundle.putInt("showTimeId", result.show_time)
                     findNavController().navigate(R.id.theaterChooseTicketsFragment, bundle)
                     dismiss()

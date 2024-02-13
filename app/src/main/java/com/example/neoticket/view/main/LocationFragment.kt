@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.CompoundButton
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -39,6 +40,7 @@ class LocationFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLocationBinding.inflate(inflater, container, false)
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
         radioButtons.forEach { radioButton ->
             radioButton.setOnCheckedChangeListener { _, isChecked ->

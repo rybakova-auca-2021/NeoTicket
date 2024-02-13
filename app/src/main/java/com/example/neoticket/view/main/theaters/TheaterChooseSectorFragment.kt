@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.neoticket.R
 import com.example.neoticket.Utils.SwipeTouchListener
 import com.example.neoticket.databinding.FragmentTheaterChooseSectorBinding
 import com.example.neoticket.view.main.concerts.SectorDialogFragment
@@ -28,9 +30,22 @@ class TheaterChooseSectorFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val theaterId = arguments?.getInt("id")
+
         setData()
         setupZoomListeners()
-        setupSectorClickListeners()
+        if (theaterId != null) {
+            setupNavigation(theaterId)
+            setupSectorClickListeners(theaterId)
+        }
+    }
+
+    private fun setupNavigation(id: Int) {
+        binding.btnBack.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+            findNavController().navigate(R.id.theaterDetailFragment, bundle)
+        }
     }
 
     private fun setupZoomListeners() {
@@ -52,7 +67,7 @@ class TheaterChooseSectorFragment : Fragment() {
         binding.cardSector.scaleY = newScaleFactor
     }
 
-    private fun setupSectorClickListeners() {
+    private fun setupSectorClickListeners(theaterId: Int) {
         val sectorIds = listOf(
             1, 2, 3
         )
@@ -61,7 +76,7 @@ class TheaterChooseSectorFragment : Fragment() {
         )
         sectorViews.forEachIndexed { index, sectorView ->
             sectorView.setOnClickListener {
-                sectorDetailDialog("Сектор ${getSectorName(index)}", sectorIds[index])
+                sectorDetailDialog("Сектор ${getSectorName(index)}", sectorIds[index], theaterId)
             }
         }
     }
@@ -72,12 +87,13 @@ class TheaterChooseSectorFragment : Fragment() {
         return "$row$seatNumber"
     }
 
-    private fun sectorDetailDialog(title: String, id: Int) {
+    private fun sectorDetailDialog(title: String, id: Int, theaterId: Int) {
         val dialog = SectorDialogFragment()
         val bundle = Bundle().apply {
             putString("source", "TheaterSector")
             putString("title", title)
             putInt("id", id)
+            putInt("theaterId", theaterId)
         }
         dialog.arguments = bundle
         dialog.show(parentFragmentManager, dialog.tag)

@@ -58,7 +58,6 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         getTickets()
-        deleteTicket()
     }
 
     private fun setupRecyclerView() {
@@ -66,7 +65,6 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
-
 
     private fun createTicket(ticketDataList: List<TicketData>) {
         val showTimeId = arguments?.getInt("showTimeId", 0) ?: 0
@@ -80,19 +78,27 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
                         findNavController().navigate(R.id.confirmPageFragment, bundle)
                     }
                 })
-                ticketDataList.forEach { ticketData ->
-                    val seats = listOf(ticketData.id)
-                    val type = ticketData.ticketType
 
-                    val qrCodeData = "QR Code for registration"
-                    val barCodeData = "Bar Code for registration"
-                    val qrCodeBitmap = QRCodeUtils.textToImageEncode(qrCodeData, 200)
-                    val barCodeBitmap = QRCodeUtils.BarcodeUtils.generateBarcode(barCodeData, 200, 100)
-                    if (qrCodeBitmap != null && barCodeBitmap != null) {
-                        val qrCodeImagePath = QRCodeUtils.saveImage(requireContext(), qrCodeBitmap)
-                        val barCodeImagePath = QRCodeUtils.saveImage(requireContext(), barCodeBitmap)
-                        if (qrCodeImagePath.isNotEmpty()) {
-                            Util.id?.let { it1 -> viewModel.createTicket(showTimeId, seats, it1, type, qrCodeImagePath, barCodeImagePath) }
+                val seats = ticketDataList.map { it.id }
+                val type = ticketDataList[0].ticketType
+
+                val qrCodeData = "QR Code for registration"
+                val barCodeData = "Bar Code for registration"
+                val qrCodeBitmap = QRCodeUtils.textToImageEncode(qrCodeData, 200)
+                val barCodeBitmap = QRCodeUtils.BarcodeUtils.generateBarcode(barCodeData, 200, 100)
+                if (qrCodeBitmap != null && barCodeBitmap != null) {
+                    val qrCodeImagePath = QRCodeUtils.saveImage(requireContext(), qrCodeBitmap)
+                    val barCodeImagePath = QRCodeUtils.saveImage(requireContext(), barCodeBitmap)
+                    if (qrCodeImagePath.isNotEmpty()) {
+                        Util.id?.let { it1 ->
+                            viewModel.createTicket(
+                                    showTimeId,
+                                    seats,
+                                    it1,
+                                    type,
+                                    qrCodeImagePath,
+                                    barCodeImagePath
+                                )
                         }
                     }
                 }
@@ -103,7 +109,6 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
         }
     }
 
-
     private fun getTickets() {
         CoroutineScope(Dispatchers.IO).launch {
             val tickets = ticketDao.getAllTickets()
@@ -112,6 +117,7 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
                     binding.numOfTickets.text = "${tickets.size} билет"
                     adapter.updateData(tickets)
                     createTicket(tickets)
+                    deleteTicket()
                 }
             }
         }
@@ -137,5 +143,4 @@ class ConfirmTicketSeatsFragment : BottomSheetDialogFragment() {
             }
         })
     }
-
 }

@@ -47,9 +47,9 @@ class ScheduleFragment : Fragment() {
         val id = arguments?.getInt("id")
         if (id != null) {
             getShowTime(id)
-            getValue()
+            setupNavigation(id)
+            getValue(id)
         }
-        setupNavigation()
     }
 
     private fun setupAdapter() {
@@ -64,9 +64,11 @@ class ScheduleFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
-    private fun setupNavigation() {
+    private fun setupNavigation(id: Int) {
         binding.imageView.setOnClickListener {
-            findNavController().navigate(R.id.detailMovieInCinemaFragment)
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+            findNavController().navigate(R.id.detailMovieInCinemaFragment, bundle)
         }
     }
 
@@ -77,7 +79,7 @@ class ScheduleFragment : Fragment() {
         findNavController().navigate(R.id.chooseTicketFragment, bundle)
     }
 
-    private fun getValue() {
+    private fun getValue(id: Int) {
         mPicker.setStartDate(3, 2, 2024)
 //        val currentDate = Date()
 //        val startDate = SimpleDateFormat("yyyy-MM-dd").format(currentDate)
@@ -89,8 +91,13 @@ class ScheduleFragment : Fragment() {
             override fun onDateSelected(@Nullable date: Date?) {
                 date?.let {
                     val selectedDate = SimpleDateFormat("yyyy-MM-dd").format(date)
-                    adapter.filterByDateTime(selectedDate)
-                    adapter.notifyDataSetChanged()
+                    viewModel.showTimeLiveData.observe(viewLifecycleOwner, Observer { result ->
+                        if (result != null) {
+                            val filteredData = result.filter { it.start_date == selectedDate }
+                            adapter.updateData(filteredData)
+                        }
+                    })
+                    viewModel.getShowTimeByMovie(id.toString())
                 }
             }
         })

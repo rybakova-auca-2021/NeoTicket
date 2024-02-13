@@ -8,9 +8,10 @@ import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.neoticket.R
 import com.example.neoticket.adapters.GridAdapterSeat
 import com.example.neoticket.adapters.MovieSeatItem
-import com.example.neoticket.adapters.SeatItem
 import com.example.neoticket.databinding.FragmentChooseTicketBinding
 import com.example.neoticket.viewModel.cinema.GetShowTimeDetailViewModel
 
@@ -30,11 +31,21 @@ class ChooseTicketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val showTimeId = arguments?.getInt("showTimeId")
-        if (showTimeId != null) {
+        val movie = arguments?.getInt("movie")
+        if (showTimeId != null && movie != null) {
             setupAdapter(showTimeId)
+            setupNavigation(movie)
         }
         if (showTimeId != null) {
             getShowTimeDetail(showTimeId)
+        }
+    }
+
+    private fun setupNavigation(id: Int) {
+        binding.btnBack.setOnClickListener {
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+            findNavController().navigate(R.id.scheduleFragment, bundle)
         }
     }
 

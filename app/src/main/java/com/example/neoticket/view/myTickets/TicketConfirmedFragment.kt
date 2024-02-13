@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentTicketConfirmedBinding
 
@@ -17,6 +18,7 @@ class TicketConfirmedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTicketConfirmedBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).hideBtmNav()
         return binding.root
     }
 
