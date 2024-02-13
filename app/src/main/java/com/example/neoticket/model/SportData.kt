@@ -45,6 +45,19 @@ data class SportOrderCheckoutResponse(
     val sport_order: Int
 )
 
+data class SportOrderRefund(
+    val user: Int,
+    val sport_order: Int,
+    val device_name: String
+)
+
+data class SportOrderRefundResponse(
+    val id: Int,
+    val user: Int,
+    val sport_order: Int,
+    val device_name: String
+)
+
 data class SportSeat(
     val id: Int,
     val row_number: Int,

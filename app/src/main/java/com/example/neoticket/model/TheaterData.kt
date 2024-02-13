@@ -47,6 +47,19 @@ data class TheaterOrderCheckout(
     val theater_order: Int
 )
 
+data class TheaterOrderRefund(
+    val user: Int,
+    val theater_order: Int,
+    val device_name: String
+)
+
+data class TheaterOrderRefundResponse(
+    val id: Int,
+    val user: Int,
+    val theater_order: Int,
+    val device_id: String
+)
+
 data class TheaterOrderCheckoutResponse(
     val id: Int,
     val user: Int,

@@ -29,6 +29,19 @@ data class ConcertOrderCheckoutResponse(
     val concert_order: Int
 )
 
+data class ConcertOrderRefund(
+    val user: Int,
+    val concert_order: Int,
+    val device_name: String
+)
+
+data class ConcertOrderRefundResponse(
+    val id: Int,
+    val user: Int,
+    val concert_order: Int,
+    val device_name: String
+)
+
 data class ConcertOrder(
     val id: Int,
     val user: Int,

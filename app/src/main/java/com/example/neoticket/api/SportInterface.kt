@@ -5,11 +5,11 @@ import com.example.neoticket.model.SportDetail
 import com.example.neoticket.model.SportOrder
 import com.example.neoticket.model.SportOrderCheckout
 import com.example.neoticket.model.SportOrderCheckoutResponse
+import com.example.neoticket.model.SportOrderRefund
+import com.example.neoticket.model.SportOrderRefundResponse
 import com.example.neoticket.model.SportSection
 import com.example.neoticket.model.SportTicket
 import com.example.neoticket.model.SportTicketCreate
-import com.example.neoticket.model.Theater
-import com.example.neoticket.model.TheaterOrder
 import com.example.neoticket.model.TheaterOrderCheckout
 import com.example.neoticket.model.TheaterOrderCheckoutResponse
 import com.example.neoticket.model.TheaterSection
@@ -33,7 +33,7 @@ interface SportInterface {
     fun sportOrderCheckout(@Body request: SportOrderCheckout) : Call<SportOrderCheckoutResponse>
 
     @POST("sport/order/refund/")
-    fun sportOrderRefund(@Body request: SportOrderCheckout) : Call<SportOrderCheckoutResponse>
+    fun sportOrderRefund(@Body request: SportOrderRefund) : Call<SportOrderRefundResponse>
 
     @GET("sport/order/{id}/")
     fun getSportOrderData(

@@ -3,23 +3,23 @@ package com.example.neoticket.viewModel.theater
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.neoticket.api.RetrofitInstance
-import com.example.neoticket.model.TheaterOrderCheckout
-import com.example.neoticket.model.TheaterOrderCheckoutResponse
+import com.example.neoticket.model.TheaterOrderRefund
+import com.example.neoticket.model.TheaterOrderRefundResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class TheaterOrderRefundViewModel : ViewModel() {
-    private val _orderConcertLiveData = MutableLiveData<TheaterOrderCheckoutResponse?>()
-    val orderTheaterLiveData: MutableLiveData<TheaterOrderCheckoutResponse?> get() = _orderConcertLiveData
+    private val _orderConcertLiveData = MutableLiveData<TheaterOrderRefundResponse?>()
+    val orderTheaterLiveData: MutableLiveData<TheaterOrderRefundResponse?> get() = _orderConcertLiveData
 
     fun orderTheater(user: Int, order: Int) {
         val apiInterface = RetrofitInstance.theaterApi
-        val request = TheaterOrderCheckout(user, order)
+        val request = TheaterOrderRefund(user, order, "Kami")
 
         val call = apiInterface.theaterOrderRefund(request)
-        call.enqueue(object : Callback<TheaterOrderCheckoutResponse> {
-            override fun onResponse(call: Call<TheaterOrderCheckoutResponse>, response: Response<TheaterOrderCheckoutResponse>) {
+        call.enqueue(object : Callback<TheaterOrderRefundResponse> {
+            override fun onResponse(call: Call<TheaterOrderRefundResponse>, response: Response<TheaterOrderRefundResponse>) {
                 if (response.isSuccessful) {
                     val body = response.body()
                     _orderConcertLiveData.value = body
@@ -29,7 +29,7 @@ class TheaterOrderRefundViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<TheaterOrderCheckoutResponse>, t: Throwable) {
+            override fun onFailure(call: Call<TheaterOrderRefundResponse>, t: Throwable) {
                 println("Request failed: ${t.message}")
             }
         })

@@ -58,6 +58,19 @@ data class MovieOrderCheckoutResponse(
     val movie_order: Int
 )
 
+data class MovieOrderRefund(
+    val user: Int,
+    val movie_order: Int,
+    val device_name: String
+)
+
+data class MovieOrderRefundResponse(
+    val id: Int,
+    val user: Int,
+    val movie_order: Int,
+    val device_name: String
+)
+
 data class MovieOrder(
     val id: Int,
     val user: Int,
@@ -100,7 +113,8 @@ data class StartTimeDetail(
     val id: Int,
     val movie_title: String,
     val cinema_name: String,
-    val seats: List<MovieSeat>
+    val seats: List<MovieSeat>,
+    val all_seats_taken: String
 )
 
 data class TicketType(

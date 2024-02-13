@@ -5,6 +5,8 @@ import com.example.neoticket.model.TheaterDetail
 import com.example.neoticket.model.TheaterOrder
 import com.example.neoticket.model.TheaterOrderCheckout
 import com.example.neoticket.model.TheaterOrderCheckoutResponse
+import com.example.neoticket.model.TheaterOrderRefund
+import com.example.neoticket.model.TheaterOrderRefundResponse
 import com.example.neoticket.model.TheaterSection
 import com.example.neoticket.model.TheaterTicket
 import com.example.neoticket.model.TheaterTicketCreate
@@ -30,7 +32,7 @@ interface TheaterInterface {
     fun theaterOrderCheckout(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>
 
     @POST("theater/order/refund/")
-    fun theaterOrderRefund(@Body request: TheaterOrderCheckout) : Call<TheaterOrderCheckoutResponse>
+    fun theaterOrderRefund(@Body request: TheaterOrderRefund) : Call<TheaterOrderRefundResponse>
 
 
     @GET("theater/order/{id}/")

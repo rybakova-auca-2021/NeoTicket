@@ -7,6 +7,8 @@ import com.example.neoticket.model.MovieDetail
 import com.example.neoticket.model.MovieOrder
 import com.example.neoticket.model.MovieOrderCheckout
 import com.example.neoticket.model.MovieOrderCheckoutResponse
+import com.example.neoticket.model.MovieOrderRefund
+import com.example.neoticket.model.MovieOrderRefundResponse
 import com.example.neoticket.model.MovieTicket
 import com.example.neoticket.model.MovieTicketCreate
 import com.example.neoticket.model.Popular
@@ -54,7 +56,7 @@ interface MovieInterface {
     fun orderMovie(@Body request: MovieOrderCheckout) : Call<MovieOrderCheckoutResponse>
 
     @POST("movie/order/refund/")
-    fun refundMovie(@Body request: MovieOrderCheckout) : Call<MovieOrderCheckoutResponse>
+    fun refundMovie(@Body request: MovieOrderRefund) : Call<MovieOrderRefundResponse>
 
     @GET("movie/order/{id}/")
     fun getMovieOrderDetail(@Path("id") id: Int) : Call<MovieOrder>

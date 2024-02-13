@@ -5,21 +5,23 @@ import androidx.lifecycle.ViewModel
 import com.example.neoticket.api.RetrofitInstance
 import com.example.neoticket.model.MovieOrderCheckout
 import com.example.neoticket.model.MovieOrderCheckoutResponse
+import com.example.neoticket.model.MovieOrderRefund
+import com.example.neoticket.model.MovieOrderRefundResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RefundMovieViewModel : ViewModel() {
-    private val _orderMovieLiveData = MutableLiveData<MovieOrderCheckoutResponse?>()
-    val orderMovieLiveData: MutableLiveData<MovieOrderCheckoutResponse?> get() = _orderMovieLiveData
+    private val _orderMovieLiveData = MutableLiveData<MovieOrderRefundResponse?>()
+    val orderMovieLiveData: MutableLiveData<MovieOrderRefundResponse?> get() = _orderMovieLiveData
 
     fun orderMovie(user: Int, movieOrder: Int) {
         val apiInterface = RetrofitInstance.movieApi
-        val request = MovieOrderCheckout(user, movieOrder)
+        val request = MovieOrderRefund(user, movieOrder, "Kami")
 
         val call = apiInterface.refundMovie(request)
-        call.enqueue(object : Callback<MovieOrderCheckoutResponse> {
-            override fun onResponse(call: Call<MovieOrderCheckoutResponse>, response: Response<MovieOrderCheckoutResponse>) {
+        call.enqueue(object : Callback<MovieOrderRefundResponse> {
+            override fun onResponse(call: Call<MovieOrderRefundResponse>, response: Response<MovieOrderRefundResponse>) {
                 if (response.isSuccessful) {
                     val body = response.body()
                     _orderMovieLiveData.value = body
@@ -29,7 +31,7 @@ class RefundMovieViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<MovieOrderCheckoutResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MovieOrderRefundResponse>, t: Throwable) {
                 println("Request failed: ${t.message}")
             }
         })
