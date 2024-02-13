@@ -45,23 +45,35 @@ class MainPageFragment : Fragment(), OnCitySelectedListener {
     ): View {
         binding = FragmentMainPageBinding.inflate(inflater, container, false)
         (requireActivity() as MainActivity).showBtmNav()
-        recyclerViewCinema = binding.rvCinema
-        recyclerViewConcert = binding.rvConcerts
-        recyclerViewTheater = binding.rvTheater
-        recyclerViewPopular = binding.rvPopular
+        initializeViews()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAdapters()
-        setupAdapterClicks()
+        setupViews()
         setupNavigation()
+        fetchData()
+        search()
+    }
+
+    private fun initializeViews() {
+        recyclerViewCinema = binding.rvCinema
+        recyclerViewConcert = binding.rvConcerts
+        recyclerViewTheater = binding.rvTheater
+        recyclerViewPopular = binding.rvPopular
+    }
+
+    private fun fetchData() {
         getPopularList()
         getCinemaList()
         getConcertList()
         getTheaterList()
-        search()
+    }
+
+    private fun setupViews() {
+        setupAdapters()
+        setupAdapterClicks()
     }
 
     private fun setupAdapters() {
@@ -115,69 +127,67 @@ class MainPageFragment : Fragment(), OnCitySelectedListener {
     }
 
     private fun getCinemaList() {
-        movieViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movies ->
+        movieViewModel.moviesLiveData.observe(viewLifecycleOwner) { movies ->
             val cinemaItems = movies?.map { CinemaItem(it) }
             if (cinemaItems != null) {
                 cinemaAdapter.updateData(cinemaItems)
             }
-        })
+        }
         movieViewModel.getMovies()
     }
 
 
     private fun getTheaterList() {
-        theaterViewModel.theaterLiveData.observe(viewLifecycleOwner, Observer { movies ->
+        theaterViewModel.theaterLiveData.observe(viewLifecycleOwner) { movies ->
             val items = movies?.map { TheaterItem(it) }
             if (items != null) {
                 theaterAdapter.updateData(items)
             }
-        })
+        }
         theaterViewModel.getTheaters()
     }
 
     private fun getConcertList() {
-        concertViewModel.concertsLiveData.observe(viewLifecycleOwner, Observer { movies ->
+        concertViewModel.concertsLiveData.observe(viewLifecycleOwner) { movies ->
             val concertItems = movies?.map { ConcertItem(it) }
             if (concertItems != null) {
                 concertAdapter.updateData(concertItems)
             }
-        })
+        }
         concertViewModel.getConcerts()
     }
 
     private fun getPopularList() {
-        popularViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { popular ->
+        popularViewModel.moviesLiveData.observe(viewLifecycleOwner) { popular ->
             val items = popular?.map { PopularItem(it) }
             if (items != null) {
                 popularAdapter.updateData(items)
             }
-        })
+        }
         popularViewModel.getPopularList()
     }
 
     private fun search() {
         binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                query?.let { it ->
+                    if (it.isNotEmpty()) {
+                        initialSearchViews()
+                        performSearch(it)
+                    } else {
+                       emptyResultViews()
+                    }
+                }
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let { it ->
                     if (it.isNotEmpty()) {
-                        binding.cardPopular.visibility = View.GONE
-                        binding.cardView3.visibility = View.GONE
-                        movieViewModel.getMoviesBySearch(it) { result ->
-                            val items = result.map { CinemaItem(it) }
-                            cinemaAdapter.updateData(items)
-                        }
-                        theaterViewModel.getTheatersBySearch(it) { result ->
-                            val items = result.map { TheaterItem(it) }
-                            theaterAdapter.updateData(items)
-                        }
-                        concertViewModel.getConcertsBySearch(it) { result ->
-                            val items = result.map { ConcertItem(it) }
-                            concertAdapter.updateData(items)
-                        }
+                        initialSearchViews()
+                        performSearch(it)
+                    } else {
+                        emptyResultViews()
                     }
                 }
                 return true
@@ -185,63 +195,126 @@ class MainPageFragment : Fragment(), OnCitySelectedListener {
         })
     }
 
+    private fun performSearch(it: String) {
+        movieViewModel.getMoviesBySearch(it) { moviesResult ->
+            if (moviesResult.isEmpty()) {
+                binding.searchError.visibility = View.VISIBLE
+                binding.cardCinema.visibility = View.GONE
+            } else {
+                val cinemaItems = moviesResult.map { CinemaItem(it) }
+                binding.searchError.visibility = View.GONE
+                binding.cardCinema.visibility = View.VISIBLE
+                cinemaAdapter.updateData(cinemaItems)
+            }
+        }
+        theaterViewModel.getTheatersBySearch(it) { theatersResult ->
+            if (theatersResult.isEmpty()) {
+                binding.searchError.visibility = View.VISIBLE
+                binding.cardTheater.visibility = View.GONE
+            } else {
+                val theaterItems = theatersResult.map { TheaterItem(it) }
+                theaterAdapter.updateData(theaterItems)
+                binding.searchError.visibility = View.GONE
+                binding.cardTheater.visibility = View.VISIBLE
+            }
+        }
+        concertViewModel.getConcertsBySearch(it) { concertsResult ->
+            if (concertsResult.isEmpty()) {
+                binding.searchError.visibility = View.VISIBLE
+                binding.cardConcert.visibility = View.GONE
+            } else {
+                val concertItems = concertsResult.map { ConcertItem(it) }
+                concertAdapter.updateData(concertItems)
+                binding.searchError.visibility = View.GONE
+                binding.cardConcert.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun initialSearchViews() {
+        binding.searchError.visibility = View.GONE
+        binding.cardPopular.visibility = View.GONE
+        binding.cardView3.visibility = View.GONE
+        binding.searchError.visibility = View.GONE
+        binding.cardConcert.visibility = View.VISIBLE
+        binding.cardCinema.visibility = View.VISIBLE
+        binding.cardTheater.visibility = View.VISIBLE
+    }
+    private fun emptyResultViews() {
+        binding.searchError.visibility = View.VISIBLE
+        binding.cardConcert.visibility = View.GONE
+        binding.cardCinema.visibility = View.GONE
+        binding.cardTheater.visibility = View.GONE
+    }
+
     private fun setupNavigation() {
+        setupLocationButton()
+        setupNavigationButtons()
+    }
+
+    private fun setupLocationButton() {
         binding.btnLocation.setOnClickListener {
             val bottomSheetFragment = LocationFragment()
             bottomSheetFragment.setOnLocationSelectedListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
+    }
 
+    private fun setupNavigationButtons() {
         val cinemaAction = R.id.action_mainPageFragment_to_cinemaFragment
         val theaterAction = R.id.action_mainPageFragment_to_mainTheaterFragment
         val sportAction = R.id.action_mainPageFragment_to_mainSportFragment
         val concertAction = R.id.action_mainPageFragment_to_mainConcertPageFragment
 
-        binding.btnAllCinema.setOnClickListener {
-            findNavController().navigate(cinemaAction)
-        }
-        binding.btnCinema.setOnClickListener {
-            findNavController().navigate(cinemaAction)
-        }
+        binding.apply {
+            btnAllCinema.setOnClickListener { findNavController().navigate(cinemaAction) }
+            btnCinema.setOnClickListener { findNavController().navigate(cinemaAction) }
 
-        binding.btnAllTheater.setOnClickListener {
-            findNavController().navigate(theaterAction)
-        }
-        binding.btnTheater.setOnClickListener {
-            findNavController().navigate(theaterAction)
-        }
+            btnAllTheater.setOnClickListener { findNavController().navigate(theaterAction) }
+            btnTheater.setOnClickListener { findNavController().navigate(theaterAction) }
 
-        binding.btnSport.setOnClickListener {
-            findNavController().navigate(sportAction)
-        }
+            btnSport.setOnClickListener { findNavController().navigate(sportAction) }
 
-        binding.btnConcert.setOnClickListener {
-            findNavController().navigate(concertAction)
-        }
-        binding.btnAllConcert.setOnClickListener {
-            findNavController().navigate(concertAction)
-        }
-        binding.btnAllPopular.setOnClickListener {
-            findNavController().navigate(R.id.popularPageFragment)
+            btnConcert.setOnClickListener { findNavController().navigate(concertAction) }
+            btnAllConcert.setOnClickListener { findNavController().navigate(concertAction) }
+            btnAllPopular.setOnClickListener { findNavController().navigate(R.id.popularPageFragment) }
+            btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
         }
     }
 
     override fun onCitySelected(location: String) {
+        updateMoviesByLocation(location)
+        updateTheatersByLocation(location)
+        updateConcertsByLocation(location)
+        updatePopularListByLocation(location)
+    }
+
+    private fun updateMoviesByLocation(location: String) {
         movieViewModel.getMoviesByLocation(location) { result ->
             val items = result.map { CinemaItem(it) }
             cinemaAdapter.updateData(items)
         }
+    }
+
+    private fun updateTheatersByLocation(location: String) {
         theaterViewModel.getTheatersByLocation(location) { result ->
             val items = result.map { TheaterItem(it) }
             theaterAdapter.updateData(items)
         }
+    }
+
+    private fun updateConcertsByLocation(location: String) {
         concertViewModel.getConcertsByLocation(location) { result ->
             val items = result.map { ConcertItem(it) }
             concertAdapter.updateData(items)
         }
+    }
+
+    private fun updatePopularListByLocation(location: String) {
         popularViewModel.getPopularListByLocation(location) { result ->
             val items = result.map { PopularItem(it) }
             popularAdapter.updateData(items)
         }
     }
+
 }

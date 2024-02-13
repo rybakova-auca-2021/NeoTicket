@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".view.main.LocationFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="750dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -22,6 +22,7 @@
                 android:id="@+id/text_your_town"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_bold"
                 android:text="Ваш город"
                 android:textColor="@color/black"
@@ -149,6 +150,7 @@
                 android:id="@+id/btn_choose"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/btn_rounded_auth"
                 android:enabled="false"
                 android:text="Выбрать"
