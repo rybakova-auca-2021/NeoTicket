@@ -19,6 +19,7 @@ import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentCinemaDetailBinding
 import com.example.neoticket.model.CinemaShowTime
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.model.MovieDetail
 import com.example.neoticket.model.ShowTime
 import com.example.neoticket.model.StartTime
@@ -90,6 +91,13 @@ class CinemaDetailFragment : Fragment() {
             val bottomSheetFragment = CinemaListFragment()
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")

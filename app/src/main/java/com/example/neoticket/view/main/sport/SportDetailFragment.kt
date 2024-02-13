@@ -21,6 +21,7 @@ import com.example.neoticket.R
 import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentSportDetailBinding
 import com.example.neoticket.model.CombinedShowTime
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.viewModel.sport.SportListViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -65,8 +66,17 @@ class SportDetailFragment : Fragment() {
     }
 
     private fun setupNavigation(id: Int) {
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
             override fun onItemClick(item: CombinedShowTime) {
+                val bundle = Bundle()
+                bundle.putInt("id", id)
                 findNavController().navigate(R.id.sportChooseSectorFragment)
             }
         })

@@ -20,6 +20,7 @@ import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentDetailMovieBinding
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.viewModel.cinema.MovieDetailViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
@@ -58,6 +59,13 @@ class DetailMovieFragment : Fragment() {
     }
 
     private fun setupNavigation(id: Int) {
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
         binding.btnMovieDetails.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", id)

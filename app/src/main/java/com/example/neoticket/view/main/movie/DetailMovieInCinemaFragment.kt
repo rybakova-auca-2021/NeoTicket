@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.neoticket.R
 import com.example.neoticket.databinding.FragmentDetailMovieInCinemaBinding
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.model.ShowTime
 import com.example.neoticket.model.StartTime
 import com.example.neoticket.viewModel.cinema.GetShowTimeViewModel
@@ -81,6 +82,13 @@ class DetailMovieInCinemaFragment : Fragment() {
     }
 
     private fun setupNavigation(id: Int) {
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
         binding.btnMovieDetails.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", id)
@@ -95,6 +103,7 @@ class DetailMovieInCinemaFragment : Fragment() {
             when (arguments?.getString("sourceFragment")) {
                 "mainPageFragment" -> findNavController().navigate(R.id.mainPageFragment)
                 "nowInCinema" -> findNavController().navigate(R.id.cinemaFragment)
+                else -> findNavController().navigate(R.id.cinemaFragment)
             }
         }
 

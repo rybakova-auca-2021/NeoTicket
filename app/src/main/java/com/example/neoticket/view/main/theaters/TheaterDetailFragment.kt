@@ -21,6 +21,7 @@ import com.example.neoticket.R
 import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentTheaterDetailBinding
 import com.example.neoticket.model.CombinedShowTime
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.viewModel.theater.TheaterListViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -65,9 +66,18 @@ class TheaterDetailFragment : Fragment() {
     }
 
     private fun setupNavigation(id: Int) {
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
             override fun onItemClick(item: CombinedShowTime) {
-                findNavController().navigate(R.id.action_theaterDetailFragment_to_theaterChooseSectorFragment)
+                val bundle = Bundle()
+                bundle.putInt("id", id)
+                findNavController().navigate(R.id.action_theaterDetailFragment_to_theaterChooseSectorFragment, bundle)
             }
         })
         binding.btnTheaterDetails.setOnClickListener {
@@ -79,6 +89,7 @@ class TheaterDetailFragment : Fragment() {
             when (arguments?.getString("sourceFragment")) {
                 "mainPageFragment" -> findNavController().navigate(R.id.mainPageFragment)
                 "mainTheaterPage" -> findNavController().navigate(R.id.mainTheaterFragment)
+                else -> findNavController().navigate(R.id.mainTheaterFragment)
             }
         }
     }

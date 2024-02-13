@@ -6,10 +6,22 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.neoticket.databinding.ImageCardBinding
+import com.example.neoticket.model.Cinema
 import com.example.neoticket.model.DetailImage
 
 class DetailImageAdapter(private var items: List<DetailImage>) :
     RecyclerView.Adapter<DetailImageAdapter.ImageViewHolder>() {
+
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onImageClick(item: DetailImage)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ImageCardBinding.inflate(inflater, parent, false)
@@ -39,6 +51,16 @@ class DetailImageAdapter(private var items: List<DetailImage>) :
 
     inner class ImageViewHolder(private val binding: ImageCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val clickedItem = items[position]
+                    itemClickListener?.onImageClick(clickedItem)
+                }
+            }
+        }
 
         fun bind(item: DetailImage) {
             Glide.with(binding.itemImg.context)

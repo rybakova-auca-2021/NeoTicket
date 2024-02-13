@@ -20,7 +20,9 @@ import com.example.neoticket.MainActivity
 import com.example.neoticket.R
 import com.example.neoticket.Utils.DateUtils
 import com.example.neoticket.databinding.FragmentConcertDetailPageBinding
+import com.example.neoticket.model.Cinema
 import com.example.neoticket.model.CombinedShowTime
+import com.example.neoticket.model.DetailImage
 import com.example.neoticket.viewModel.concerts.ConcertListViewModel
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -65,9 +67,19 @@ class ConcertDetailPageFragment : Fragment() {
     }
 
     private fun setupNavigation(id: Int) {
+        adapter.setOnItemClickListener(object : DetailImageAdapter.OnItemClickListener {
+            override fun onImageClick(item: DetailImage) {
+                val bundle = Bundle()
+                bundle.putString("image", item.image)
+                findNavController().navigate(R.id.imageDialogFragment, bundle)
+            }
+        })
+
         scheduleAdapter.setOnItemClickListener(object : TheaterScheduleAdapter.OnItemClickListener{
             override fun onItemClick(item: CombinedShowTime) {
-                findNavController().navigate(R.id.concertChooseSectorFragment)
+                val bundle = Bundle()
+                bundle.putInt("id", id)
+                findNavController().navigate(R.id.concertChooseSectorFragment, bundle)
             }
         })
         binding.btnConcertDetails.setOnClickListener {
